@@ -47,6 +47,8 @@ class MailService{
         } 
         catch (error) {
             console.error('Помилка надсилання листа:', error);
+            console.log('SMTP_HOST', process.env.SMTP_HOST);
+            console.log('SMTP_PORT', process.env.SMTP_PORT);
             throw new Error('Не вдалося надіслати лист');
         }
     }

@@ -6,8 +6,9 @@ const User = sequelize.define('user', {
     email: {type: DataTypes.STRING, unique: true, allowNull: false},
     username: {type: DataTypes.STRING, allowNull: false},
     password: {type: DataTypes.STRING, allowNull: false},
+    avatar: {type: DataTypes.STRING, allowNull: true},
     role: {type: DataTypes.STRING, defaultValue: 'USER'},
-    isActiveted: {type: DataTypes.BOOLEAN, defaultValue: false},
+    isActivated: {type: DataTypes.BOOLEAN, defaultValue: false},
     activationLink: {type: DataTypes.STRING}
 })
 

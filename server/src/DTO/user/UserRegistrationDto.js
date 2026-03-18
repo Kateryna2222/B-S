@@ -4,6 +4,7 @@ class UserRegistrationDto{
         this.password = data.password,
         this.email = data.email,
         this.avatar = data.avatar || '',
+        this.phoneNumber = data.phoneNumber,
         this.role = data.role?.toUpperCase() || 'USER'
     }
 }

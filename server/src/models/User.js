@@ -8,6 +8,7 @@ const User = sequelize.define('user', {
     password: {type: DataTypes.STRING, allowNull: false},
     avatar: {type: DataTypes.STRING, allowNull: true},
     role: {type: DataTypes.STRING, defaultValue: 'USER'},
+    phoneNumber: {type: DataTypes.STRING, allowNull: false },
     isActivated: {type: DataTypes.BOOLEAN, defaultValue: false},
     activationLink: {type: DataTypes.STRING}
 })

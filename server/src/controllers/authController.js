@@ -1,5 +1,6 @@
 import authService from "../services/authService.js";
 
+
 function setCookie(res, refreshToken){
     res.cookie(
         'refreshToken', 
@@ -41,7 +42,7 @@ class AuthController{
     async activate(req, res){
         const activationLink = req.params.link;
         await authService.activate(activationLink);
-        return res.redirect(process.env.CLIENT_URL);
+        return res.redirect(process.env.SERVER_URL);
     }
 
     async refresh(req, res){

@@ -13,7 +13,8 @@ class AdminService {
         const user = await userRepository.findOne("id", userId);
         if (!user) throw new ApiError(404, "User not found");
 
-        const updatedUser = await userRepository.update(userId, { isActivated: false });
+        user.isActivated = false;
+        const updatedUser = await userRepository.save(user);
         return new UserGetDto(updatedUser);
     }
 
@@ -21,7 +22,8 @@ class AdminService {
         const user = await userRepository.findOne("id", userId);
         if (!user) throw new ApiError(404, "User not found");
 
-        const updatedUser = await userRepository.update(userId, { isActivated: true });
+        user.isActivated = true;
+        const updatedUser = await userRepository.save(user);
         return new UserGetDto(updatedUser);
     }
 
@@ -29,9 +31,11 @@ class AdminService {
         const user = await userRepository.findOne("id", userId);
         if (!user) throw new ApiError(404, "User not found");
 
-        const updatedUser = await userRepository.update(userId, { role });
+        user.role = role;
+        const updatedUser = await userRepository.save(user);
         return new UserGetDto(updatedUser);
     }
+
 }
 
 export default new AdminService();

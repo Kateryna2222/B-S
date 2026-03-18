@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import router from "./routes/router.js";
 import errorHandler from './middlewares/ErrorHandlingMiddleware.js'
 
+
 const app = express();
 app.use(express.json());
 app.use(cookieParser());

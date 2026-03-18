@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer';
+import { config } from 'dotenv';
+config();
 
 class MailService{
 
@@ -14,10 +16,13 @@ class MailService{
         })
     }
 
+    
+
     async sendActivationMail(to, link){
         try {
             await this.transporter.verify();
             console.log('SMTP connection successful');
+
             await this.transporter.sendMail({
                 from: process.env.SMTP_USER,
                 to,
@@ -47,9 +52,7 @@ class MailService{
         } 
         catch (error) {
             console.error('Помилка надсилання листа:', error);
-            console.log('SMTP_HOST', process.env.SMTP_HOST);
-            console.log('SMTP_PORT', process.env.SMTP_PORT);
-            throw new Error('Не вдалося надіслати лист');
+            throw new Error('Не вдалося надіслати лист 11');
         }
     }
 }

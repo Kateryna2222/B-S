@@ -8,6 +8,8 @@ import userRepository from "../ropositories/userRepository.js";
 
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+import { config } from "dotenv";
+config();
 
 async function generateTokens(user){
     const userDto = new UserGetDto(user);
@@ -29,7 +31,7 @@ class AuthService{
         const activationLink = uuidv4();
 
         const user = await userRepository.create({...userData, password: hashPassword, activationLink});
-        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
+        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/auth/activate/${activationLink}`);
 
         const res = await generateTokens(user);
         return res

@@ -17,11 +17,15 @@ class UserService{
         if (!user) throw new ApiError(404, "User not found");
 
         const updatedFields = {};
-        ["firstName", "lastName", "phoneNumber", "avatar"].forEach(field => {
+        ["username", "avatar"].forEach(field => {
             if (data[field] !== undefined) updatedFields[field] = data[field];
         });
 
-        const updatedUser = await userRepository.update(userId, updatedFields);
+        if (Object.keys(updatedFields).length === 0) {
+            throw new ApiError(400, "No valid fields to update");
+        }
+
+        const updatedUser = await userRepository.update(user, updatedFields);
         return new UserGetDto(updatedUser);
     }
 
@@ -33,16 +37,15 @@ class UserService{
         if (!comparePass) throw new ApiError(401, "Old password is incorrect");
 
         const hashPassword = await bcrypt.hash(newPassword, 10);
-        await userRepository.update(userId, { password: hashPassword });
+        await userRepository.update(user, { password: hashPassword });
         return { message: "Password updated successfully" };
     }
 
-    //async deleteUser(){} //soft delete?
     async deleteUser(userId) {
         const user = await userRepository.findOne("id", userId);
         if (!user) throw new ApiError(404, "User not found");
 
-        await userRepository.delete(userId);
+        await userRepository.delete(user);
         return { message: "User deleted successfully" };
     }
 

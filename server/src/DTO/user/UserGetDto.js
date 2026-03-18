@@ -5,7 +5,8 @@ class UserGetDto{
         this.email = data.email,
         this.avatar = data.avatar || '',
         this.role = data.role,
-        this.isActiveted = data.isActiveted
+        this.phoneNumber = data.phoneNumber,
+        this.isActivated = data.isActivated
     }
 }
 

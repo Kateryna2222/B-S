@@ -11,6 +11,7 @@ router.post(
     body('username').isLength({ min: 2 }),
     body('email').isEmail(),
     body('password').isLength({ min: 8, max: 32 }),
+    body('phoneNumber').matches(/^\+\d{10,15}$/),
     body('role').customSanitizer(value => value?.toUpperCase()).isIn(['USER', 'ADMIN']),
     validationMiddlleware,
     authController.registration 

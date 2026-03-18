@@ -9,6 +9,7 @@ module.exports = {
       password: { type: Sequelize.STRING, allowNull: false },
       avatar: { type: Sequelize.STRING, allowNull: true },
       role: { type: Sequelize.STRING, defaultValue: 'USER' },
+      phoneNumber: {type: Sequelize.STRING, allowNull: false },
       isActivated: { type: Sequelize.BOOLEAN, default: false},
       activationLink: { type: Sequelize.STRING },
       createdAt: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('NOW()') },

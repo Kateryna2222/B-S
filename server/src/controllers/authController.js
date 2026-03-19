@@ -7,9 +7,9 @@ function setCookie(res, refreshToken){
         refreshToken, 
         {
             maxAge: 20 * 24 * 60 * 60 * 1000, 
-            httpOnly: true
-            //secure: true,          
-            //sameSite: 'strict' 
+            httpOnly: true,
+            secure: false,          
+            sameSite: 'none' 
         }
     );
 }

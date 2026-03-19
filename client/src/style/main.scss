@@ -1,0 +1,64 @@
+@use 'vars' as *;
+
+a{
+    color: $main_text;
+}
+
+button{
+    color: inherit;
+    font-size: inherit;
+}
+
+.btn{
+    background-color: $main_dark;
+    padding: 14px 28px;
+    font-size: 18px;
+    border-radius: 3px;
+    color: $main_text;
+    &:hover{
+        transition: .6s;
+        opacity: 60%;
+    }
+}
+
+body{
+    background-color: $main_light;
+}
+
+.container{
+    max-width: 1216px;
+    width: 100%;
+    padding: 8px;
+    margin: 0 auto;
+    min-height: 100vh;
+    font-size: 16px;
+    color: $main_text;
+    @extend %main-font;
+    overflow: hidden;
+}
+
+::selection {
+  background-color: $main_dark; 
+  color: $main_light;
+}
+
+.my-toast{
+    background-color: $main_light;
+    color: $main_text;
+    border: 5px solid $main_dark;
+    text-align: center;
+}
+
+.my-toast-progress{
+    background: $main_dark;
+}
+
+.input{
+    height: 56px;
+    width: 100%;
+    border-radius: 12px;
+    background-color: $main_dark;
+    font-size: 18px;
+    color: $second_text;
+    padding: 0 20px;
+}

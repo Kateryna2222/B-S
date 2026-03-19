@@ -1,0 +1,20 @@
+@use '../../style/vars' as *;
+
+
+.header{
+    display: flex;
+    font-size: 24px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 20px;
+    margin-bottom: 50px;
+
+    background-color: $main_dark;
+    color: $second_text;
+
+    .wrapper{
+        max-width: 1216px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}

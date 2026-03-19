@@ -1,0 +1,13 @@
+@use '../../style/vars' as *;
+
+.home{
+    display: flex;
+    justify-content: space-between;
+    .home_posts{
+        width: 750px;
+        overflow: hidden;
+        li{
+            margin-bottom: 80px;
+        }
+    }
+}

@@ -1,10 +1,8 @@
-
-
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import {register} from '../../../store/authSlice.js';
+import {login} from '../../../store/authSlice.js';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -19,7 +17,7 @@ const Login = () => {
     }
 
     const submit = () => {
-        console.log(formValues)
+        dispatch(login(formValues))
     }
 
     useEffect(()=>{}, [dispatch])
@@ -28,22 +26,33 @@ const Login = () => {
         <div className="registration">
             <h5>Вхід</h5>
             <form className="form" onSubmit={e => e.preventDefault()}>
-                <input type="email" id='email'
-                    value={formValues.email}
-                    onChange={e => handleFormValue(e, 'email')}
-                />
-                <input type="password" id='password'
-                    value={formValues.password}
-                    onChange={e => handleFormValue(e, 'password')}
-                />
+                <div>
+                    <label className="hint">
+                        Введіть вашу електронну адресу:
+                    </label>
+                    <input type="email" id='email' placeholder='exapmle@gmail.com'
+                        value={formValues.email}
+                        onChange={e => handleFormValue(e, 'email')}
+                    />
+                </div>
+                <div>
+                    <label className="hint">
+                        Введіть пароль:
+                    </label>
+                    <input type="password" id='password' placeholder='password'
+                        value={formValues.password}
+                        onChange={e => handleFormValue(e, 'password')}
+                    />
+                </div>
                 <button type='button' onClick={submit}>ввійти</button>
             </form>
-            <span className="changeLink">
-                Не зареєстровані?
-            </span>
-            <Link to={'/auth/registration'}>
-                зареєструватись
-            </Link>
+            <div className="changeLink">
+                <span>Не зареєстровані?</span>
+                <Link to={'/auth/registration'}>
+                    зареєструватись
+                </Link>
+            </div>
+        
         </div>
     );
 };

@@ -8,8 +8,8 @@ function setCookie(res, refreshToken){
         {
             maxAge: 20 * 24 * 60 * 60 * 1000, 
             httpOnly: true,
-            secure: false,          
-            sameSite: 'none' 
+            secure: false,   //true       
+            sameSite: 'lax'  //none
         }
     );
 }
@@ -42,7 +42,7 @@ class AuthController{
     async activate(req, res){
         const activationLink = req.params.link;
         await authService.activate(activationLink);
-        return res.redirect(process.env.SERVER_URL);
+        return res.redirect(process.env.CLIENT_URL);
     }
 
     async refresh(req, res){

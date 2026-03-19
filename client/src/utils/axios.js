@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { storage } from '../storage/storage';
 
+export const API_ULR = 'http://localhost:3000/api'
+
 const instance = axios.create({
-    baseURL:  'http://localhost:3000/api',
+    withCredentials: true,
+    baseURL: API_ULR
 })
 
 instance.interceptors.request.use(config => {

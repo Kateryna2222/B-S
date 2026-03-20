@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import {login} from '../../../store/authSlice.js';
+import { login } from '../../store/authSlice.js';
+import { handleSubmit } from './handleSubmit.js';
+import { scrollToTop } from '../../utils/scrollToTop.js';
 
 const Login = () => {
     const dispatch = useDispatch();
-    const {status} = useSelector(state => state.user)
-    console.log(status)
+    const navigate = useNavigate();
 
     const [formValues, setFormValues] = useState({
         password: '',
@@ -18,11 +20,6 @@ const Login = () => {
         setFormValues({...formValues, [keyName]: e.target.value})
     }
 
-    const submit = () => {
-        dispatch(login(formValues))
-    }
-
-    useEffect(()=>{}, [dispatch])
 
     return (
         <div className="registration">
@@ -46,11 +43,14 @@ const Login = () => {
                         onChange={e => handleFormValue(e, 'password')}
                     />
                 </div>
-                <button type='button' onClick={submit}>ввійти</button>
+                <button type='button' 
+                        onClick={()=>handleSubmit(formValues, 'login', login, dispatch, navigate)}>
+                    ввійти
+                </button>
             </form>
             <div className="changeLink">
                 <span>Не зареєстровані?</span>
-                <Link to={'/auth/registration'}>
+                <Link to={'/auth/registration'} onClick={scrollToTop}>
                     зареєструватись
                 </Link>
             </div>

@@ -4,6 +4,13 @@
     font-weight: 400;
 }
 
+%cursive-font{
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
 // colors
 $main_light: #ffffff;
 $main_dark: #774dcb;

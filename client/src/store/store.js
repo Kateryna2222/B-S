@@ -4,7 +4,7 @@ import authSlice from "./authSlice"
 
 
 const rootReducer = combineReducers({
-    user: authSlice,
+    auth: authSlice,
 })
 
 export const store = configureStore({

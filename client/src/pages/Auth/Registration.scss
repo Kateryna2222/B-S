@@ -1,4 +1,4 @@
-@use '../../../style/vars' as *;
+@use '../../style/vars' as *;
 
 .registration{
     background-color: $main_dark;
@@ -9,14 +9,16 @@
     min-height: 70vh;
     display: flex;
     flex-direction: column;
+    margin-bottom: 50px;
 
     h5{
         display: block;
         font-size: 30px;
-        font-weight: 600;
         padding-bottom: 40px;
         letter-spacing: 8px;
         text-transform: uppercase;
+        @extend %cursive-font;
+        font-weight: 400;
     }
 
     .form{
@@ -80,12 +82,17 @@
             border-radius: 50%;
             margin: 0 auto 20px auto;
             overflow: hidden;
-            background-image: url(../../../assets/avatar.svg);
+            background-image: url(../../assets/avatar.svg);
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
             background-size: 60%; 
             cursor: pointer;
+
+            &:hover{
+                opacity: 60%;
+                transition: .3s;
+            }
 
             img{
                 width: 100%;
@@ -116,6 +123,9 @@
         font-size: 22px;
         width: 110px;
         align-self: center;
+        @extend %cursive-font;
+        font-weight: 400;
+        letter-spacing: 2px;
         &:hover{
             color: $main_text;
             transition: 0.4s ease;

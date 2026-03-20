@@ -52,7 +52,7 @@ class MailService{
         } 
         catch (error) {
             console.error('Помилка надсилання листа:', error);
-            throw new Error('Не вдалося надіслати лист 11');
+            throw new Error('Не вдалося надіслати лист');
         }
     }
 }

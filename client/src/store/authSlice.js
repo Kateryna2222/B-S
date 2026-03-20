@@ -101,13 +101,13 @@ const authSlice = createSlice({
         })
         builder.addCase(register.fulfilled, (state, {payload}) => {
             state.isLoading = false;
-            state.status = payload.message;
+            state.status = payload;
             state.user = payload.user;
             state.accessToken = payload.accessToken;
-            state.isAuth = true;
+            state.isAuth = payload.user.isActivated;
         })
         builder.addCase(register.rejected, (state, {payload}) => {
-            state.status = payload.message;
+            state.status = payload;
             state.isLoading = false;
         })
         //LOGIN
@@ -117,13 +117,13 @@ const authSlice = createSlice({
         })
         builder.addCase(login.fulfilled, (state, {payload}) => {
             state.isLoading = false;
-            state.status = payload.message;
+            state.status = payload;
             state.user = payload.user;
             state.accessToken = payload.accessToken;
-            state.isAuth = true;
+            state.isAuth = payload.user.isActivated;
         })
         builder.addCase(login.rejected, (state, {payload}) => {
-            state.status = payload.message;
+            state.status = payload;
             state.isLoading = false;
         })
         //LOGOUT
@@ -133,13 +133,13 @@ const authSlice = createSlice({
         })
         builder.addCase(logout.fulfilled, (state, {payload}) => {
             state.isLoading = false;
-            state.status = payload.message;
+            state.status = payload;
             state.user = null;
             state.accessToken = null;
             state.isAuth = false;
         })
         builder.addCase(logout.rejected, (state, {payload}) => {
-            state.status = payload.message;
+            state.status = payload;
             state.isLoading = false;
         })
         //CHECK AUTH
@@ -149,13 +149,13 @@ const authSlice = createSlice({
         })
         builder.addCase(checkAuth.fulfilled, (state, {payload}) => {
             state.isLoading = false;
-            state.status = payload.message;
+            state.status = payload;
             state.user = payload.user;
             state.accessToken = payload.accessToken;
-            state.isAuth = true;
+            state.isAuth = payload.user.isActivated;
         })
         builder.addCase(checkAuth.rejected, (state, {payload}) => {
-            state.status = payload.message;
+            state.status = payload;
             state.isLoading = false;
         })
     }

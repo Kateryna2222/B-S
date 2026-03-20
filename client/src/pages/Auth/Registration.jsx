@@ -1,14 +1,17 @@
 import './Registration.scss';
 
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import {register} from '../../../store/authSlice.js';
+import { register } from '../../store/authSlice.js';
+import { handleSubmit } from './handleSubmit.js';
+import { scrollToTop } from '../../utils/scrollToTop.js';
 
 const Registration = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const fileInputRef = useRef(null);
     const handleDivClick = () => {
@@ -36,11 +39,6 @@ const Registration = () => {
         }
     }
 
-    const submit = () => {
-        dispatch(register(formValues));
-    }
-
-    useEffect(()=>{}, [dispatch])
 
     return (
         <div className="registration">
@@ -83,11 +81,14 @@ const Registration = () => {
                         onChange={e => handleFormValue(e, 'password')}
                     />
                 </div>
-                <button type='button' onClick={submit}>зареєструватись</button>
+                <button type='button' 
+                        onClick={()=>handleSubmit(formValues, 'registration', register, dispatch, navigate)}>
+                    зареєструватись
+                </button>
             </form>
             <div className="changeLink">
                 <span>Вже маєте акаунт?</span>
-                <Link to={'/auth/login'}>
+                <Link to={'/auth/login'} onClick={scrollToTop}>
                     ввійти
                 </Link>
             </div>

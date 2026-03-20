@@ -3,8 +3,8 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "../pages/Layout/Layout.jsx";
 import Home from "../pages/Home/Home.jsx";
 import NotFound from "../pages/NotFound/NotFound.jsx";
-import Registration from "../pages/Auth/Registration/Registration.jsx";
-import Login from "../pages/Auth/Login/Login.jsx";
+import Registration from "../pages/Auth/Registration.jsx";
+import Login from "../pages/Auth/Login.jsx";
 
 const ProtectedRoute = ({element}) => {
     const token = storage.getItem('token')

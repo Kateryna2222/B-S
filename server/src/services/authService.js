@@ -27,7 +27,7 @@ class AuthService{
         const {email, password} = userData;
 
         const candidate = await userRepository.findOne('email', email);
-        if(candidate) throw new ApiError(409, "User with this email already exist");
+        if(candidate) throw new ApiError(409, "Користувач з даною поштою вже існує");
 
         const hashPassword = await bcrypt.hash(password, 10);
         const activationLink = uuidv4();
@@ -61,10 +61,10 @@ class AuthService{
         const {email, password} = userData;
         
         const user = await userRepository.findOne('email', email);
-        if(!user) throw new ApiError(404, 'User with this email not exist');
+        if(!user) throw new ApiError(404, 'Користувача з цією поштою не існує');
 
         const comparePass = await bcrypt.compare(password, user.password);
-        if(!comparePass) throw new ApiError(401, 'Wrong password');
+        if(!comparePass) throw new ApiError(401, 'Неправильний пароль');
 
         const res = await generateTokens(user);
         return res

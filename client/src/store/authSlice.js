@@ -9,7 +9,11 @@ export const register = createAsyncThunk(
     'auth/register',
     async (payload, thunkAPI) => {
         try {
-            const {data} = await axiosCustom.post('/auth/registration', payload);
+            const {data} = await axiosCustom.post('/auth/registration', payload, {
+                 headers: {
+                    'Content-Type': 'multipart/form-data'
+                },
+            });
             if(data.accessToken){
                 storage.setItem('accessToken', data.accessToken)
             }

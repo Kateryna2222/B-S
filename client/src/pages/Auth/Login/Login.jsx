@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {login} from '../../../store/authSlice.js';
 
 const Login = () => {
     const dispatch = useDispatch();
+    const {status} = useSelector(state => state.user)
+    console.log(status)
 
     const [formValues, setFormValues] = useState({
         password: '',

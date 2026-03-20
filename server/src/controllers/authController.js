@@ -17,7 +17,7 @@ function setCookie(res, refreshToken){
 class AuthController{
 
     async registration(req, res){
-        const userData = await authService.registration(req.body);
+        const userData = await authService.registration(req.body, req.files?.avatar);
         const {refreshToken, ...responseData } = userData;
 
         setCookie(res, refreshToken);

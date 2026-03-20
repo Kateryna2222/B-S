@@ -19,12 +19,21 @@ const Registration = () => {
         username: '',
         password: '',
         email: '',
-        avatar: null,
-        phoneNumber: ''
+        phoneNumber: '',
+        avatar: null
     });
 
+    const [avatarPreview, setAvatarPreview] = useState('');
+
     const handleFormValue = (e, keyName) => {
-        setFormValues({...formValues, [keyName]: e.target.value})
+        if(keyName === 'avatar'){
+            const file = e.target.files[0];
+            setFormValues({...formValues, [keyName]: file})
+            setAvatarPreview(URL.createObjectURL(file))
+        }
+        else{
+            setFormValues({...formValues, [keyName]: e.target.value})
+        }
     }
 
     const submit = () => {
@@ -38,10 +47,11 @@ const Registration = () => {
             <h5>Реєстрація</h5>
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className='fileUpload'>
-                    <div className='file' onClick={handleDivClick}></div>
+                    <div className='file' onClick={handleDivClick}>
+                        {avatarPreview? <img src={avatarPreview} alt='avatar preview'/> : null}
+                    </div>
                     <input type="file" accept='image' id='avatar'
                         ref={fileInputRef}
-                        value={formValues.avatar}
                         onChange={e => handleFormValue(e, 'avatar')}
                     />
                 </div>

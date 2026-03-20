@@ -5,6 +5,7 @@ import UserGetDto from "../DTO/user/UserGetDto.js";
 import mailService from "./mailService.js";
 import tokenService from "./tokenService.js";
 import userRepository from "../ropositories/userRepository.js";
+import createFile from "../utils/createFile.js";
 
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
@@ -18,9 +19,10 @@ async function generateTokens(user){
     return {...tokens, user: userDto}
 }
 
+
 class AuthService{
 
-    async registration(data){
+    async registration(data, avatar){
         const userData = new UserRegistrationDto(data);
         const {email, password} = userData;
 
@@ -30,7 +32,15 @@ class AuthService{
         const hashPassword = await bcrypt.hash(password, 10);
         const activationLink = uuidv4();
 
-        const user = await userRepository.create({...userData, password: hashPassword, activationLink});
+        const fileName = avatar? await createFile(avatar, 'users') : null;
+
+        const user = await userRepository.create({
+            ...userData, 
+            password: hashPassword, 
+            activationLink, 
+            avatar: fileName 
+        });
+
         await mailService.sendActivationMail(email, `${process.env.API_URL}/api/auth/activate/${activationLink}`);
 
         const res = await generateTokens(user);

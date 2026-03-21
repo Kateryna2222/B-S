@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 import Header from '../../components/Header/Header.jsx'
-import { checkAuth } from "../../store/authSlice.js";
+import { checkAuth } from "../../store/user/authFunctions.js";
 import { storage } from "../../storage/storage.js";
 
 const Layout = () => {

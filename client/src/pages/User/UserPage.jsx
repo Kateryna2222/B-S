@@ -1,17 +1,13 @@
-import './Registration.scss';
+import './UserPage.scss';
 
 import { useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { register } from '../../store/user/authFunctions.js';
-import { handleSubmit } from './handleSubmit.js';
-import { scrollToTop } from '../../utils/scrollToTop.js';
 
-const Registration = () => {
+const UserPage = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const { user } = useSelector(state => state.user)
 
     const fileInputRef = useRef(null);
     const handleDivClick = () => {
@@ -19,11 +15,12 @@ const Registration = () => {
     };
 
     const [formValues, setFormValues] = useState({
-        username: '',
-        password: '',
-        email: '',
-        phoneNumber: '',
-        avatar: null
+        username: user.username,
+        oldPassword: '',
+        newPassword: '',
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        avatar: `http://localhost:3000/users/443be750-0ee7-49e2-bdcf-e926b7acce83.jpg`
     });
 
     const [avatarPreview, setAvatarPreview] = useState('');
@@ -42,7 +39,7 @@ const Registration = () => {
 
     return (
         <div className="userForm">
-            <h5>Реєстрація</h5>
+            <h5>Ваша сторінка</h5>
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className='fileUpload'>
                     <div className='file' onClick={handleDivClick}>
@@ -54,47 +51,45 @@ const Registration = () => {
                     />
                 </div>
                 <div>
-                    <label className='hint'>Введіть і'мя користувача:</label>
+                    <label className='hint'>І'мя користувача:</label>
                     <input type="text" id='username' placeholder='username'
                         value={formValues.username}
                         onChange={e => handleFormValue(e, 'username')}
                     />
                 </div>
                 <div>
-                    <label className='hint'>Введіть ваш номер телефону:</label>
+                    <label className='hint'>Номер телефону:</label>
                     <input type="text" id='phoneNumber' placeholder='+380...'
                         value={formValues.phoneNumber}
                         onChange={e => handleFormValue(e, 'phoneNumber')}
                     />
                 </div>
                 <div>
-                    <label className='hint'>Введіть вашу електронну адресу:</label>
-                    <input type="email" id='email' placeholder='example@gmail.com'
-                        value={formValues.email}
-                        onChange={e => handleFormValue(e, 'email')}
+                    <label className='hint'>Електронна адреса:</label>
+                    <input type="email" id='email' value={formValues.email} disabled/>
+                </div>
+                <div>
+                    <label className='hint changePassword'>Бажаєте змінити пароль?</label>
+                    <label className='hint'>Введіть старий пароль:</label>
+                    <input type="password" id='oldPassword' className='password'
+                        value={formValues.oldPassword}
+                        onChange={e => handleFormValue(e, 'oldPassword')}
                     />
                 </div>
                 <div>
-                    <label className='hint'>Введіть пароль (мінімум 8 символів):</label>
-                    <input type="password" id='password' placeholder='password' className='password'
-                        value={formValues.password}
-                        onChange={e => handleFormValue(e, 'password')}
+                    <label className='hint'>Введіть новий пароль:</label>
+                    <input type="password" id='newPassword' className='password'
+                        value={formValues.newPassword}
+                        onChange={e => handleFormValue(e, 'newPassword')}
                     />
                 </div>
-                <button type='button' className='submit'
-                        onClick={()=>handleSubmit(formValues, 'registration', register, dispatch, navigate)}>
-                    зареєструватись
+                <button type='button' className='submit'>
+                        зберегти зміни
                 </button>
             </form>
-            <div className="changeLink">
-                <span>Вже маєте акаунт?</span>
-                <Link to={'/auth/login'} onClick={scrollToTop}>
-                    ввійти
-                </Link>
-            </div>
-
         </div>
     );
 };
 
-export default Registration;
+export default UserPage;
+

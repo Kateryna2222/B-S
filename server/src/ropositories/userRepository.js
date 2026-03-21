@@ -18,11 +18,6 @@ class UserRepository{
         return await user.save();
     }
 
-    async update(user, data) {
-        Object.assign(user, data);
-        return await user.save();
-    }
-
     async delete(user){
         return await user.destroy();
     }

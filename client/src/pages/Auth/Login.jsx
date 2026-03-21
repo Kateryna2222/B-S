@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { login } from '../../store/authSlice.js';
-import { handleSubmit } from './handleSubmit.js';
+import { login } from '../../store/user/authFunctions.js';
+import { sendEmailForRecoverPassword } from '../../store/user/userFunction.js';
+import { handleSubmit, sendMail } from './handleSubmit.js';
 import { scrollToTop } from '../../utils/scrollToTop.js';
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
 
 
     return (
-        <div className="registration">
+        <div className="userForm">
             <h5>Вхід</h5>
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div>
@@ -42,8 +43,12 @@ const Login = () => {
                         value={formValues.password}
                         onChange={e => handleFormValue(e, 'password')}
                     />
+                    <button className='recover' 
+                            onClick={()=>sendMail(formValues, sendEmailForRecoverPassword, dispatch)}>
+                        Забули пароль?
+                    </button>
                 </div>
-                <button type='button' 
+                <button type='button' className='submit'
                         onClick={()=>handleSubmit(formValues, 'login', login, dispatch, navigate)}>
                     ввійти
                 </button>

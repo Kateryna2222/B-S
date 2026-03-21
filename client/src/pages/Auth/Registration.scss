@@ -1,12 +1,13 @@
 @use '../../style/vars' as *;
 
-.registration{
+.userForm{
     background-color: $main_dark;
     border-radius: 5px;
     padding: 60px 30px;
     text-align: center;
     color: $second_text;
     min-height: 70vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
@@ -59,7 +60,7 @@
             display: block;
         }
 
-        button{
+        .submit{
             padding: 15px 30px;
             border-radius: 6px;
             font-size: 20px;
@@ -68,6 +69,19 @@
             &:hover{
                 background-color: $main_text;
                 color: $main-light;
+                opacity: 70%;
+                transition: 0.4s ease;
+            }
+        }
+
+        .recover{
+            background-color: inherit;
+            color: $main-light;
+            display: block;
+            margin-top: 30px;
+            &:hover{
+                background-color: inherit;
+                color: $main_text;
                 opacity: 70%;
                 transition: 0.4s ease;
             }

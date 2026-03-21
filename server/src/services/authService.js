@@ -46,8 +46,12 @@ class AuthService{
         const res = await generateTokens(user);
         return res
     }
+    
 
     async activate(activationLink){
+        if (!activationLink) {
+            throw new ApiError(400, "Відсутній activation link");
+        }
         const user = await userRepository.findOne('activationLink', activationLink);
         if(!user) throw new ApiError(400, 'Неправильне посилання активації');
 
@@ -62,6 +66,7 @@ class AuthService{
         
         const user = await userRepository.findOne('email', email);
         if(!user) throw new ApiError(404, 'Користувача з цією поштою не існує');
+        if(!user.isActivated) throw new ApiError(404, 'Профіль користувача не було активовано на пошті');
 
         const comparePass = await bcrypt.compare(password, user.password);
         if(!comparePass) throw new ApiError(401, 'Неправильний пароль');

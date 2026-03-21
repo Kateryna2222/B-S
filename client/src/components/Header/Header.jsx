@@ -8,6 +8,7 @@ const Header = () => {
             <div className="wrapper">
                 <span className='logo'>B&S</span>
             </div>
+            <Link to={'/me'}>get meee</Link>
         </header>
     );
 };

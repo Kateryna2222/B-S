@@ -12,11 +12,28 @@
     background-color: $main_dark;
     color: $second_text;
 
+
+    li, button{
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        @extend %cursive-font;
+        font-weight: 400;
+        font-size: 18px;
+    }
+
+    a, button{
+        color: inherit;
+        background-color: transparent;
+    }
+
     .wrapper{
         max-width: 1216px;
         width: 100%;
         margin: 0 auto;
         padding: 0 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .logo{

@@ -15,9 +15,11 @@ const Layout = () => {
     useEffect(()=>{
         if(storage.getItem('accessToken')){
             dispatch(checkAuth())
+            console.log('token access upfate')
         }
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }, [dispatch, pathName])
+
 
     return (
         <>

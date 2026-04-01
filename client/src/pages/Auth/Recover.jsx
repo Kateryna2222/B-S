@@ -21,7 +21,7 @@ const Recover = () => {
     }
 
     return (
-        <div className="registration">
+        <div className="userForm">
             <h5>Встановити новий пароль</h5>
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div>

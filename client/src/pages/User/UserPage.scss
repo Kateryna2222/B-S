@@ -7,4 +7,21 @@
         font-size: 24px;
         padding: 20px 0;
     }
+
+    .unable{
+        opacity: 70%;
+    }
+
+
+    .deleteWrapper{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .delete{
+        background-color: rgb(220, 169, 169);
+        padding: 10px;
+        border-radius: 6px;
+    }
 }

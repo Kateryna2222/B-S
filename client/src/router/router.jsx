@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({element}) => {
     const {isAuth} = useSelector(state => state.user)
-    console.log(isAuth)
     return isAuth? element : <Navigate to='/auth/login' replace/>
 }
 

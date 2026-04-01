@@ -1,38 +1,38 @@
 import userRepository from "../ropositories/userRepository.js";
 import ApiError from "../errors/ApiError.js";
 import UserGetDto from "../DTO/user/UserGetDto.js";
+import UserUpdateDto from "../DTO/user/UserUpdateDto.js";
 import mailService from "./mailService.js";
+import createFile from "../utils/createFile.js";
 
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
 
 class UserService{
 
-    async updateUser(userId, data) {
-        const user = await userRepository.findOne("id", userId);
+    async updateUser(id, data, avatar) {
+        const dto = new UserUpdateDto(data)
+
+        const user = await userRepository.findOne("id", id);
         if (!user) throw new ApiError(404, "User not found");
 
-        if (Object.keys(data).length === 0) {
+        if (Object.keys(dto).length === 0) {
             throw new ApiError(400, "Змін немає");
         }
 
-        if(data.oldPassword && data.newPassword){
-            const comparePass = await bcrypt.compare(data.oldPassword, user.password);
+        if(dto.oldPassword && dto.newPassword){
+            const comparePass = await bcrypt.compare(dto.oldPassword, user.password);
             if (!comparePass) throw new ApiError(401, "Неправильний пароль");
 
-            const hashPassword = await bcrypt.hash(data.newPassword, 10);
+            const hashPassword = await bcrypt.hash(dto.newPassword, 10);
             user.password = hashPassword;
         }
 
-        if(data.username){
-            user.username = data.username;
-        }
-        if(data.phoneNumber){
-            user.phoneNumber = data.phoneNumber;
-        }
-        if(data.avatar){
-            user.avatar = data.avatar;
-        }
+        const fileName = avatar? await createFile(avatar, 'users') : null;
+
+        if (dto.username) user.username = dto.username
+        if (dto.phoneNumber) user.phoneNumber = dto.phoneNumber
+        if (avatar) user.avatar = fileName
 
         await userRepository.save(user);
         return new UserGetDto(user);
@@ -69,12 +69,12 @@ class UserService{
         return { message: "Пароль було змінено" };
     }
 
-    async deleteUser(userId) {
-        const user = await userRepository.findOne("id", userId);
+    async deleteUser(id) {
+        const user = await userRepository.findOne("id", id);
         if (!user) throw new ApiError(404, "User not found");
 
         await userRepository.delete(user);
-        return { message: "User deleted successfully" };
+        return { message: "Обліковий запис видалено" };
     }
 
 }

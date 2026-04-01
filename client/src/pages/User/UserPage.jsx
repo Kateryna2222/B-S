@@ -3,24 +3,29 @@ import './UserPage.scss';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
+import { upadateUser } from '../../store/user/userFunction.js';
+import { handleSubmit } from './handleSubmit.js';
 
 const UserPage = () => {
+    const { user } = useSelector(state => state.user);
     const dispatch = useDispatch();
-    const { user } = useSelector(state => state.user)
 
     const fileInputRef = useRef(null);
     const handleDivClick = () => {
         fileInputRef.current.click(); 
     };
 
+    const [showDeleteButton, setShowDeleteButton] = useState(false);
+
     const [formValues, setFormValues] = useState({
-        username: user.username,
+        username: '',
         oldPassword: '',
         newPassword: '',
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        avatar: `http://localhost:3000/users/443be750-0ee7-49e2-bdcf-e926b7acce83.jpg`
+        email: '',
+        phoneNumber: '',
+        avatar: ''
     });
 
     const [avatarPreview, setAvatarPreview] = useState('');
@@ -37,13 +42,26 @@ const UserPage = () => {
     }
 
 
+    useEffect(() => {
+        if (user) {
+        setFormValues({
+            username: user.username,
+            oldPassword: '',
+            newPassword: '',
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            avatar: user.avatar
+        });
+        }
+    }, [user]);
+
     return (
         <div className="userForm">
-            <h5>Ваша сторінка</h5>
+            <h5>Ваш профіль</h5>
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className='fileUpload'>
                     <div className='file' onClick={handleDivClick}>
-                        {avatarPreview? <img src={avatarPreview} alt='avatar preview'/> : null}
+                        <img src={avatarPreview || `http://localhost:3000/users/${formValues.avatar}`}  alt='avatar preview'/>
                     </div>
                     <input type="file" accept='image' id='avatar'
                         ref={fileInputRef}
@@ -66,7 +84,7 @@ const UserPage = () => {
                 </div>
                 <div>
                     <label className='hint'>Електронна адреса:</label>
-                    <input type="email" id='email' value={formValues.email} disabled/>
+                    <input type="email" id='email' value={formValues.email} disabled className='unable'/>
                 </div>
                 <div>
                     <label className='hint changePassword'>Бажаєте змінити пароль?</label>
@@ -83,9 +101,22 @@ const UserPage = () => {
                         onChange={e => handleFormValue(e, 'newPassword')}
                     />
                 </div>
-                <button type='button' className='submit'>
+                <button type='button' className='submit' onClick={()=>handleSubmit(formValues, upadateUser, dispatch)}>
                         зберегти зміни
                 </button>
+                <div className='deleteWrapper'>
+                    <button className='delete' onClick={()=>setShowDeleteButton(showDeleteButton === true? false : true)}>
+                        Видалити обліковий запис?
+                    </button>
+                    {
+                        showDeleteButton? 
+                        <button className='delete'>
+                            видалити
+                        </button>
+                        :
+                        null
+                    }
+                </div>
             </form>
         </div>
     );

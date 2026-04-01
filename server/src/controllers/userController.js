@@ -3,7 +3,7 @@ import userService from "../services/userService.js";
 class UserController{
 
     async updateUser(req, res){
-        const user = await userService.updateUser(req.params.id, req.body);
+        const user = await userService.updateUser(req.user.id, req.body, req.files?.avatar);
         return res.status(200).json({...user});
     }
 
@@ -18,8 +18,8 @@ class UserController{
     }
 
     async deleteUser(req, res){
-        await userService.deleteUser(req.params.id)
-        return res.status(200).json({message: 'User was deleted'})
+        await userService.deleteUser(req.user.id)
+        return res.status(200).json({message: 'Обліковий запис видалено'})
     }
 
 }

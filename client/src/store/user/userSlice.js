@@ -8,11 +8,10 @@ import { userExtraReducers } from "./userFunction.js";
 const userSlice = createSlice({
     name: "auth",
     initialState: {
-        isAuth: false,
+        isAuth: !!storage.getItem('accessToken'),
         user: null,
         accessToken: storage.getItem('accessToken') || null,
-        isLoading: false,
-        status: null
+        isLoading: false
     },
     reducers: {},
     extraReducers: (builder) => {

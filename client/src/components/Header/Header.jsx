@@ -6,6 +6,7 @@ import { logout } from '../../store/user/authFunctions.js';
 
 const Header = () => {
 
+    // AUTH + TOKEN EVEN IF TOKEN DIED IT STILL TRUE
     const {isAuth} = useSelector(state => state.user)
     const navigate = useNavigate();
 

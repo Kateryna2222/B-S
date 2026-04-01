@@ -7,10 +7,14 @@ import Registration from "../pages/Auth/Registration.jsx";
 import UserPage from "../pages/User/UserPage.jsx";
 import Login from "../pages/Auth/Login.jsx";
 import Recover from "../pages/Auth/Recover.jsx";
+import RegistrationSubmitPage from "../pages/Auth/RegistrationSubmit.jsx";
 import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({element}) => {
-    const {isAuth} = useSelector(state => state.user)
+    const {isAuth, isLoading} = useSelector(state => state.user)
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
     return isAuth? element : <Navigate to='/auth/login' replace/>
 }
 
@@ -27,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 path: "/auth/registration",
                 element: <Registration/>
+            },
+            {
+                path: "/auth/registration/submit",
+                element: <RegistrationSubmitPage/>
             },
             {
                 path: "/auth/login",

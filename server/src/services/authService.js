@@ -88,7 +88,7 @@ class AuthService{
         const tokenFromDB = await tokenService.findToken(refreshToken);
 
         if(!userData || !tokenFromDB){
-            throw new ApiError(401, 'User is unauthorized');
+            throw new ApiError(401, 'Користувач не авторизований');
         }
 
         const user = await userRepository.findOne('id', userData.id);

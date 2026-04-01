@@ -88,65 +88,53 @@ export const authExtraReducers = (builder) => {
     //REGISTER
     builder.addCase(register.pending, (state) => {
         state.isLoading = true;
-        state.status = null;
     })
     builder.addCase(register.fulfilled, (state, {payload}) => {
         state.isLoading = false;
-        state.status = payload;
         state.user = payload.user;
         state.accessToken = payload.accessToken;
         state.isAuth = payload.user.isActivated;
     })
     builder.addCase(register.rejected, (state, {payload}) => {
-        state.status = payload;
         state.isLoading = false;
     })
     //LOGIN
     builder.addCase(login.pending, (state) => {
         state.isLoading = true;
-        state.status = null;
     })
     builder.addCase(login.fulfilled, (state, {payload}) => {
         state.isLoading = false;
-        state.status = payload;
         state.user = payload.user;
         state.accessToken = payload.accessToken;
         state.isAuth = payload.user.isActivated;
     })
     builder.addCase(login.rejected, (state, {payload}) => {
-        state.status = payload;
         state.isLoading = false;
     })
     //LOGOUT
     builder.addCase(logout.pending, (state) => {
         state.isLoading = true;
-        state.status = null;
     })
     builder.addCase(logout.fulfilled, (state, {payload}) => {
         state.isLoading = false;
-        state.status = payload;
         state.user = null;
         state.accessToken = null;
         state.isAuth = false;
     })
     builder.addCase(logout.rejected, (state, {payload}) => {
-        state.status = payload;
         state.isLoading = false;
     })
     //CHECK AUTH
     builder.addCase(checkAuth.pending, (state) => {
         state.isLoading = true;
-        state.status = null;
     })
     builder.addCase(checkAuth.fulfilled, (state, {payload}) => {
         state.isLoading = false;
-        state.status = payload;
         state.user = payload.user;
         state.accessToken = payload.accessToken;
         state.isAuth = payload.user.isActivated;
     })
     builder.addCase(checkAuth.rejected, (state, {payload}) => {
-        state.status = payload;
         state.isLoading = false;
     })
 };

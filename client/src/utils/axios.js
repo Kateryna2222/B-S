@@ -16,4 +16,22 @@ instance.interceptors.request.use(config => {
     return config;
 })
 
+instance.interceptors.response.use(config => {
+    return config;
+}, async (error)=>{
+    const originalRequest = error.config;
+    if(error.response?.status == 401 && error.config && !error.config._isRetry){
+        originalRequest._isRetry = true;
+        try {
+            const {data} = await axios.get(`${API_ULR}/auth/refresh`, {withCredentials: true});
+            storage.setItem('accessToken', data.accessToken);
+            return instance.request(originalRequest);
+        } 
+        catch (error) {
+            console.log('Користувач не авторизований')
+        }
+    }
+    throw error;
+})
+
 export default instance;

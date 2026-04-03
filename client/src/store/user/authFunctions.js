@@ -94,7 +94,7 @@ export const authExtraReducers = (builder) => {
         state.isLoading = false;
         state.user = payload.user;
         state.accessToken = payload.accessToken;
-        state.isAuth = payload.user.isActivated;
+        state.isAuth = false;
     })
     builder.addCase(register.rejected, (state) => {
         state.isLoading = false;

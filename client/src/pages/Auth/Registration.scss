@@ -68,7 +68,6 @@
 
             &:hover{
                 background-color: $main_text;
-                color: $main-light;
                 opacity: 70%;
                 transition: 0.4s ease;
             }
@@ -143,6 +142,41 @@
         &:hover{
             color: $main_text;
             transition: 0.4s ease;
+        }
+    }
+}
+
+.registrSubmit{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div{
+        background-color: $main_dark;
+        width: 50vw;
+        height: 50vh;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        color: $second_text;
+        border-radius: 20px;
+        text-align: center;
+
+        h5{
+            letter-spacing: 6px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        p{
+            font-size: 22px;
+            max-width: 550px;
+            line-height: 30px;
         }
     }
 }

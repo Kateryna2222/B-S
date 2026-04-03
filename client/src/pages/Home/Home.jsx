@@ -1,5 +1,6 @@
 import './Home.scss';
 
+
 const Home = () => {
     
     return (

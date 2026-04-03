@@ -12,7 +12,6 @@ import { logout } from '../../store/user/authFunctions.js';
 
 const Header = () => {
 
-    // AUTH + TOKEN EVEN IF TOKEN DIED IT STILL TRUE
     const {isAuth} = useSelector(state => state.user)
     const navigate = useNavigate();
 
@@ -33,9 +32,6 @@ const Header = () => {
                 <li>
                     <Link to={'/'} className='logo'>B&S</Link>
                 </li>
-                {/* <li>
-                    <Link to={'/'}>Головна</Link>
-                </li> */}
                 <li>
                     <ul className='icons'>
                         <li>

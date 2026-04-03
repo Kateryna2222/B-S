@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import { upadateUser } from '../../store/user/userFunction.js';
+import { upadateUser, deleteUser } from '../../store/user/userFunction.js';
 import { handleSubmit } from './handleSubmit.js';
 
 const UserPage = () => {
@@ -40,6 +40,7 @@ const UserPage = () => {
             setFormValues({...formValues, [keyName]: e.target.value})
         }
     }
+
 
 
     useEffect(() => {
@@ -110,7 +111,7 @@ const UserPage = () => {
                     </button>
                     {
                         showDeleteButton? 
-                        <button className='delete'>
+                        <button className='delete' onClick={()=>dispatch(deleteUser())}>
                             видалити
                         </button>
                         :

@@ -3,7 +3,7 @@ import axiosCustom from '../../utils/axios.js';
 
 
 export const sendEmailForRecoverPassword = createAsyncThunk(
-    'auth/recoverPassword',
+    'auth/recoverPasswordEmail',
     async (payload, thunkAPI) => {
         try {
             const {data} = await axiosCustom.post('/user/recover', payload);
@@ -53,9 +53,9 @@ export const upadateUser = createAsyncThunk(
 
 export const deleteUser = createAsyncThunk(
     'auth/deleteUser',
-    async (payload, thunkAPI) => {
+    async (_, thunkAPI) => {
         try {
-            const {data} = await axiosCustom.put('/user/recover/password', payload);
+            const {data} = await axiosCustom.delete('/user/me/delete');
             console.log(data)
             return data
         } 
@@ -74,10 +74,10 @@ export const userExtraReducers = (builder) => {
     builder.addCase(recoverPassword.pending, (state) => {
         state.isLoading = true;
     })
-    builder.addCase(recoverPassword.fulfilled, (state, {payload}) => {
+    builder.addCase(recoverPassword.fulfilled, (state) => {
         state.isLoading = false;
     })
-    builder.addCase(recoverPassword.rejected, (state, {payload}) => {
+    builder.addCase(recoverPassword.rejected, (state) => {
         state.isLoading = false;
     })
     //UPDATE USER
@@ -88,7 +88,20 @@ export const userExtraReducers = (builder) => {
         state.isLoading = false;
         state.user = payload;
     })
-    builder.addCase(upadateUser.rejected, (state, {payload}) => {
+    builder.addCase(upadateUser.rejected, (state) => {
+        state.isLoading = false;
+    })
+    //DELETE USER
+    builder.addCase(deleteUser.pending, (state) => {
+        state.isLoading = true;
+    })
+    builder.addCase(deleteUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.user = null;
+        state.accessToken = null;
+        state.isAuth = false;
+    })
+    builder.addCase(deleteUser.rejected, (state) => {
         state.isLoading = false;
     })
 };

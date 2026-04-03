@@ -76,6 +76,7 @@ export const checkAuth = createAsyncThunk(
             return data
         } 
         catch (error) {
+            storage.removeItem('accessToken');
             const message = error.response?.data?.message || error.message || 'Щось пішло не так';
             return thunkAPI.rejectWithValue(message);
         }
@@ -95,8 +96,11 @@ export const authExtraReducers = (builder) => {
         state.accessToken = payload.accessToken;
         state.isAuth = payload.user.isActivated;
     })
-    builder.addCase(register.rejected, (state, {payload}) => {
+    builder.addCase(register.rejected, (state) => {
         state.isLoading = false;
+        state.isAuth = false;
+        state.user = null;
+        state.accessToken = null;
     })
     //LOGIN
     builder.addCase(login.pending, (state) => {
@@ -106,22 +110,25 @@ export const authExtraReducers = (builder) => {
         state.isLoading = false;
         state.user = payload.user;
         state.accessToken = payload.accessToken;
-        state.isAuth = payload.user.isActivated;
+        state.isAuth = true;
     })
-    builder.addCase(login.rejected, (state, {payload}) => {
+    builder.addCase(login.rejected, (state) => {
         state.isLoading = false;
+        state.isAuth = false;
+        state.user = null;
+        state.accessToken = null;
     })
     //LOGOUT
     builder.addCase(logout.pending, (state) => {
         state.isLoading = true;
     })
-    builder.addCase(logout.fulfilled, (state, {payload}) => {
+    builder.addCase(logout.fulfilled, (state) => {
         state.isLoading = false;
         state.user = null;
         state.accessToken = null;
         state.isAuth = false;
     })
-    builder.addCase(logout.rejected, (state, {payload}) => {
+    builder.addCase(logout.rejected, (state) => {
         state.isLoading = false;
     })
     //CHECK AUTH
@@ -132,9 +139,12 @@ export const authExtraReducers = (builder) => {
         state.isLoading = false;
         state.user = payload.user;
         state.accessToken = payload.accessToken;
-        state.isAuth = payload.user.isActivated;
+        state.isAuth = true;
     })
-    builder.addCase(checkAuth.rejected, (state, {payload}) => {
+    builder.addCase(checkAuth.rejected, (state) => {
         state.isLoading = false;
+        state.isAuth = false;
+        state.user = null;
+        state.accessToken = null;
     })
 };

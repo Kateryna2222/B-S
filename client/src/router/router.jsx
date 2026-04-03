@@ -12,11 +12,14 @@ import { useSelector } from "react-redux";
 
 const ProtectedRoute = ({element}) => {
     const {isAuth, isLoading} = useSelector(state => state.user)
+    
     if (isLoading) {
         return <div>Loading...</div>
     }
+    
     return isAuth? element : <Navigate to='/auth/login' replace/>
 }
+
 
 export const router = createBrowserRouter([
     {

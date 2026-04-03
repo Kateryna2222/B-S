@@ -6,11 +6,19 @@
     font-size: 24px;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 20px;
+    padding: 20px;
     margin-bottom: 50px;
 
     background-color: $main_dark;
     color: $second_text;
+
+    // position: fixed;
+    // top: 0;
+    // left: 50%;
+    // right: 50%;
+    // transform: translate(-50%, -50%);
+    // width: 100%;
+    // z-index: 100;
 
 
     li, button{
@@ -19,6 +27,24 @@
         @extend %cursive-font;
         font-weight: 400;
         font-size: 18px;
+    }
+
+    li{
+        img{
+            width: 30px;
+            height: auto;
+        }
+    }
+
+    img, a{
+        &:hover{
+            opacity: 70%;
+        }
+    }
+
+    .icons{
+        display: flex;
+        gap: 25px;
     }
 
     a, button{
@@ -30,10 +56,15 @@
         max-width: 1216px;
         width: 100%;
         margin: 0 auto;
-        padding: 0 50px;
+        padding: 0 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    .myPosts{
+        width: 40px;
+        height: auto;
     }
 
     .logo{

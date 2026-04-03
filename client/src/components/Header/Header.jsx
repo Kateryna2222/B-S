@@ -52,7 +52,7 @@ const Header = () => {
                     </ul>
                 </li>
                 <li>
-                    <Link to={`/me`}>
+                    <Link to={`/my-products`}>
                         <img src={iconPosts} alt="Мої пости" className='myPosts'/>
                     </Link>
                 </li>

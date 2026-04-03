@@ -1,0 +1,112 @@
+@use '../../style/vars' as *;
+
+$main_light: #ffffff;
+$main_dark: #1b7447fc;
+$main_text: #47613e;
+
+.userPosts{
+
+    .create{
+        margin-bottom: 80px;
+
+        a{
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: $main_dark;
+            color: $main_light;
+            font-size: 20px;
+            border-radius: 6px;
+            &:hover{
+                background-color: $main_text;
+                transition: .4s;
+            }
+        }
+    }
+
+    .wrapper{
+
+        .filter{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            li{
+                button{
+                    background-color: $main_dark;
+                    color: $main_light;
+                    padding: 10px 20px;
+                    font-size: 18px;
+                    border-radius: 6px;
+                    letter-spacing: 2px;
+                    border: 1px solid transparent;
+                    &:hover, &.active{
+                        border: 1px solid $main_dark;
+                        color: $main_dark;
+                        background-color: inherit;
+                        font-weight: 500;
+                        transition: .4s;
+                    }
+                }
+            }
+        }
+
+        .posts{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:center;
+            gap: 40px;
+            padding: 0 20px;
+            .post{
+                width: 200px;
+                border-radius: 6px;
+                overflow: hidden;
+                border: 1px solid $main_dark;
+                .wrapper{
+                    cursor: pointer;
+                    &:hover{
+                        opacity: 60%;
+                        background-color: #87a18f;
+                        transition: .3s;
+                    }
+                }
+                .img{
+                    background-color: #9797b4;
+                    background-image: url('../../assets/noImg.png');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+                    background-size: 102%; 
+                    height: 120px;
+                }
+                .info{
+                    padding: 20px 10px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    font-size: 22px;
+                    color: $main_dark;
+                }
+                .buttons{
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+                    .edit, .delete{
+                        padding: 10px;
+                        color: $main_light;
+                        text-transform: capitalize;
+                        &:hover{
+                            opacity: 80%;
+                        }
+                    }
+                    .edit{
+                        display: inline-block;
+                        background-color: #af692c;
+                    }
+                    .delete{
+                        background-color: #ad364e;
+                    }
+                }
+            }
+        }
+    }
+}

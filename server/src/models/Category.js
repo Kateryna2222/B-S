@@ -12,7 +12,6 @@ const Category = sequelize.define('category', {
             model: 'categories', 
             key: 'id'
         },
-        onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
     }
 }, {timestamps: false})

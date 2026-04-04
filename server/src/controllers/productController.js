@@ -1,0 +1,42 @@
+import productService from "../services/Products/productService.js";
+
+class ProductController{
+
+    async getProduct(req, res){
+        const product = await productService.getOne(req.params.id);
+        return res.status(200).json(product);
+    }
+
+    async getProducts(_, res){
+        const products = await productService.getAll();
+        return res.status(200).json(products);
+    }
+
+    async getProductWithUser(req, res){
+        const product = await productService.getOneWithUser(req.params.id);
+        return res.status(200).json(product);
+    }
+
+    async getProductsWithUser(req, res){
+        const products = await productService.getAllWithUser(req.params.id);
+        return res.status(200).json(products);
+    }
+
+    async createProduct(req, res){
+        const product = await productService.createProduct(req.body, req.user.id);
+        return res.status(200).json(product);
+    }
+
+    async updateProduct(req, res){
+        const product = await productService.updateProduct(req.params.id, req.body);
+        return res.status(200).json(product);
+    }
+
+    async deleteProduct(req, res){
+        await productService.deleteProduct(req.params.id)
+        return res.status(200).json({message: 'Товар видалено'})
+    }
+
+}
+
+export default new ProductController();

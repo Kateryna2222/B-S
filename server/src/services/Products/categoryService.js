@@ -12,7 +12,6 @@ class CategoryService{
 
     async getCategories(parent_id){
         const categories = await categoryRepository.findAll(parent_id);
-        if (!categories) throw new ApiError(404, "Категорію не знайдено");
         return categories
     }
 

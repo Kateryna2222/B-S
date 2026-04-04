@@ -12,7 +12,7 @@ class CategoryController{
         return res.status(200).json(categories);
     }
 
-    async careteCategory(req, res){
+    async createCategory(req, res){
         const category = await categoryService.createCategory(req.body);
         return res.status(200).json(category);
     }

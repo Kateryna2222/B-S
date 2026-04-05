@@ -8,7 +8,7 @@ class ProductDto {
     this.state = validStates.includes(data.state) ? data.state : 'new';
 
     const validStatuses = ['pending', 'available', 'sold'];
-    this.status = validStatuses.includes(data.status) ? data.status : 'pending';
+    this.status = validStatuses.includes(data.status) ? data.status : 'available';
 
     this.categoryId = data.categoryId;
   }

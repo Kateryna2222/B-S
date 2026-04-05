@@ -1,36 +1,30 @@
 import productRepository from "../../ropositories/productRepository.js";
-import userRepository from "../../ropositories/userRepository.js";
 import ApiError from "../../errors/ApiError.js";
 import ProductDto from "../../DTO/products/productDto.js";
+import ProductQueryDto from "../../DTO/other/productQueryDto.js";
+import { handleProductQuery } from "../function/handleProductQuery.js";
+import { pagination } from "../function/pagination.js";
 
 class ProductService{
 
-    async getOne(id){
-        const product = await productRepository.getOne(id);
+    async getOne(id, user){
+        const product = await productRepository.getOne(id, user);
         if (!product) throw new ApiError(404, "Товар не знайдено");
         return product
     }
 
-    async getAll(){
-        const product = await productRepository.getAll();
-        return product
-    }
+    async getAll(query){
+        const qp = new ProductQueryDto(query);
+        const params = handleProductQuery(qp);
+        const result = await productRepository.getAll({...params});
+        const products = result.rows;
 
-    async getOneWithUser(id){
-        const user = await userRepository.findOne('id', id);
-        if(!user) throw new ApiError(404, "Користувача не знайдено");
+        const pageData = pagination(qp, result);
 
-        const product = await productRepository.getOneWithUser(id);
-        if (!product) throw new ApiError(404, "Товар не знайдено");
-        return product
-    }
-
-    async getAllWithUser(id){
-        const user = await userRepository.findOne('id', id);
-        if(!user) throw new ApiError(404, "Користувача не знайдено");
-
-        const products = await productRepository.getAllWithUser(id);
-        return products
+        return {
+            products,
+            ...pageData
+        }
     }
     
 

@@ -3,22 +3,13 @@ import productService from "../services/Products/productService.js";
 class ProductController{
 
     async getProduct(req, res){
-        const product = await productService.getOne(req.params.id);
+        const { user } = req.query;
+        const product = await productService.getOne(req.params.id, user);
         return res.status(200).json(product);
     }
 
-    async getProducts(_, res){
-        const products = await productService.getAll();
-        return res.status(200).json(products);
-    }
-
-    async getProductWithUser(req, res){
-        const product = await productService.getOneWithUser(req.params.id);
-        return res.status(200).json(product);
-    }
-
-    async getProductsWithUser(req, res){
-        const products = await productService.getAllWithUser(req.params.id);
+    async getProducts(req, res){
+        const products = await productService.getAll(req.query);
         return res.status(200).json(products);
     }
 

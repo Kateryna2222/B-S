@@ -11,14 +11,20 @@ router.get('/', productController.getProducts);
 router.get('/:id', productController.getProduct);
 router.post(
     '/', 
+    body('title').isLength({ min: 2}),
     authMiddleware, 
-    productController.createProduct
+    validationMiddlleware,
+    productController.createProduct,
 );
 router.put(
     '/:id', 
+    body('title').isLength({ min: 2}),
     authMiddleware, 
     productController.updateProduct
 );
-router.delete('/:id', authMiddleware, productController.deleteProduct);
+router.delete(
+    '/:id', 
+    authMiddleware, 
+    productController.deleteProduct);
 
 export default router;

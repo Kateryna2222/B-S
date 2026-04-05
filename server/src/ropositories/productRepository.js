@@ -3,7 +3,7 @@ import User from "../models/User.js";
 import Category from "../models/Category.js";
 
 const baseInclude = [
-    { model: Category, as: 'category' }
+    { model: Category, as: 'category' },
 ]
 
 const userInclude = [
@@ -14,33 +14,31 @@ const userInclude = [
     }
 ]
 
+
 class ProductRepository{
 
     async findOne(id) {
         return await Product.findByPk(id);
     }
 
-    async getOne(id) {
-        return await Product.findByPk(id, {...baseInclude});
-    }
-
-    async getOneWithUser(id) {
-        return await Product.findByPk(id, {include: [...baseInclude, ...userInclude]});
-    }
-
-    async getAllWithUser(id) {
-        return await Product.findAll({
-            where: {userId: id}, 
-            include: [...baseInclude, ...userInclude]
+    async getOne(id, user) {
+        return await Product.findByPk(id, {
+            include: [
+                ...baseInclude,
+                ...(user ? userInclude : []),
+            ]
         });
     }
 
-    async getAll() {
-        return await Product.findAll({include: [...baseInclude]});
+    async getAll(query) {
+        return await Product.findAndCountAll({
+            ...query,
+            distinct: true
+        });
     }
 
-    async create(product){
-        return await product.create({...data});
+    async create(data){
+        return await Product.create({...data});
     }
 
     async save(product){

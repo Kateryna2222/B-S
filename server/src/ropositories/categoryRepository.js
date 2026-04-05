@@ -7,8 +7,7 @@ class CategoryRepository{
     }
 
     async findAll(parent_id) {
-        const whereClause = parent_id !== undefined ? { parent_id } : undefined;
-        return await Category.findAll({ where: whereClause });
+        return Category.findAll({ where: parent_id && { parent_id } });
     }
 
     async create(data){

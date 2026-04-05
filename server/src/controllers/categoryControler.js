@@ -8,7 +8,8 @@ class CategoryController{
     }
 
     async getCategories(req, res){
-        const categories = await categoryService.getCategories(req.params.parent_id || undefined);
+        const { parent_id } = req.query; 
+        const categories = await categoryService.getCategories(parent_id);
         return res.status(200).json(categories);
     }
 

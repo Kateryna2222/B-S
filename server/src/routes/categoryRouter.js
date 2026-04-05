@@ -7,9 +7,8 @@ import validationMiddlleware from "../middlewares/validationMiddlleware.js";
 
 const router = Router();
 
-router.get('/all', categoryControler.getCategories);
+router.get('/', categoryControler.getCategories);
 router.get('/:id', categoryControler.getCategory);
-router.get('/all/:parent_id', categoryControler.getCategories);
 router.post(
     '/', 
     checkRoleMiddleware('ADMIN'), 

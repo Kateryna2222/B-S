@@ -7,8 +7,8 @@ import validationMiddlleware from "../middlewares/validationMiddlleware.js";
 
 const router = Router();
 
+router.get('/', productController.getProducts);
 router.get('/:id', productController.getProduct);
-router.get('/all', productController.getProducts);
 router.post(
     '/', 
     authMiddleware, 

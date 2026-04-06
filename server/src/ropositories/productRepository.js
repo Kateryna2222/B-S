@@ -1,9 +1,15 @@
 import Product from "../models/Product.js";
 import User from "../models/User.js";
 import Category from "../models/Category.js";
+import ProductImage from "../models/ProductImage.js";
 
 const baseInclude = [
     { model: Category, as: 'category' },
+    { 
+        model: ProductImage, 
+        as: 'images',
+        attributes: ['id', 'image_url'] 
+    },
 ]
 
 const userInclude = [
@@ -37,8 +43,8 @@ class ProductRepository{
         });
     }
 
-    async create(data){
-        return await Product.create({...data});
+    async create(data, options = {}){
+        return await Product.create({...data}, options);
     }
 
     async save(product){

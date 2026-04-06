@@ -28,13 +28,13 @@ class ProductService{
     }
     
 
-    async createProduct(data, id){
+    async createProduct(data, id, options = {}){
         const dto = new ProductDto(data);
-        const product = await productRepository.create({...dto, userId: id});
+        const product = await productRepository.create({...dto, userId: id}, options);
         return product
     }
 
-    async updateProduct(id, data){
+    async updateProduct(id, data, options = {}){
         const product = await productRepository.findOne(id);
         if (!product) throw new ApiError(404, "Товар не знайдено");
 
@@ -45,7 +45,7 @@ class ProductService{
             }
         });
 
-        const updatedProduct = await productRepository.save(product);
+        const updatedProduct = await productRepository.save(product, options);
         return updatedProduct
     }
 

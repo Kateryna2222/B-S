@@ -1,10 +1,17 @@
 import { Op } from "sequelize";
 import User from "../../models/User.js";
 import Category from "../../models/Category.js";
+import ProductImage from "../../models/ProductImage.js";
 
 const category = {
     model: Category, 
     as: 'category'
+}
+
+const imgs ={ 
+    model: ProductImage, 
+    as: 'images',
+    attributes: ['id', 'image_url'] 
 }
 
 const user = { 
@@ -17,6 +24,7 @@ export const handleProductQuery = (qp) => {
     const include = [];
     const where = {};
     include.push({...category});
+    include.push({...imgs});
 
     // filter
     if(qp.title) where.title = { [Op.iLike]: `%${qp.title}%` };

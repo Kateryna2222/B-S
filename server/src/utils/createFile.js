@@ -12,4 +12,18 @@ const createFile = async (img, folder) => {
     return fileName;
 }
 
+export const deleteFile = async (folder, fileName) => {
+    try {
+        const filePath = path.resolve(__dirname, '..', `static/${folder}`, fileName);
+        await fs.unlink(filePath); // видаляємо файл
+        console.log(`Файл ${fileName} успішно видалено`);
+    } catch (err) {
+        if (err.code === 'ENOENT') {
+            console.warn(`Файл ${fileName} не знайдено`);
+        } else {
+            throw err; // інші помилки кидаємо далі
+        }
+    }
+};
+
 export default createFile;

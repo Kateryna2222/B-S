@@ -47,8 +47,8 @@ class ProductRepository{
         return await Product.create({...data}, options);
     }
 
-    async save(product){
-        return await product.save();
+    async save(product, options = {}){
+        return await product.save(options);
     }
 
     async delete(product){

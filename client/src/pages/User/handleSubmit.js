@@ -1,6 +1,5 @@
 import { setToast } from "../../utils/toastSetting";
 import { toast } from "react-toastify";
-import { scrollToTop } from "../../utils/scrollToTop";
 
 const phoneRegex = /^\+\d{1,4}\d{6,12}$/;
 
@@ -24,7 +23,6 @@ export const handleSubmit = async (formValues, fun, dispatch) => {
 
         await dispatch(fun(formValues)).unwrap();
         toast('Дані оновлено', { ...setToast });
-        scrollToTop();
     } 
     catch (error) {
         toast(error, { ...setToast });

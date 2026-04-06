@@ -25,7 +25,7 @@ class ProductQueryDto{
         this.page = parseInt(query.page) || 1
         this.limit = parseInt(query.limit) || 5
         if(this.page < 1) this.page = 1
-        if(this.limit < 1 || this.limit > 5) this.limit = 5
+        if(this.limit < 1 || this.limit > 50) this.limit = 20
     }
 
     get skip(){

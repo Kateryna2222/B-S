@@ -1,6 +1,5 @@
 import { setToast } from "../../utils/toastSetting";
 import { toast } from "react-toastify";
-import { scrollToTop } from "../../utils/scrollToTop";
 
 const phoneRegex = /^\+\d{1,4}\d{6,12}$/;
 
@@ -44,7 +43,6 @@ export const handleSubmit = async (formValues, type, fun, dispatch, navigate) =>
                 'Раді Вас бачити!', { ...setToast });
             navigate('/');
         }
-        scrollToTop();
     } 
     catch (error) {
         toast(error, { ...setToast });
@@ -70,7 +68,6 @@ export const handleSubmitRecover = async (formValues, activationLink, fun, dispa
             'Пароль змінено!', 
             { ...setToast });
         navigate('/auth/login');
-        scrollToTop();
     } 
     catch (error) {
         toast(error, { ...setToast });

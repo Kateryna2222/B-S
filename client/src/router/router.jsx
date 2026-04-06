@@ -64,7 +64,7 @@ export const router = createBrowserRouter([
                 element: <ProtectedRoute element={<CreatePost/>}/>
             },
             {
-                path: "/my-products/edit",
+                path: "/my-products/edit/:id",
                 element: <ProtectedRoute element={<EditPost/>}/>
             }
         ]

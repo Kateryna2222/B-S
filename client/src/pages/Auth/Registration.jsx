@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 
 import { register } from '../../store/user/authFunctions.js';
 import { handleSubmit } from './handleSubmit.js';
-import { scrollToTop } from '../../utils/scrollToTop.js';
 
 const Registration = () => {
     const dispatch = useDispatch();
@@ -88,7 +87,7 @@ const Registration = () => {
             </form>
             <div className="changeLink">
                 <span>Вже маєте акаунт?</span>
-                <Link to={'/auth/login'} onClick={scrollToTop}>
+                <Link to={'/auth/login'}>
                     ввійти
                 </Link>
             </div>

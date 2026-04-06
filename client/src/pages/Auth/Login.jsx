@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../../store/user/authFunctions.js';
 import { sendEmailForRecoverPassword } from '../../store/user/userFunction.js';
 import { handleSubmit, sendMail } from './handleSubmit.js';
-import { scrollToTop } from '../../utils/scrollToTop.js';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -55,7 +54,7 @@ const Login = () => {
             </form>
             <div className="changeLink">
                 <span>Не зареєстровані?</span>
-                <Link to={'/auth/registration'} onClick={scrollToTop}>
+                <Link to={'/auth/registration'} >
                     зареєструватись
                 </Link>
             </div>

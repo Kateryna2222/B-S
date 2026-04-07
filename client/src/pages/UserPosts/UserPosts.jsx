@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import { getProducts } from '../../store/product/productSlice.js';
+import { getProducts, changePage } from '../../store/product/productSlice.js';
 import MyPost from '../../components/MyPost/MyPost.jsx';
 import Loading from '../../components/Loading/Loading.jsx';
+import Pagination from '../../components/Pagination/Pagination.jsx';
 
 const UserPosts = () => {
 
-    const { products, isLoading } = useSelector(state => state.product);
+    const { products, pagination, isLoading } = useSelector(state => state.product);
     const { user } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
@@ -18,14 +19,16 @@ const UserPosts = () => {
 
     useEffect(() => {
         if (!user?.id) return;
-        dispatch(getProducts(`userId=${user.id}&limit=8${params? `&status=${params}` : ''}`))
-    }, [dispatch, params, user?.id])
+        dispatch(getProducts(`userId=${user.id}&page=${pagination.page}&limit=8${params? `&status=${params}` : ''}`))
+    }, [dispatch, params, user?.id, pagination.page])
 
 
     const filter = (type) => {
-        setParams(type)
-        setActiveButton(type)
+        setParams(type);
+        setActiveButton(type);
+        dispatch(changePage(1));
     }
+
 
     return (
         <div className="userPosts">
@@ -76,6 +79,7 @@ const UserPosts = () => {
                         )
                     }
                 </ul>
+                <Pagination dispatch={dispatch}/>
             </div>
         </div>
     );

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axiosCustom from '../../utils/axios.js';
 
 export const getProducts = createAsyncThunk(
-    'auth/getProducts',
+    'product/getProducts',
     async (payload, thunkAPI) => {
         try {
             const params = payload? `?${payload}` : '';
@@ -18,14 +18,21 @@ export const getProducts = createAsyncThunk(
 )
 
 const productSlice = createSlice({
-    name: "auth",
+    name: "product",
     initialState: {
         products: [],
         currentProduct: null,
-        pagination: {},
+        pagination: {
+            page: 1, 
+            totalPages: 1
+        },
         isLoading: false
     },
-    reducers: {},
+    reducers: {
+        changePage(state, {payload}){
+            state.pagination.page = payload;
+        }
+    },
     extraReducers: (builder) => {
         //GET POSTS
         builder.addCase(getProducts.pending, (state) => {
@@ -43,4 +50,5 @@ const productSlice = createSlice({
     }
 })
 
+export const { changePage } = productSlice.actions;
 export default productSlice.reducer

@@ -1,0 +1,44 @@
+@use '../../style/vars' as *;
+
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    li{
+        color: $main_dark;
+        &.active{
+            background-color: $main_dark;
+            color: $main_light;
+        }
+        &.previous, &.next{
+            a {
+                border: none;     
+            }
+        }
+        &.disabled{ 
+            cursor: default;
+            a {
+                opacity: 0.3;           
+                pointer-events: none;
+            }
+        }
+        a{
+            padding: 3px 7px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            border: 1px solid $main_dark;
+            background-color: inherit;
+            color: inherit;
+            &:hover{
+                background-color: $main_dark;
+                color: $main_light;
+                font-weight: 500;
+                transition: .4s;
+            }
+        }
+    }
+}

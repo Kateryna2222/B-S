@@ -6,14 +6,6 @@
     overflow: hidden;
     border: 1px solid $main_dark;
     position: relative;
-    // .wrapper{
-    //     cursor: pointer;
-    //     &:hover{
-    //         opacity: 80%;
-    //         background-color: #b1b2b1;
-    //         transition: .5s;
-    //     }
-    // }
     .title{
         text-transform: capitalize;
     }
@@ -32,6 +24,7 @@
         img{
             width: 100%;
             height: auto;
+            min-height: 100%;
             object-position: center;
             object-fit: cover; 
         }

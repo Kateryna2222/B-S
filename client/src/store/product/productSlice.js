@@ -36,7 +36,7 @@ export const deleteProduct = createAsyncThunk(
     async (id, thunkAPI) => {
         try {
             const {data} = await axiosCustom.delete(`/product/${id}`);
-            return data
+            return {data, id}
         } 
         catch (error) {
             const message = error.response?.data?.message || error.message || 'Щось пішло не так';
@@ -65,9 +65,9 @@ export const createProduct = createAsyncThunk(
 
 export const updateProduct = createAsyncThunk(
     'product/updateProduct',
-    async (payload, thunkAPI) => {
+    async ({id, payload}, thunkAPI) => {
         try {
-            const {data} = await axiosCustom.patch(`/product`, payload ,{
+            const {data} = await axiosCustom.put(`/product/${id}`, payload ,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -123,35 +123,11 @@ const productSlice = createSlice({
             state.isLoading = false;
         })
         //DELETE
-        builder.addCase(deleteProduct.pending, (state) => {
-            state.isLoading = true;
-        })
-        builder.addCase(deleteProduct.fulfilled, (state) => {
-            state.pagination = initialState.pagination;
-            state.products = [];
-        })
-        builder.addCase(deleteProduct.rejected, (state) => {
+        builder.addCase(deleteProduct.fulfilled, (state, {payload}) => {
             state.isLoading = false;
-        })
-        //CREATE
-        builder.addCase(createProduct.pending, (state) => {
-            state.isLoading = true;
-        })
-        builder.addCase(createProduct.fulfilled, (state, {payload}) => {
-            state.products = payload.products;//without products
-        })
-        builder.addCase(createProduct.rejected, (state) => {
-            state.isLoading = false;
-        })
-        //UPDATE
-        builder.addCase(updateProduct.pending, (state) => {
-            state.isLoading = true;
-        })
-        builder.addCase(updateProduct.fulfilled, (state, {payload}) => {
-            state.products = payload.products;//without products
-        })
-        builder.addCase(updateProduct.rejected, (state) => {
-            state.isLoading = false;
+            state.products = state.products.filter(
+                product => product.id !== payload.id
+            );
         })
     }
 })

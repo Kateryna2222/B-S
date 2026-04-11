@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Category from '../../components/Category/Category.jsx';
 import { createProduct } from '../../store/product/productSlice.js';
@@ -11,6 +12,7 @@ import { handleSubmit } from './handleSubmit.js';
 const CreatePost = () => {
     const { currentCategory } = useSelector(state => state.category);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     //img
@@ -44,6 +46,8 @@ const CreatePost = () => {
             }));
         }
     }, [currentCategory]);
+
+
 
 
     return (
@@ -99,7 +103,10 @@ const CreatePost = () => {
                             б/у
                     </label>
                 </div>
-                <button type='button' className='submit' onClick={()=>console.log(formValues)}>
+                <button type='button' className='submit' onClick={()=>{
+                    handleSubmit(formValues, createProduct, dispatch)
+                    navigate('/')
+                }}>
                     створити товар
                 </button>
             </form>

@@ -15,7 +15,10 @@ const Pagination = ({dispatch}) => {
                 pageCount={pagination.totalPages}
                 pageRangeDisplayed={3}
                 marginPagesDisplayed={2}
-                onPageChange={({ selected }) => dispatch(changePage(selected + 1))}
+                onPageChange={({ selected }) => {
+                  dispatch(changePage(selected + 1))
+                  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                }}
                 containerClassName="pagination"
                 activeClassName="active"
                 previousLabel="<"

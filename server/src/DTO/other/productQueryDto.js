@@ -11,8 +11,8 @@ class ProductQueryDto{
         this.maxPrice = query.maxPrice ? parseFloat(query.maxPrice) : null;
         this.userId = query.userId? parseInt(query.userId) : null;
         this.category = query.category || null;
-        this.state = validStates.includes(query.state) ? query.state : 'new';
-        this.status = validStatuses.includes(query.status) ? query.status : 'available';
+        this.state = validStates.includes(query.state) ? query.state : null;
+        this.status = validStatuses.includes(query.status) ? query.status : null;
 
         // search
         this.search = query.search || null;

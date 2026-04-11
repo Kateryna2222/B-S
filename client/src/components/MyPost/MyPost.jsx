@@ -1,9 +1,12 @@
 import './MyPost.scss';
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 
 import editImg from '../../assets/edit.svg';
+import { deleteProduct } from '../../store/product/productSlice.js';
 
 const MyPost = ({product}) => {
+    const dispatch = useDispatch();
 
     const link = `/my-products/edit/${product.id}`;
 
@@ -29,7 +32,8 @@ const MyPost = ({product}) => {
                     </div>
                 </div>
                 <div className="buttons">
-                    <button className="delete"></button>
+                    <button className="delete" onClick={()=>dispatch(deleteProduct(product.id))}
+                    ></button>
                     <div className="edit">
                         <Link to={link}>
                             <img src={editImg} alt="edit" />

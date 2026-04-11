@@ -2,26 +2,26 @@ import { setToast } from "../../utils/toastSetting";
 import { toast } from "react-toastify";
 
 
-export const handleSubmit = async (formValues, fun, dispatch) => {
+export const handleSubmit = async (obj, fun, dispatch) => {
     try {
 
-        if(formValues.title < 2){
+        if(obj.payload.title < 2){
             toast("Назва повинна мати щонайменше 2 літери", {...setToast})
             return
         }
 
-        if(formValues.price < 0){
+        if(obj.payload.price < 0){
             toast("Не вірно вказана ціна", {...setToast})
             return
         }
 
-        if(formValues.categoryId === null){
+        if(obj.payload.categoryId === null){
             toast("Не вибрано категорію", {...setToast})
             return
         }
 
-        await dispatch(fun(formValues)).unwrap();
-        toast('Оголошення створено', { ...setToast });
+        await dispatch(fun(obj)).unwrap();
+        toast('Дані оновлено', { ...setToast });
     } 
     catch (error) {
         toast(error, { ...setToast });

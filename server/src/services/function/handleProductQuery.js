@@ -23,7 +23,6 @@ const user = {
 export const handleProductQuery = (qp) => {
     const include = [];
     const where = {};
-    include.push({...category});
     include.push({...imgs});
 
     // filter
@@ -50,6 +49,8 @@ export const handleProductQuery = (qp) => {
                 slug: { [Op.iLike]: `%${qp.category}%` }
             }
         });
+    }else {
+        include.push({...category});
     }
     if(qp.state) where.state = qp.state;
     if(qp.status) where.status = qp.status;

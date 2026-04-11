@@ -24,6 +24,7 @@ router.put(
     body('price').isNumeric(),
     body('categoryId').isInt(),
     authMiddleware, 
+    validationMiddlleware,
     productController.updateProduct
 );
 router.delete(

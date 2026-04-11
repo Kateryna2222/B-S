@@ -1,4 +1,5 @@
 import productRepository from "../../ropositories/productRepository.js";
+import userRepository from "../../ropositories/userRepository.js";
 import ApiError from "../../errors/ApiError.js";
 import ProductDto from "../../DTO/products/productDto.js";
 import ProductQueryDto from "../../DTO/other/productQueryDto.js";
@@ -29,6 +30,8 @@ class ProductService{
     
 
     async createProduct(data, id, options = {}){
+        const user = await userRepository.findOne('id', id);
+        if (!user) throw new ApiError(404, "Користувача не знайдено");
         const dto = new ProductDto(data);
         const product = await productRepository.create({...dto, userId: id}, options);
         return product

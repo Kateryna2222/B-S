@@ -68,10 +68,6 @@ class ProductController{
         }
     }
 
-    // async updateProduct(req, res){
-    //     const product = await productService.updateProduct(req.params.id, req.body);
-    //     return res.status(200).json(product);
-    // }
 
     async deleteProduct(req, res){
         await productService.deleteProduct(req.params.id)

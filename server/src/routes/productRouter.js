@@ -12,6 +12,8 @@ router.get('/:id', productController.getProduct);
 router.post(
     '/', 
     body('title').isLength({ min: 2}),
+    body('price').isNumeric(),
+    body('categoryId').isInt(),
     authMiddleware, 
     validationMiddlleware,
     productController.createProduct,
@@ -19,6 +21,8 @@ router.post(
 router.put(
     '/:id', 
     body('title').isLength({ min: 2}),
+    body('price').isNumeric(),
+    body('categoryId').isInt(),
     authMiddleware, 
     productController.updateProduct
 );

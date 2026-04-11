@@ -13,6 +13,7 @@ router.post(
     '/', 
     checkRoleMiddleware('ADMIN'), 
     body('name').isLength({ min: 2}),
+    body('parent_id').optional().isInt(),
     validationMiddlleware,
     categoryControler.createCategory
 );
@@ -20,6 +21,7 @@ router.put(
     '/:id', 
     checkRoleMiddleware('ADMIN'), 
     body('name').isLength({ min: 2}),
+    body('parent_id').optional().isInt(),
     validationMiddlleware,
     categoryControler.updateCategory
 );

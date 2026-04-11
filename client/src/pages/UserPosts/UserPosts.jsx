@@ -19,7 +19,7 @@ const UserPosts = () => {
 
     useEffect(() => {
         if (!user?.id) return;
-        dispatch(getProducts(`userId=${user.id}&page=${pagination.page}&limit=8${params? `&status=${params}` : ''}`))
+        dispatch(getProducts(`userId=${user.id}&page=${pagination.page}&limit=16${params? `&status=${params}` : ''}`))
     }, [dispatch, params, user?.id, pagination.page])
 
 

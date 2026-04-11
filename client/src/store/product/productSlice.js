@@ -17,6 +17,70 @@ export const getProducts = createAsyncThunk(
     }
 )
 
+export const getProduct = createAsyncThunk(
+    'product/getProduct',
+    async (id, thunkAPI) => {
+        try {
+            const {data} = await axiosCustom.get(`/product/${id}`);
+            return data
+        } 
+        catch (error) {
+            const message = error.response?.data?.message || error.message || 'Щось пішло не так';
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+)
+
+export const deleteProduct = createAsyncThunk(
+    'product/deleteProduct',
+    async (id, thunkAPI) => {
+        try {
+            const {data} = await axiosCustom.delete(`/product/${id}`);
+            return data
+        } 
+        catch (error) {
+            const message = error.response?.data?.message || error.message || 'Щось пішло не так';
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+)
+
+export const createProduct = createAsyncThunk(
+    'product/createProduct',
+    async (payload, thunkAPI) => {
+        try {
+            const {data} = await axiosCustom.post(`/product`, payload ,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            return data
+        } 
+        catch (error) {
+            const message = error.response?.data?.message || error.message || 'Щось пішло не так';
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+)
+
+export const updateProduct = createAsyncThunk(
+    'product/updateProduct',
+    async (payload, thunkAPI) => {
+        try {
+            const {data} = await axiosCustom.patch(`/product`, payload ,{
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            return data
+        } 
+        catch (error) {
+            const message = error.response?.data?.message || error.message || 'Щось пішло не так';
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+)
+
 const productSlice = createSlice({
     name: "product",
     initialState: {
@@ -34,7 +98,7 @@ const productSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        //GET POSTS
+        //GET ALL
         builder.addCase(getProducts.pending, (state) => {
             state.isLoading = true;
         })
@@ -45,6 +109,48 @@ const productSlice = createSlice({
             state.pagination = pagination;
         })
         builder.addCase(getProducts.rejected, (state) => {
+            state.isLoading = false;
+        })
+        //GET ONE
+        builder.addCase(getProduct.pending, (state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(getProduct.fulfilled, (state, {payload}) => {
+            state.isLoading = false;
+            state.currentProduct = payload;
+        })
+        builder.addCase(getProduct.rejected, (state) => {
+            state.isLoading = false;
+        })
+        //DELETE
+        builder.addCase(deleteProduct.pending, (state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(deleteProduct.fulfilled, (state) => {
+            state.pagination = initialState.pagination;
+            state.products = [];
+        })
+        builder.addCase(deleteProduct.rejected, (state) => {
+            state.isLoading = false;
+        })
+        //CREATE
+        builder.addCase(createProduct.pending, (state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(createProduct.fulfilled, (state, {payload}) => {
+            state.products = payload.products;//without products
+        })
+        builder.addCase(createProduct.rejected, (state) => {
+            state.isLoading = false;
+        })
+        //UPDATE
+        builder.addCase(updateProduct.pending, (state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(updateProduct.fulfilled, (state, {payload}) => {
+            state.products = payload.products;//without products
+        })
+        builder.addCase(updateProduct.rejected, (state) => {
             state.isLoading = false;
         })
     }

@@ -1,0 +1,33 @@
+@use '../../style/vars' as *;
+
+.search{
+    margin-bottom: 40px;
+    form{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 0 8px;
+        width: 100%;
+        input{
+            border: 1px solid $main_dark;
+            border-radius: 3px;
+            padding: 10px;
+            max-width: 600px;
+            width: 100%;
+            font-size: 18px;
+            color: $main_dark;
+        }
+        button{
+            background-color: $main_dark;
+            padding: 2px 10px;
+            color: $main_light;
+            font-size: 18px;
+            border-radius: 3px;
+            letter-spacing: 1px;
+            &:hover{
+                opacity: 80%;
+                transition: .2s;
+            }
+        }
+    }
+}

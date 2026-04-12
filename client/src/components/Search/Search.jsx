@@ -1,3 +1,4 @@
+import './Search.scss';
 import { useState } from 'react';
 
 const Search = ({ onSearch }) => {
@@ -9,7 +10,7 @@ const Search = ({ onSearch }) => {
     };
 
     return (
-        <search>
+        <search className='search'>
             <form onSubmit={handleSubmit}>
                 <input
                     type="search"

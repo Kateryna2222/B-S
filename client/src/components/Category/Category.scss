@@ -1,0 +1,41 @@
+@use '../../style/vars' as *;
+
+.categoriesWrapper{
+    margin-bottom: 50px;
+    .categories{
+        margin-bottom: 30px;
+    }
+    .categories, .subcategories{
+        padding: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px 10px;
+        button{
+            background-color: $main_dark;
+            border: 1px solid $main_light;
+            padding: 5px 10px;
+            color: $main_light;
+            font-size: 18px;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            &:hover{
+                opacity: 80%;
+                transition: .2s;
+            }
+        }
+        .active{
+            background-color: $main_light;
+            color: $main_dark;
+            border: 1px solid $main_dark;
+        }
+    }
+    .subcategories{
+        button{
+            font-size: 16px;
+        }
+    }
+    h4, p{
+        font-size: 20px;
+    }
+}

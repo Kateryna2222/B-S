@@ -70,15 +70,11 @@ const Home = () => {
             <Search onSearch={(value) => {
                 handleFormValue("search", value)
             }}/>
-            <h3>Фільтри</h3>
             {
                 isLoading? 
                 <Loading/>
                 :
-                <>
-                    <h4>Доступні розділи:</h4>
-                    <Category/>
-                </>
+                <Category/>
             }
             <Filter
                 params={params}

@@ -1,0 +1,60 @@
+@use '../../style/vars' as *;
+
+.filter{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 80px;
+    p{
+        font-size: 20px;
+    }
+    .price{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 40px;
+        input{
+            font-size: 18px;
+            border: 1px solid $main_dark;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-left: 20px;
+        }
+    }
+    select{
+        border: 1px solid $main_dark;
+        margin: 40px 0;
+        max-width: 200px;
+        padding: 10px 15px;
+        border-radius: 3px;
+        color: $main_dark;
+        font-size: 15px;
+    }
+    .btns{
+        align-self: center;
+        display: flex;
+        gap: 30px;
+        button{
+            background-color: $main_dark;
+            color: $main_light;
+            font-size: 18px;
+            padding: 8px 14px;
+            border-radius: 3px;
+        }
+    }
+}
+
+.filterWrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.sort{
+    border: 1px solid $main_dark;
+    border-radius: 3px;
+    padding: 2px 5px;
+    max-width: 150px;
+    margin-bottom: 40px;
+    margin-right: 40px;
+    align-self: flex-end;
+}

@@ -4,11 +4,13 @@ import { useDispatch } from 'react-redux';
 
 import editImg from '../../assets/edit.svg';
 import { deleteProduct } from '../../store/product/productSlice.js';
+import { formatDate } from './formatDate.js';
 
-const MyPost = ({product}) => {
+const MyPost = ({product, data = false}) => {
     const dispatch = useDispatch();
 
     const link = `/my-products/edit/${product.id}`;
+
 
     return (
         <li>
@@ -23,23 +25,36 @@ const MyPost = ({product}) => {
                         }
                     </div>
                     <div className="info">
-                        <span className="title">
+                        <Link to={`/products/${product.id}`} className="title">
                             {product.title}
-                        </span>
+                        </Link>
                         <span className="price">
                             {`${product.price} грн`}
                         </span>
+                        {
+                            !data?
+                            null
+                            :
+                            <span className='data'>
+                                {formatDate(product.createdAt)}
+                            </span>
+                        }
                     </div>
                 </div>
-                <div className="buttons">
-                    <button className="delete" onClick={()=>dispatch(deleteProduct(product.id))}
-                    ></button>
-                    <div className="edit">
-                        <Link to={link}>
-                            <img src={editImg} alt="edit" />
-                        </Link>
+                {
+                    data?
+                    null
+                    :
+                    <div className="buttons">
+                        <button className="delete" onClick={()=>dispatch(deleteProduct(product.id))}
+                        ></button>
+                        <div className="edit">
+                            <Link to={link}>
+                                <img src={editImg} alt="edit" />
+                            </Link>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </li>
     );

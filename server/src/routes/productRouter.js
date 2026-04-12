@@ -5,6 +5,7 @@ import productController from "../controllers/productController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 import validationMiddlleware from "../middlewares/validationMiddlleware.js";
 
+
 const router = Router();
 
 router.get('/', productController.getProducts);

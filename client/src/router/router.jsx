@@ -15,6 +15,7 @@ import RegistrationSubmitPage from "../pages/Auth/RegistrationSubmit.jsx";
 import UserPosts from "../pages/UserPosts/UserPosts.jsx";
 import EditPost from "../pages/EditPost/EditPost.jsx";
 import CreatePost from "../pages/CreatePost/CreatePost.jsx";
+import PostPage from "../pages/PostPage/PostPage.jsx";
 
 const ProtectedRoute = ({element}) => {
     const {isAuth, isLoading} = useSelector(state => state.user)
@@ -66,6 +67,10 @@ export const router = createBrowserRouter([
             {
                 path: "/my-products/edit/:id",
                 element: <ProtectedRoute element={<EditPost/>}/>
+            },
+            {
+                path: "/products/:id",
+                element: <PostPage/>
             }
         ]
 

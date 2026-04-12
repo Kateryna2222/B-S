@@ -104,8 +104,7 @@ const CreatePost = () => {
                     </label>
                 </div>
                 <button type='button' className='submit' onClick={()=>{
-                    handleSubmit(formValues, createProduct, dispatch)
-                    navigate('/')
+                    handleSubmit(formValues, createProduct, dispatch, navigate)
                 }}>
                     створити товар
                 </button>

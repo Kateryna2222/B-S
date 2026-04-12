@@ -2,7 +2,7 @@ import { setToast } from "../../utils/toastSetting";
 import { toast } from "react-toastify";
 
 
-export const handleSubmit = async (formValues, fun, dispatch) => {
+export const handleSubmit = async (formValues, fun, dispatch, navigate) => {
     try {
 
         if(formValues.title < 2){
@@ -22,6 +22,7 @@ export const handleSubmit = async (formValues, fun, dispatch) => {
 
         await dispatch(fun(formValues)).unwrap();
         toast('Оголошення створено', { ...setToast });
+        navigate('/')
     } 
     catch (error) {
         toast(error, { ...setToast });

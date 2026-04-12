@@ -7,7 +7,21 @@
     border: 1px solid $main_dark;
     position: relative;
     .title{
+        display: inline-block;
         text-transform: capitalize;
+        border-bottom: 1px solid transparent;
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        text-underline-offset: 4px;
+
+        &:hover {
+            text-decoration-color: $main_dark;
+            transition: .3s;
+        }
+    }
+    .data{
+        font-size: 14px;
+        padding-top: 20px;
     }
     .price{
         font-size: 18px;

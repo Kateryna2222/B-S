@@ -19,7 +19,7 @@ const UserPosts = () => {
 
     useEffect(() => {
         if (!user?.id) return;
-        dispatch(getProducts(`userId=${user.id}&page=${pagination.page}&limit=16${params? `&status=${params}` : ''}`))
+        dispatch(getProducts(`userId=${user.id}&page=${pagination.page}&limit=2${params? `&status=${params}` : ''}`))
     }, [dispatch, params, user?.id, pagination.page])
 
 
@@ -38,7 +38,7 @@ const UserPosts = () => {
                 </Link>
             </div>
             <div className="wrapper">
-                <ul className="filter">
+                <ul className="filterBtns">
                     <li>
                         <button className={activeButton === '' ? 'active' : ''} 
                                 onClick={()=>filter('')}>

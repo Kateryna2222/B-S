@@ -2,10 +2,10 @@ import { setToast } from "../../utils/toastSetting";
 import { toast } from "react-toastify";
 
 
-export const handleSubmit = async (formValues, fun, dispatch, navigate) => {
+export const handleSubmit = async (formValues, images, fun, dispatch, navigate) => {
     try {
 
-        if(formValues.title < 2){
+        if(formValues.title.length < 2){
             toast("Назва повинна мати щонайменше 2 літери", {...setToast})
             return
         }
@@ -20,7 +20,21 @@ export const handleSubmit = async (formValues, fun, dispatch, navigate) => {
             return
         }
 
-        await dispatch(fun(formValues)).unwrap();
+
+        const formData = new FormData();
+
+        Object.keys(formValues).forEach((key) => {
+            if (key !== "images") {
+                formData.append(key, formValues[key]);
+            }
+        });
+
+        images.forEach((img) => {
+            formData.append("images", img);
+        });
+
+
+        await dispatch(fun(formData)).unwrap();
         toast('Оголошення створено', { ...setToast });
         navigate('/')
     } 

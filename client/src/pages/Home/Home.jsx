@@ -40,6 +40,10 @@ const Home = () => {
     }
     
     useEffect(() => {
+        
+    }, []);
+
+    useEffect(() => {
         const query = buildParams();
         dispatch(getProducts(query));
     }, [dispatch, pagination.page, params.search, params.sortBy, params.sortDir]);

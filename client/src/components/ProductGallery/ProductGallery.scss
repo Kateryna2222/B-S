@@ -1,0 +1,52 @@
+@use '../../style/vars' as *;
+
+.ProductGallery{
+
+    .imgs{
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        padding-top: 30px;
+    }
+
+    .imgWrapper{
+        margin-top: 20px;
+    }
+    .img{  
+        width: 300px;
+        height: 300px;
+        object-fit: cover; 
+    }
+
+    ul{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+        .miniImg{
+            cursor: pointer;
+            img{ 
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .uploadBox {
+        width: 200px;
+        height: 50px;
+        padding: 10px;
+        border: 2px dashed $main_light;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: 0.2s;
+
+        &:hover {
+            opacity: 50%;
+        }
+    }
+}

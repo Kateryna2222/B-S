@@ -1,0 +1,45 @@
+
+
+.createPostForm{
+    .form{
+        align-items: self-start;
+        padding-left: 40px;
+        textarea{
+            height: 200px;
+            width: 800px;
+            resize: none;
+            border-radius: 3px;
+            padding: 10px;
+            &::placeholder{
+                font-size: 18px;
+            }
+        }
+        input, button{
+            border-radius: 3px;
+        }
+        label{
+            font-size: 22px;
+        }
+        .price{
+            width: 500px;
+            input{
+                margin-right: 20px;
+                width: 410px;
+            }
+            span{
+                font-size: 20px;
+            }
+        }
+        .options{
+            display: flex;
+            flex-direction: column;
+            input{
+                width: 40px;
+            }
+            label{
+                font-size: 18px;
+            }
+            margin-bottom: 40px;
+        }
+    }
+}

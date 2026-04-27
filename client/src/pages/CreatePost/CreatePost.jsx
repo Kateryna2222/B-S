@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Category from '../../components/Category/Category.jsx';
 import ProductGallery from '../../components/ProductGallery/ProductGallery.jsx';
+import ImagesSlider from '../../components/ImagesSlider/ImagesSlider.jsx';
 import { createProduct } from '../../store/product/productSlice.js';
 import { handleSubmit } from './handleSubmit.js';
 
@@ -16,26 +17,20 @@ const CreatePost = () => {
     const navigate = useNavigate();
 
     const [images, setImages] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const initialState = {
         title: '',
         description: '',
         price: 0.00,
         state: 'new',
-        categoryId: null,
-        images: []
+        categoryId: null
     }
 
     const [formValues, setFormValues] = useState(initialState);
-
-
     const handleFormValue = (e, keyName) => {
         setFormValues({...formValues, [keyName]: e.target.value})
     }
-
-    useEffect(() => {
-        setFormValues(prev => ({ ...prev, images }));
-    }, [images]);
 
 
     useEffect(() => {
@@ -49,12 +44,11 @@ const CreatePost = () => {
 
 
 
-
     return (
         <div className="userForm createPostForm">
             <h5>Нове оголошення</h5>
             <form className="form" onSubmit={e => e.preventDefault()}>
-                <ProductGallery images={images} setImages={setImages}/>
+                <ImagesSlider images={images} setImages={setImages} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}/>
                 <div>
                     <Category/>
                 </div>

@@ -30,7 +30,7 @@ export const handleSubmit = async (formValues, images, fun, dispatch, navigate) 
         });
 
         images.forEach((img) => {
-            formData.append("images", img);
+            formData.append("images", img.file || img);
         });
 
 

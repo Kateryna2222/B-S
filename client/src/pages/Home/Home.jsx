@@ -38,10 +38,7 @@ const Home = () => {
         const query =`${queryBase}${queryParams}`;
         return query
     }
-    
-    useEffect(() => {
-        
-    }, []);
+
 
     useEffect(() => {
         const query = buildParams();

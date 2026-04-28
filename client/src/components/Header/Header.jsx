@@ -35,7 +35,7 @@ const Header = () => {
                 <li>
                     <ul className='icons'>
                         <li>
-                            <Link to={'/favorites'}>
+                            <Link to={'/favourites'}>
                                 <img src={iconFavorites} alt="Обрані" />
                             </Link>
                         </li>

@@ -57,4 +57,10 @@
     margin-bottom: 40px;
     margin-right: 40px;
     align-self: flex-end;
+    option:checked {
+        background: $main_dark;
+    }
+    option:hover{
+        background-color: aqua;
+    }
 }

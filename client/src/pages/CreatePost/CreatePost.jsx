@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Category from '../../components/Category/Category.jsx';
-import ProductGallery from '../../components/ProductGallery/ProductGallery.jsx';
 import ImagesSlider from '../../components/ImagesSlider/ImagesSlider.jsx';
 import { createProduct } from '../../store/product/productSlice.js';
 import { handleSubmit } from './handleSubmit.js';

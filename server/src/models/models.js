@@ -3,6 +3,7 @@ import User from "./User.js";
 import Category from "./Category.js";
 import Product from "./Product.js";
 import ProductImage from "./ProductImage.js";
+import Favourite from "./Favourite.js";
 
 User.hasOne(Token, { onDelete: 'CASCADE' });
 Token.belongsTo(User);
@@ -18,3 +19,6 @@ Product.belongsTo(Category, { as: 'category', foreignKey: 'categoryId' });
 
 Product.hasMany(ProductImage, { as: 'images', foreignKey: 'productId' });
 ProductImage.belongsTo(Product, { foreignKey: 'productId' });
+
+Favourite.belongsTo(Product, { foreignKey: 'productId', as: 'product'});
+Product.hasMany(Favourite, { foreignKey: 'productId'});

@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Category from '../../components/Category/Category.jsx';
-import ProductGallery from '../../components/ProductGallery/ProductGallery.jsx';
 import ImagesSlider from '../../components/ImagesSlider/ImagesSlider.jsx';
 import { updateProduct, getProduct } from '../../store/product/productSlice.js';
 import { handleSubmit } from './handleSubmit.js';

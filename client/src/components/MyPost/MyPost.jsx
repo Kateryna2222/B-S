@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import editImg from '../../assets/edit.svg';
 import { deleteProduct } from '../../store/product/productSlice.js';
-import { formatDate } from './formatDate.js';
+import { formatDate } from '../../utils/formatDate.js';
 
 const MyPost = ({product, data = false}) => {
     const dispatch = useDispatch();

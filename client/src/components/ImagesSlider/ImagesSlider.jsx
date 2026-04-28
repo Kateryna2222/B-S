@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, memo } from 'react';
 import './ImagesSlider.scss';
 
-const ImagesSlider = ({images, setImages, currentIndex, setCurrentIndex}) => {
+const ImagesSlider = ({images, setImages = null, currentIndex, setCurrentIndex, onlyRead = false}) => {
     const BASE_URL = 'http://localhost:3000/products/';
 
     const fileInputRef = useRef(null);
@@ -28,6 +28,8 @@ const ImagesSlider = ({images, setImages, currentIndex, setCurrentIndex}) => {
 
 
     const handleImageChange = (e) => {
+        //if(onlyRead) return
+
         const files = Array.from(e.target.files).map(file => ({
             file,
             preview: URL.createObjectURL(file)
@@ -40,28 +42,6 @@ const ImagesSlider = ({images, setImages, currentIndex, setCurrentIndex}) => {
         });
     };
 
-
-    // const handleDelete = () => {
-    //     if (!images.length) return;
-
-    //     const imageToRemove = images[currentIndex];
-
-    //     if (imageToRemove?.preview) {
-    //         URL.revokeObjectURL(imageToRemove.preview);
-    //     }
-
-    //     setImages(prev => {
-    //         const updated = prev.filter((_, i) => i !== currentIndex);
-
-    //         setCurrentIndex(prevIndex => {
-    //             if (updated.length === 0) return 0;
-    //             if (prevIndex >= updated.length) return updated.length - 1;
-    //             return prevIndex;
-    //         });
-
-    //         return updated;
-    //     });
-    // };
 
     const handleDelete = () => {
         const img = images[currentIndex];
@@ -98,35 +78,32 @@ const ImagesSlider = ({images, setImages, currentIndex, setCurrentIndex}) => {
     return (
 
         <>
-            <input
-                type="file"
-                multiple
-                accept="image/*"
-                ref={fileInputRef}
-                onChange={handleImageChange}
-                style={{ display: "none" }}
-            />
-            
-            <div className="uploadBox"
-                onClick={() => fileInputRef.current.click()}>
-                <span>+ додати зображення</span>
-            </div>
+            {
+                onlyRead?
+                null
+                :
+                <>
+                    <input
+                        type="file"
+                        multiple
+                        accept="image/*"
+                        ref={fileInputRef}
+                        onChange={handleImageChange}
+                        style={{ display: "none" }}
+                    />
+                
+                    <div className="uploadBox"
+                        onClick={() => fileInputRef.current.click()}>
+                        <span>+ додати зображення</span>
+                    </div>
+                </>
+            }
 
             {
                 images?.length > 0?
                     <div className="imagesSliderContainer">
                         <div className="imagesSlides">
                             <div className="leftArrow" onClick={goToPrevious}>&#8249;</div>
-                            {/* <div
-                                className="imagesSlide"
-                                style={{
-                                    backgroundImage: currentImage?.preview
-                                        ? `url(${currentImage.preview})`
-                                        : currentImage?.image_url
-                                        ? `url(${BASE_URL}${currentImage.image_url})`
-                                        : 'none'
-                                }}
-                            /> */}
                             <div
                                 className="imagesSlide"
                                 style={{
@@ -137,9 +114,14 @@ const ImagesSlider = ({images, setImages, currentIndex, setCurrentIndex}) => {
                                         : 'none'
                                 }}
                             />
-                            <button className='deleteImg' onClick={handleDelete}>
-                                &#x2716;
-                            </button>
+                            {
+                                onlyRead?
+                                null
+                                :
+                                <button className='deleteImg' onClick={handleDelete}>
+                                    &#x2716;
+                                </button>
+                            }
                             {console.log('RERENDER ImageSLIDER')}
                             <div className="rightArrow" onClick={goToNext}>&#8250;</div>
                         </div>

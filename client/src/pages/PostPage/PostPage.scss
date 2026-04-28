@@ -1,0 +1,73 @@
+@use '../../style/vars' as *;
+
+.imagesSliderContainer{
+    width: 800px;
+    height: 500px;
+}
+
+
+.postPage{
+    margin-bottom: 100px;
+    
+    .date{
+        margin-top: 40px;
+        padding-bottom: 30px;
+    }
+
+    .title{
+        text-transform: capitalize;
+        font-size: 28px;
+        padding-bottom: 10px;
+    }
+
+    .price{
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+    .categoryWrapper{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding-top: 60px;
+        font-size: 20px;
+
+        p{
+            font-weight: 600;
+        }
+    }
+
+    .description{
+        padding-top: 20px;
+        padding-bottom: 10px;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .info{
+        width: 70%;
+        font-style: 18px;
+        margin-bottom: 60px;
+    }
+
+    .seiller{
+        margin-bottom: 150px;
+        p{
+            font-weight: 600;
+            font-size: 20px;
+            padding-bottom: 10px;
+        }
+    }
+
+    .buttons{
+        display: flex;
+        gap: 50px;
+        .message, .show{
+            background-color: $main_dark;
+            color: $main_light;
+            padding: 10px 15px;
+            border-radius: 3px;
+            letter-spacing: 2px;
+        }
+    }
+}

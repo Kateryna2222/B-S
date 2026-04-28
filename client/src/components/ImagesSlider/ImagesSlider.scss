@@ -17,6 +17,7 @@
             position: absolute;
             top: 0;
             right: 0;
+            user-select: none;
         }
 
         .imagesSlide{
@@ -38,7 +39,8 @@
         font-size: 80px;
         z-index: 1;
         cursor: pointer;
-        color: rgb(255, 255, 255);
+        color: rgb(168, 162, 162);
+        user-select: none;
     }
     .leftArrow {
         left: -40px;

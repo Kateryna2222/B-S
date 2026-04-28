@@ -17,6 +17,8 @@ import EditPost from "../pages/EditPost/EditPost.jsx";
 import CreatePost from "../pages/CreatePost/CreatePost.jsx";
 import PostPage from "../pages/PostPage/PostPage.jsx";
 
+import Favourite from "../pages/Favourite/Favourite.jsx";
+
 const ProtectedRoute = ({element}) => {
     const {isAuth, isLoading} = useSelector(state => state.user)
     if (isLoading) {
@@ -71,6 +73,10 @@ export const router = createBrowserRouter([
             {
                 path: "/products/:id",
                 element: <PostPage/>
+            },
+            {
+                path: "/favourites",
+                element: <Favourite/>
             }
         ]
 

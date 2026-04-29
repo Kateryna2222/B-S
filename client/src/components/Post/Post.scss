@@ -79,4 +79,15 @@
             width: 22px;
         }
     }
+
+    .heart{
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: inherit;
+        img{
+            width: 30px;
+            height: 30px;
+        }
+    }
 }

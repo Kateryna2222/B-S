@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getProducts } from '../../store/product/productSlice.js';
 import Loading from '../../components/Loading/Loading';
-import MyPost from '../../components/MyPost/MyPost.jsx';
+import Post from '../../components/Post/Post.jsx';
 import Category from '../../components/Category/Category.jsx';
 import Search from '../../components/Search/Search.jsx';
 import Filter from '../../components/Filter/Filter.jsx';
@@ -91,7 +91,7 @@ const Home = () => {
                 <ul className="products">
                     {
                         products.map(product => {
-                            return <MyPost product={product} data={true} key={product?.id}/>
+                            return <Post product={product} data={true} key={product?.id}/>
                         })
                     }
                 </ul>

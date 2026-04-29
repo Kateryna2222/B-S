@@ -6,18 +6,17 @@ import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
+router.use(authMiddleware);
+
 router.get(
     '/', 
-    authMiddleware,
     favouriteController.getProducts);
 router.post(
     '/:id', 
-    authMiddleware, 
     favouriteController.addProduct,
 );
 router.delete(
     '/:id', 
-    authMiddleware, 
     favouriteController.deleteProduct);
 
 export default router;

@@ -61,6 +61,16 @@ const favouriteSlice = createSlice({
         builder.addCase(getFavourites.rejected, (state) => {
             state.isLoading = false;
         })
+        //ADD
+        builder.addCase(addToFavourite.fulfilled, (state, {payload}) => {
+            state.products.push(payload);
+        })
+        //REMOVE
+        builder.addCase(removeFromFavourite.fulfilled, (state, {payload}) => {
+            state.products = state.products.filter(
+                item => item.id !== payload.productId
+            );
+        })
     }
 })
 

@@ -27,7 +27,7 @@ class FavouriteService{
     async removeFromFavourite(data) {
         await this.checkExistance(data);
         const res = await favouriteRepository.delete(data);
-        return { message: "Товар видалено з обраного" };
+        return res;
     }
 
 }

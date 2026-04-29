@@ -2,6 +2,7 @@ import Favourite from "../models/Favourite.js";
 import Product from "../models/Product.js";
 import ProductImage from "../models/ProductImage.js";
 
+
 class FavouriteRepository{
 
     async findAll(userId) {
@@ -27,13 +28,27 @@ class FavouriteRepository{
         });
         if (existing) return existing;
 
-        return await Favourite.create({ userId, productId });
+        await Favourite.create({ userId, productId });
+
+        return await Product.findByPk(productId, {
+            include: [
+                { 
+                    model: ProductImage, 
+                    as: 'images',
+                    attributes: ['id', 'image_url'] 
+                }
+            ]
+        });
     }
 
     async delete({userId, productId}) {
-        return await Favourite.destroy({
+        const id = Number(productId);
+
+        await Favourite.destroy({
             where: { userId, productId }
         });
+
+        return { productId: id };
     }
 
 }

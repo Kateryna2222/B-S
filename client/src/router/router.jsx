@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/favourites",
-                element: <Favourite/>
+                element: <ProtectedRoute element={<Favourite/>}/>
             }
         ]
 

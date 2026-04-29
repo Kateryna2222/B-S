@@ -17,14 +17,14 @@ class FavouriteController{
 
     async addProduct(req, res){
         const data = getData(req);
-        const favourites = await favouriteService.addToFavourite(data);
-        return res.status(200).json(favourites);
+        const favourite = await favouriteService.addToFavourite(data);
+        return res.status(200).json(favourite);
     }
 
     async deleteProduct(req, res){
         const data = getData(req);
-        const favourites = await favouriteService.removeFromFavourite(data);
-        return res.status(200).json({message: 'Товар видалено з обраного'})
+        const deleted = await favouriteService.removeFromFavourite(data);
+        return res.status(200).json(deleted)
     }
 
 }

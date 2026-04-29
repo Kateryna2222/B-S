@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import { getProducts, changePage } from '../../store/product/productSlice.js';
-import MyPost from '../../components/MyPost/MyPost.jsx';
+import Post from '../../components/Post/Post.jsx';
 import Loading from '../../components/Loading/Loading.jsx';
 import Pagination from '../../components/Pagination/Pagination.jsx';
 
@@ -72,7 +72,7 @@ const UserPosts = () => {
                         (
                             products.length?
                             products.map(product => {
-                                return <MyPost key={product.id} product={product}/>
+                                return <Post key={product.id} product={product}/>
                             })
                             :
                             <p className='empthy'>Оголошень немає</p>

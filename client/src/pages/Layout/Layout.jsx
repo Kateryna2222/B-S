@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 
 import Header from '../../components/Header/Header.jsx'
 import { checkAuth } from "../../store/user/authFunctions.js";
+import { getFavourites } from "../../store/favourite/favouriteSlice.js";
 
 const Layout = () => {
 
@@ -12,7 +13,8 @@ const Layout = () => {
     const {pathname} = useLocation();
 
     useEffect(()=>{
-        dispatch(checkAuth())
+        dispatch(checkAuth());
+        dispatch(getFavourites());
     }, [dispatch])
 
     useEffect(()=>{

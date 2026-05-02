@@ -3,6 +3,9 @@ import User from "../models/User.js";
 import Category from "../models/Category.js";
 import ProductImage from "../models/ProductImage.js";
 
+import { fn, col } from 'sequelize';
+import Rating from "../models/Rating.js";
+
 const baseInclude = [
     { model: Category, as: 'category' },
     { 
@@ -16,7 +19,18 @@ const userInclude = [
     { 
         model: User, 
         as: 'user',
-        attributes: ['id', 'username', 'avatar', 'phoneNumber'] 
+        attributes: [
+            'id', 'username', 'avatar', 'phoneNumber',
+            [fn('AVG', col('user.receivedRatings.rating')), 'averageRating'],
+            [fn('COUNT', col('user.receivedRatings.id')), 'ratingsCount']
+        ],
+        include: [
+            {
+                model: Rating,
+                as: 'receivedRatings',
+                attributes: []
+            }
+        ]
     }
 ]
 
@@ -32,6 +46,12 @@ class ProductRepository{
             include: [
                 ...baseInclude,
                 ...(user ? userInclude : []),
+            ],
+            group: [
+                col('product.id'),
+                col('user.id'),
+                col('category.id'),      
+                col('images.id'),       
             ]
         });
     }

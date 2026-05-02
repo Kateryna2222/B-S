@@ -122,7 +122,6 @@ const ImagesSlider = ({images, setImages = null, currentIndex, setCurrentIndex, 
                                     &#x2716;
                                 </button>
                             }
-                            {console.log('RERENDER ImageSLIDER')}
                             <div className="rightArrow" onClick={goToNext}>&#8250;</div>
                         </div>
                     </div>

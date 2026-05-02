@@ -26,3 +26,5 @@ Product.hasMany(Favourite, { foreignKey: 'productId'});
 
 Rating.belongsTo(User, { foreignKey: 'sellerId', as: 'seller'});
 Rating.belongsTo(User, { foreignKey: 'reviewerId', as: 'reviewer'});
+User.hasMany(Rating, { foreignKey: 'sellerId', as: 'receivedRatings' });
+User.hasMany(Rating, { foreignKey: 'reviewerId', as: 'givenRatings' });

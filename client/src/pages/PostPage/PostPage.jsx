@@ -1,5 +1,4 @@
 import './PostPage.scss';
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -8,6 +7,7 @@ import { getProduct } from "../../store/product/productSlice.js";
 import { formatDate } from '../../utils/formatDate.js';
 import ImagesSlider from "../../components/ImagesSlider/ImagesSlider.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
+import Rating from '../../components/Rating/Rating.jsx';
 
 const PostPage = () => {
 
@@ -42,6 +42,12 @@ const PostPage = () => {
                     <span className='price'>
                         {currentProduct.price} грн
                     </span>
+                    <div className='state'>
+                        <p>Стан:</p>
+                        <span className="category">
+                            {currentProduct.state === 'new'? 'нове' : 'б/у'}
+                        </span>
+                    </div>
                     <div className='categoryWrapper'>
                         <p>Категорія:</p>
                         <span className="category">
@@ -59,11 +65,32 @@ const PostPage = () => {
                         :
                         null
                     }
-                    <div className="seiller">
+                    <div className="seller">
                         <p>Продавець:</p>
-                        <span>
-                            {currentProduct.user?.username}
-                        </span>
+                        <div className="user">
+                            <div className="img"
+                                style={{
+                                    backgroundImage: currentProduct.user?.avatar
+                                        ? `url(http://localhost:3000/users/${currentProduct.user?.avatar})`
+                                        : 'none'
+                                }}
+                            >
+                                {
+                                    currentProduct.user?.avatar? '' : currentProduct.user?.username[0]
+                                }
+                            </div>
+                            <div className="userInfo">
+                                <div className="row">
+                                    <span className='name'>
+                                        {currentProduct.user?.username}
+                                    </span>
+                                    <Rating count={currentProduct.user?.averageRating} sellerId={currentProduct.user?.id} size={30}/>
+                                </div>
+                                <span className='ratingCount'>
+                                    оцінило <strong>{currentProduct.user?.ratingsCount}</strong> користувачів
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div className="buttons">
                         <button className="message">

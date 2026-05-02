@@ -25,16 +25,23 @@
         font-weight: 700;
     }
 
-    .categoryWrapper{
+    .categoryWrapper, .state{
         display: flex;
         align-items: center;
         gap: 20px;
-        padding: 60px 0;
         font-size: 20px;
 
         p{
             font-weight: 600;
         }
+    }
+
+    .state{
+        padding: 60px 0 8px;
+    }
+
+    .categoryWrapper{
+        padding: 0 0 60px;
     }
 
     .description{
@@ -50,13 +57,56 @@
         margin-bottom: 60px;
     }
 
-    .seiller{
-        margin-bottom: 150px;
+    .seller{
+        margin-bottom: 100px;
         p{
             font-weight: 600;
             font-size: 20px;
             padding-bottom: 10px;
         }
+
+        .user{
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .img{
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-color: $main_dark;
+
+            color: rgb(255, 255, 255);
+            text-transform: uppercase;
+            font-size: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .row{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .name{
+            text-transform: capitalize;
+            font-size: 24px;
+        }
+
+        .ratingCount{
+            font-size: 14px;
+        }
+    }
+
+    button:disabled {
+        cursor: default;
+        pointer-events: none;
     }
 
     .buttons{

@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import axiosCustom from '../../utils/axios.js';
 
+
 export const getProducts = createAsyncThunk(
     'product/getProducts',
     async (payload, thunkAPI) => {

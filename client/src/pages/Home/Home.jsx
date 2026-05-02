@@ -2,7 +2,7 @@ import './Home.scss';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getProducts } from '../../store/product/productSlice.js';
+import { getProducts, changePage } from '../../store/product/productSlice.js';
 import Loading from '../../components/Loading/Loading';
 import Post from '../../components/Post/Post.jsx';
 import Category from '../../components/Category/Category.jsx';

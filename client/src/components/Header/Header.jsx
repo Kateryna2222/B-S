@@ -8,6 +8,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { logout } from '../../store/user/authFunctions.js';
+import { clearFavouriteProducts } from '../../store/favourite/favouriteSlice.js';
 
 
 const Header = () => {
@@ -19,7 +20,8 @@ const Header = () => {
 
     const logoutHandler = async () => {
         try {
-            await dispatch(logout()).unwrap()
+            await dispatch(logout()).unwrap();
+            dispatch(clearFavouriteProducts());
             navigate('/')
         } catch (err) {
             console.error(err)

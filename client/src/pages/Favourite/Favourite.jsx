@@ -19,7 +19,7 @@ const Favourite = () => {
 
     return (
         <>
-            <h5>Обрані товари</h5>
+            <h5 className='favouriteHeader'>Обрані товари</h5>
             {
                 isLoading?
                 <Loading/>

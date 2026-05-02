@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 
 import Header from '../../components/Header/Header.jsx'
@@ -11,11 +11,17 @@ const Layout = () => {
 
     const dispatch = useDispatch();
     const {pathname} = useLocation();
+    const {isAuth} = useSelector(state => state.user)
 
     useEffect(()=>{
         dispatch(checkAuth());
-        dispatch(getFavourites());
-    }, [dispatch])
+    }, [dispatch]);
+
+    useEffect(()=>{
+        if(isAuth){
+            dispatch(getFavourites());
+        }
+    }, [dispatch, isAuth])
 
     useEffect(()=>{
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });

@@ -6,6 +6,7 @@ import adminRouter from './adminRouter.js';
 import categoryRouter from './categoryRouter.js';
 import productRouter from './productRouter.js';
 import favouriteRouter from './favouriteRouter.js';
+import ratingRouter from './ratingRouter.js';
 
 const router = Router();
 
@@ -15,5 +16,6 @@ router.use("/admin", adminRouter);
 router.use("/category", categoryRouter);
 router.use("/product", productRouter);
 router.use("/favourite", favouriteRouter);
+router.use("/rating", ratingRouter);
 
 export default router;

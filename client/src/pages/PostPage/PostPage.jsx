@@ -48,10 +48,17 @@ const PostPage = () => {
                             {currentProduct.category?.name}
                         </span>
                     </div>
-                    <p className='description'>Опис:</p>
-                    <p className="info">
-                        {currentProduct.description}
-                    </p>
+                    {
+                        currentProduct?.description?.length > 0?
+                        <>
+                            <p className='description'>Опис:</p>
+                            <p className="info">
+                                {currentProduct.description}
+                            </p>
+                        </>
+                        :
+                        null
+                    }
                     <div className="seiller">
                         <p>Продавець:</p>
                         <span>

@@ -49,6 +49,11 @@ const favouriteSlice = createSlice({
         products: [],
         isLoading: false
     },
+    reducers: {
+        clearFavouriteProducts(state){
+            state.products = [];
+        }
+    },
     extraReducers: (builder) => {
         //GET PRODUCTS
         builder.addCase(getFavourites.pending, (state) => {
@@ -74,4 +79,5 @@ const favouriteSlice = createSlice({
     }
 })
 
+export const { clearFavouriteProducts } = favouriteSlice.actions;
 export default favouriteSlice.reducer

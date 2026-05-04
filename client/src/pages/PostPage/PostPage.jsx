@@ -2,12 +2,14 @@ import './PostPage.scss';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import { getProduct } from "../../store/product/productSlice.js";
 import { formatDate } from '../../utils/formatDate.js';
 import ImagesSlider from "../../components/ImagesSlider/ImagesSlider.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
 import Rating from '../../components/Rating/Rating.jsx';
+import { isPlainObject } from '@reduxjs/toolkit';
 
 const PostPage = () => {
 
@@ -80,15 +82,16 @@ const PostPage = () => {
                                 }
                             </div>
                             <div className="userInfo">
+                                <Link to={`/seller/${currentProduct.user?.id}`} className='name'>
+                                    {currentProduct.user?.username}
+                                </Link>
                                 <div className="row">
-                                    <span className='name'>
-                                        {currentProduct.user?.username}
+                                    <Rating count={currentProduct.user?.averageRating} sellerId={currentProduct.user?.id} size={22}/>
+                                    <span className='ratingCount'>
+                                        &#40;<strong>{currentProduct.user?.ratingsCount}</strong> оцінок&#41;
                                     </span>
-                                    <Rating count={currentProduct.user?.averageRating} sellerId={currentProduct.user?.id} size={30}/>
                                 </div>
-                                <span className='ratingCount'>
-                                    оцінило <strong>{currentProduct.user?.ratingsCount}</strong> користувачів
-                                </span>
+                                <span className='data'>На сайті з {formatDate(currentProduct.user?.createdAt, true)}</span>
                             </div>
                         </div>
                     </div>

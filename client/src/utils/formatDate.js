@@ -1,4 +1,4 @@
-export function formatDate(createdAt) {
+export function formatDate(createdAt, year = false) {
   const date = new Date(createdAt);
   const now = new Date();
 
@@ -7,12 +7,15 @@ export function formatDate(createdAt) {
   const options = {
     day: 'numeric',
     month: 'long',
-    hour: '2-digit',
-    minute: '2-digit',
   };
 
-  if (!isCurrentYear) {
+  if (year) {
     options.year = 'numeric';
+  } else if (!isCurrentYear) {
+    options.year = 'numeric';
+  } else {
+    options.hour = '2-digit';
+    options.minute = '2-digit';
   }
 
   return new Intl.DateTimeFormat('uk-UA', options).format(date);

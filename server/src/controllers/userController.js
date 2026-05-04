@@ -2,6 +2,11 @@ import userService from "../services/userService.js";
 
 class UserController{
 
+    async getSeller(req, res){
+        const seller = await userService.getUser(req.params.id);
+        return res.status(200).json(seller.toJSON());
+    }
+
     async updateUser(req, res){
         const user = await userService.updateUser(req.user.id, req.body, req.files?.avatar);
         return res.status(200).json({...user});

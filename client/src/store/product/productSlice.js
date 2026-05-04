@@ -3,6 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 import axiosCustom from '../../utils/axios.js';
 
 
+export const getSeller = createAsyncThunk(
+    'product/getSeller',
+    async (id, thunkAPI) => {
+        try {
+            const {data} = await axiosCustom.get(`/user/seller/${id}`);
+            return data
+        } 
+        catch (error) {
+            const message = error.response?.data?.message || error.message || 'Щось пішло не так';
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+)
+
 export const getProducts = createAsyncThunk(
     'product/getProducts',
     async (payload, thunkAPI) => {
@@ -85,6 +99,7 @@ export const updateProduct = createAsyncThunk(
 const productSlice = createSlice({
     name: "product",
     initialState: {
+        seller: null,
         products: [],
         currentProduct: null,
         pagination: {
@@ -129,6 +144,10 @@ const productSlice = createSlice({
             state.products = state.products.filter(
                 product => product.id !== payload.id
             );
+        })
+        //GET SELLER
+        builder.addCase(getSeller.fulfilled, (state, {payload}) => {
+            state.seller = payload;
         })
     }
 })

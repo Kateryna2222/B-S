@@ -77,6 +77,13 @@ class UserService{
         return { message: "Обліковий запис видалено" };
     }
 
+    async getUser(id) {
+        const user = await userRepository.getSeller(id);
+        if (!user) throw new ApiError(404, "User not found");
+
+        return user;
+    }
+
 }
 
 export default new UserService();

@@ -16,6 +16,7 @@ import UserPosts from "../pages/UserPosts/UserPosts.jsx";
 import EditPost from "../pages/EditPost/EditPost.jsx";
 import CreatePost from "../pages/CreatePost/CreatePost.jsx";
 import PostPage from "../pages/PostPage/PostPage.jsx";
+import SellerPage from "../pages/SellerPage/SellerPage.jsx";
 
 import Favourite from "../pages/Favourite/Favourite.jsx";
 
@@ -77,6 +78,10 @@ export const router = createBrowserRouter([
             {
                 path: "/favourites",
                 element: <ProtectedRoute element={<Favourite/>}/>
+            },
+            {
+                path: "/seller/:id",
+                element: <SellerPage/>
             }
         ]
 

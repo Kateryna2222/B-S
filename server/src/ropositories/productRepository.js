@@ -20,7 +20,7 @@ const userInclude = [
         model: User, 
         as: 'user',
         attributes: [
-            'id', 'username', 'avatar', 'phoneNumber',
+            'id', 'username', 'avatar', 'phoneNumber', 'createdAt',
             [fn('AVG', col('user.receivedRatings.rating')), 'averageRating'],
             [fn('COUNT', col('user.receivedRatings.id')), 'ratingsCount']
         ],

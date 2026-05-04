@@ -1,4 +1,5 @@
 import './Filter.scss';
+import SortBox from '../SortBox/SortBox.jsx';
 
 const Filter = ({params, onChange, onApply, onReset}) => {
     const stateOptions = [
@@ -41,7 +42,7 @@ const Filter = ({params, onChange, onApply, onReset}) => {
                     </button>
                 </div>
             </div>
-            <select className='sort'
+            {/* <select className='sort'
                     value={`${params.sortBy}-${params.sortDir}`}
                     onChange={(e) => {
                         const [sortBy, sortDir] = e.target.value.split('-');
@@ -53,7 +54,8 @@ const Filter = ({params, onChange, onApply, onReset}) => {
                 <option value="price-desc">Спочатку дорожчі</option>
                 <option value="createdAt-desc">Спочатку новіші</option>
                 <option value="createdAt-asc">Спочатку старіші</option>
-            </select>
+            </select> */}
+            <SortBox params={params} onChange={onChange}/>
         </div>
     );
 };

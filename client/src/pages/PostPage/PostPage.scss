@@ -40,9 +40,6 @@
         padding: 60px 0 8px;
     }
 
-    .categoryWrapper{
-        padding: 0 0 60px;
-    }
 
     .description{
         padding-top: 20px;
@@ -54,21 +51,25 @@
     .info{
         width: 70%;
         font-style: 18px;
-        margin-bottom: 60px;
     }
 
     .seller{
         margin-bottom: 100px;
+        margin-top: 60px;
         p{
             font-weight: 600;
             font-size: 20px;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
 
         .user{
             display: flex;
             align-items: center;
             gap: 15px;
+        }
+
+        .data{
+            font-size: 12px;
         }
 
         .img{
@@ -101,13 +102,10 @@
 
         .ratingCount{
             font-size: 14px;
+            padding-top: 2px;
         }
     }
 
-    button:disabled {
-        cursor: default;
-        pointer-events: none;
-    }
 
     .buttons{
         display: flex;

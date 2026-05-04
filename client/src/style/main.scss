@@ -8,6 +8,11 @@ button{
     font-size: inherit;
 }
 
+button:disabled {
+    cursor: default;
+    pointer-events: none;
+}
+
 .btn{
     background-color: $main_dark;
     padding: 14px 28px;

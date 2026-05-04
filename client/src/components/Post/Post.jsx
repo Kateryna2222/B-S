@@ -37,7 +37,7 @@ const Post = ({product, data = false}) => {
     };
 
     return (
-        <li>
+        <li key={product.id}>
             <div className="post">
                 <div className="wrapper">
                     <button className='heart' onClick={handleHeartClick}>

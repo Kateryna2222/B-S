@@ -1,6 +1,30 @@
 import User from "../models/User.js";
+import Rating from "../models/Rating.js";
+import { fn, col } from 'sequelize';
+
+const ratingInclude = [
+    {
+        model: Rating,
+        as: 'receivedRatings',
+        attributes: []
+    }
+];
+
+const attributes = [
+    'id', 'username', 'avatar', 'phoneNumber', 'createdAt',
+    [fn('AVG', col('receivedRatings.rating')), 'averageRating'],
+    [fn('COUNT', col('receivedRatings.id')), 'ratingsCount']
+]
 
 class UserRepository{
+
+    async getSeller(id) {
+        return await User.findByPk(id, {
+            attributes,
+            include: ratingInclude,
+            group: ['user.id']
+        });
+    }
 
     async findOne(field, value) {
         return await User.findOne({ where: { [field]: value } });

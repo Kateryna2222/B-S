@@ -7,6 +7,8 @@ import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
+router.get('/seller/:id', userController.getSeller)
+
 router.put('/me/update', 
     authMiddleware,
     body('username').optional().isLength({ min: 2 }),

@@ -19,6 +19,7 @@ import PostPage from "../pages/PostPage/PostPage.jsx";
 import SellerPage from "../pages/SellerPage/SellerPage.jsx";
 
 import Favourite from "../pages/Favourite/Favourite.jsx";
+import ChatsPage from "../pages/ChatsPage/ChatsPage.jsx";
 
 const ProtectedRoute = ({element}) => {
     const {isAuth, isLoading} = useSelector(state => state.user)
@@ -82,7 +83,11 @@ export const router = createBrowserRouter([
             {
                 path: "/seller/:id",
                 element: <SellerPage/>
-            }
+            },
+            {
+                path: "/chats",
+                element: <ProtectedRoute element={<ChatsPage/>}/>
+            },
         ]
 
     }

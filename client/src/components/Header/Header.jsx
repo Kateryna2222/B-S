@@ -42,7 +42,7 @@ const Header = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to={'/chat'}>
+                            <Link to={'/chats'}>
                                 <img src={iconChat} alt="Чат" />
                             </Link>
                         </li>

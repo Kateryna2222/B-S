@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import SocketManager from "../../components/Socket/SocketManager.jsx";
 
 import Header from '../../components/Header/Header.jsx'
 import { checkAuth } from "../../store/user/authFunctions.js";
@@ -30,6 +31,7 @@ const Layout = () => {
 
     return (
         <>
+            <SocketManager/>
             <Header/>
             <div className="container">
                 <Outlet/>

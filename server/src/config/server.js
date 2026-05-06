@@ -1,6 +1,8 @@
 import app from '../app.js';
 import sequelize from './database.js';
-import {config} from 'dotenv';
+import initSocket from './socket.js';
+import http from 'http';
+import { config } from 'dotenv';
 config();
 
 import '../models/models.js'
@@ -13,7 +15,10 @@ async function startServer() {
         await sequelize.authenticate();
         console.log("Database connected");
 
-        app.listen(PORT, () => {
+        const server = http.createServer(app);
+        initSocket(server);
+
+        server.listen(PORT, () => {
             console.log(`Server running on port ${PORT}`);
         });
 

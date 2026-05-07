@@ -4,13 +4,15 @@ import userSlice from "./user/userSlice.js";
 import productSlice from "./product/productSlice.js";
 import categorySlice from "./category/categorySlice.js";
 import favouriteSlice from "./favourite/favouriteSlice.js";
+import chatSlice from "./chat/chatSlice.js";
 
 
 const rootReducer = combineReducers({
     user: userSlice,
     product: productSlice,
     category: categorySlice,
-    favourite: favouriteSlice
+    favourite: favouriteSlice,
+    chat: chatSlice,
 })
 
 export const store = configureStore({

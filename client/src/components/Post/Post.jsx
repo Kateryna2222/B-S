@@ -63,7 +63,7 @@ const Post = ({product, data = false}) => {
                             null
                             :
                             <span className='data'>
-                                {formatDate(product.createdAt)}
+                                {product.createdAt? formatDate(product.createdAt) : null}
                             </span>
                         }
                     </div>

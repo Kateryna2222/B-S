@@ -34,6 +34,20 @@ const userInclude = [
     }
 ]
 
+const createGroup = (user) => {
+    const group = [
+        col('product.id'),
+        col('category.id'),      
+        col('images.id')  
+    ]
+
+    if(user){
+        group.push(col('user.id'))
+    }
+
+    return group
+}
+
 
 class ProductRepository{
 
@@ -47,14 +61,10 @@ class ProductRepository{
                 ...baseInclude,
                 ...(user ? userInclude : []),
             ],
-            group: [
-                col('product.id'),
-                col('user.id'),
-                col('category.id'),      
-                col('images.id'),       
-            ]
+            group: createGroup(user)
         });
     }
+    
 
     async getAll(query) {
         return await Product.findAndCountAll({

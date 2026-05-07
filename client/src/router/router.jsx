@@ -20,6 +20,7 @@ import SellerPage from "../pages/SellerPage/SellerPage.jsx";
 
 import Favourite from "../pages/Favourite/Favourite.jsx";
 import ChatsPage from "../pages/ChatsPage/ChatsPage.jsx";
+import ChatPage from "../pages/ChatPage/ChatPage.jsx";
 
 const ProtectedRoute = ({element}) => {
     const {isAuth, isLoading} = useSelector(state => state.user)
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
             {
                 path: "/chats",
                 element: <ProtectedRoute element={<ChatsPage/>}/>
+            },
+            {
+                path: "/chats/:id",
+                element: <ProtectedRoute element={<ChatPage/>}/>
             },
         ]
 

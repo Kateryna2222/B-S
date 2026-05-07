@@ -91,7 +91,7 @@ const PostPage = () => {
                                         &#40;<strong>{currentProduct.user?.ratingsCount}</strong> оцінок&#41;
                                     </span>
                                 </div>
-                                <span className='data'>На сайті з {formatDate(currentProduct.user?.createdAt, true)}</span>
+                                <span className='data'>На сайті з {currentProduct.user?.createdAt? formatDate(currentProduct.user?.createdAt, true) : null}</span>
                             </div>
                         </div>
                     </div>

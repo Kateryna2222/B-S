@@ -7,6 +7,7 @@ import categoryRouter from './categoryRouter.js';
 import productRouter from './productRouter.js';
 import favouriteRouter from './favouriteRouter.js';
 import ratingRouter from './ratingRouter.js';
+import chatRouter from './chatRouter.js';
 
 const router = Router();
 
@@ -17,5 +18,6 @@ router.use("/category", categoryRouter);
 router.use("/product", productRouter);
 router.use("/favourite", favouriteRouter);
 router.use("/rating", ratingRouter);
+router.use("/chat", chatRouter);
 
 export default router;

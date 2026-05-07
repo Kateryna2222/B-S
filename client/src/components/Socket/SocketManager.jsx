@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import socket from '../../socket.js';
-//import { addMessage } from '../store/slices/chatSlice';
+import { addMessage } from '../../store/chat/chatSlice.js';
 
 export default function SocketManager() {
   const dispatch = useDispatch();
@@ -13,12 +13,12 @@ export default function SocketManager() {
     socket.auth = { token: accessToken }; 
     socket.connect();
 
-    socket.on('new_message', (message) => {
+    socket.on('receive_message', (message) => {
       dispatch(addMessage(message));
     });
 
     return () => {
-      socket.off('new_message');
+      socket.off('receive_message');
       socket.disconnect();
     };
   }, [isAuth, accessToken]);

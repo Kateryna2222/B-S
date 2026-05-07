@@ -28,6 +28,7 @@ const categorySlice = createSlice({
     reducers: {
         changeCategory(state, {payload}){
             state.currentCategory = state.categories.find(c => c.id === payload);
+            console.log(state.currentCategory)
         }
     },
     extraReducers: (builder) => {

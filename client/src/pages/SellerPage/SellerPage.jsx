@@ -2,6 +2,7 @@ import './SellerPage.scss';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import { getSeller, getProducts } from "../../store/product/productSlice.js";
 import { formatDate } from "../../utils/formatDate.js";
@@ -16,8 +17,10 @@ import Loading from '../../components/Loading/Loading.jsx';
 const SellerPage = () => {
     const dispatch = useDispatch();
     const {isLoading, products, seller, pagination} = useSelector(state => state.product);
+    const {user} = useSelector(state => state.user);
     const {id} = useParams();
 
+    const [showPhone, setShowPhone] = useState(false);
     const [params, setParams] = useState({
         sortBy: 'createdAt',
         sortDir: 'desc'
@@ -69,6 +72,21 @@ const SellerPage = () => {
                             <span className='data'>На сайті з {formatDate(seller.createdAt, true)}</span>
                         </div>
                     </div>
+                    {
+                        user.id !== seller.id?
+                        <div className="buttons">
+                            <Link to={`/chats/${seller.id}`}>
+                                <button className="message">
+                                    написати продавцю
+                                </button>
+                            </Link>
+                            <button className="show" onClick={()=>setShowPhone(true)}>
+                                {showPhone? seller.phoneNumber : 'показати номер'}
+                            </button>
+                        </div>
+                        :
+                        null
+                    }
                 </div>
                 :
                 null

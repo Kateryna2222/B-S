@@ -20,14 +20,6 @@ class ChatController {
         return res.status(200).json(messages);
     }
 
-    async sendMessage(req, res) {
-        const { chatId } = req.params;
-        const { content } = req.body;
-        const imageUrl = req.file?.path || null;
-        const message = await chatService.createMessage({ chatId, senderId: req.user.id, content, imageUrl });
-        return res.status(201).json(message);
-    }
-
 }
 
 export default new ChatController();

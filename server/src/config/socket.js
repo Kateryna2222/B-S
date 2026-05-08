@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 config();
 
+import createFile from '../utils/createFile.js';
+import { createFileSocket } from '../utils/createFile.js';
 import tokenService from '../services/tokenService.js';
 import chatService from '../services/chat/chatService.js';
 
@@ -37,11 +39,20 @@ function initSocket(server) {
         });
 
         socket.on("send_message", async (data) => {
+
+            let fileName = null;
+            if (data.image) {
+                fileName = await createFileSocket({
+                    buffer: data.image.buffer,
+                    originalName: data.image.originalName
+                });
+            }
+
             const message = await chatService.createMessage({
                 chatId: data.chatId,
                 senderId: socket.user.id,
                 content: data.content,
-                imageUrl: data.imageUrl,
+                imageUrl: fileName,
             });
 
             io.to(data.chatId).emit("receive_message", message);

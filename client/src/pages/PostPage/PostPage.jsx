@@ -14,7 +14,8 @@ import { isPlainObject } from '@reduxjs/toolkit';
 const PostPage = () => {
 
     const dispatch = useDispatch();
-    const {currentProduct, isLoading} = useSelector(state => state.product)
+    const {currentProduct, isLoading} = useSelector(state => state.product);
+    const {user} = useSelector(state => state.user);
     const {id} = useParams();
 
     const [showPhone, setShowPhone] = useState(false);
@@ -95,14 +96,21 @@ const PostPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="buttons">
-                        <button className="message">
-                            написати продавцю
-                        </button>
-                        <button className="show" onClick={()=>setShowPhone(true)}>
-                            {showPhone? currentProduct.user?.phoneNumber : 'показати номер'}
-                        </button>
-                    </div>
+                    {
+                        user.id !== currentProduct.user?.id?
+                        <div className="buttons">
+                            <Link to={`/chats/${currentProduct.user?.id}`}>
+                                <button className="message">
+                                    написати продавцю
+                                </button>
+                            </Link>
+                            <button className="show" onClick={()=>setShowPhone(true)}>
+                                {showPhone? currentProduct.user?.phoneNumber : 'показати номер'}
+                            </button>
+                        </div>
+                        :
+                        null
+                    }
                 </div>
             }
         </>

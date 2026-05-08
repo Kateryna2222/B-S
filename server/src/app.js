@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(fileUpload({}))
 app.use('/users', express.static(path.resolve(__dirname, 'static/users')));
 app.use('/products', express.static(path.resolve(__dirname, 'static/products')));
+app.use('/chats', express.static(path.resolve(__dirname, 'static/chats')));
 app.use(cookieParser());
 app.use(cors({
   origin: process.env.CLIENT_URL, 

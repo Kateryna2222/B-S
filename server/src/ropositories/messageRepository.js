@@ -17,7 +17,7 @@ class MessageRepository {
 
         const messages = await Message.findAll({
             where,
-            include: [{ model: User, as: 'sender', attributes: ['id', 'username', 'avatar'] }],
+            include: [{ model: User, as: 'sender', attributes: ['id', 'username'] }],
             order: [['createdAt', 'DESC']],
             limit
         });

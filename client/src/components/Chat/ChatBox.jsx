@@ -25,7 +25,10 @@ const ChatBox = ({chat}) => {
                     </div>
                     <div className="info">
                         <span className='name'>{user.username}</span>
-                        <span className='mess'>{chat.lastMessage?.content}</span>
+                        <span className='mess'>
+                            {chat.lastMessage?.content?.slice(0, 30)}
+                            {chat.lastMessage?.content?.length > 30 && '...'}
+                        </span>
                     </div>
                 </div>
                 <div className="details">

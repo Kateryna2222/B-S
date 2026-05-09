@@ -56,6 +56,11 @@ function initSocket(server) {
             });
 
             io.to(data.chatId).emit("receive_message", message);
+
+            io.emit("chat_updated", {
+                chatId: data.chatId,
+                lastMessage: message
+            });
         });
         
         socket.on("disconnect", () => {

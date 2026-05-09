@@ -7,6 +7,8 @@ import ChatBox from "../../components/Chat/ChatBox.jsx";
 import { getChats } from '../../store/chat/chatSlice.js';
 import Loading from '../../components/Loading/Loading.jsx';
 
+import socket from '../../socket.js';
+
 const ChatsPage = () => {
     const dispatch = useDispatch();
     const { chats, isLoading } = useSelector(state => state.chat);
@@ -16,9 +18,6 @@ const ChatsPage = () => {
         dispatch(getChats());
     }, [dispatch])
 
-    useEffect(()=>{
-        console.log(chats)
-    }, [chats])
 
     return (
         <>
@@ -31,8 +30,8 @@ const ChatsPage = () => {
                     chats.length > 0?
                     <ul className="chats">
                         {
-                            chats.map((chat, index) => {
-                                return <li key={index}>
+                            chats.map((chat) => {
+                                return <li key={chat.id}>
                                     {
                                         (user.id === chat.otherUser?.id)?
                                         null

@@ -22,6 +22,7 @@ module.exports = {
         type: Sequelize.ENUM('text', 'image', 'mixed'),
         defaultValue: 'text'
       },
+      isRead: {type: Sequelize.BOOLEAN, defaultValue: false},
       createdAt: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('NOW()') },
       updatedAt: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('NOW()') }
     });

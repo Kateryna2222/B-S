@@ -7,7 +7,8 @@ const Message = sequelize.define('message', {
     senderId: { type: DataTypes.INTEGER, allowNull: true },
     content: { type: DataTypes.TEXT, allowNull: true },
     imageUrl: { type: DataTypes.STRING, allowNull: true },
-    messageType: { type: DataTypes.ENUM('text', 'image', 'mixed'), defaultValue: 'text' }
+    messageType: { type: DataTypes.ENUM('text', 'image', 'mixed'), defaultValue: 'text' },
+    isRead: {type: DataTypes.BOOLEAN, defaultValue: false},
 });
 
 export default Message;

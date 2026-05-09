@@ -2,6 +2,7 @@ import { formatDate } from "../../utils/formatDate.js";
 
 
 const MessageBox = ({isMine, msg}) => {
+    
     return (
         <div
             className={isMine ? 'mine' : 'otherUser'}
@@ -13,6 +14,9 @@ const MessageBox = ({isMine, msg}) => {
                         alt="зображення" 
                         style={{ width: 'auto', height: '250px', maxWidth: '500px' }}
                     />
+                    <div className={isMine ? 'time right' : 'time left'}>
+                        {msg.createdAt? formatDate(msg.createdAt) : null}
+                    </div>
                 </div>
             )}
             {msg.content && (

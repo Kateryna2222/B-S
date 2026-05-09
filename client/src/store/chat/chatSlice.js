@@ -72,6 +72,16 @@ const chatSlice = createSlice({
                 chat.lastMessage = payload;
                 state.chats = [chat, ...state.chats.filter(c => c.id !== chatId)];
             }
+        },
+
+        updateChatLastMessage: (state, {payload}) => {
+            const chat = state.chats.find(
+                c => c.id === payload.chatId
+            );
+
+            if (chat) {
+                chat.lastMessage = payload.lastMessage;
+            }
         }
         
     },
@@ -113,5 +123,5 @@ const chatSlice = createSlice({
     }
 })
 
-export const { setActiveChat, addMessage, markMessageDeleted } = chatSlice.actions;
+export const { setActiveChat, addMessage, updateChatLastMessage } = chatSlice.actions;
 export default chatSlice.reducer;

@@ -1,5 +1,6 @@
 import './ChatBox.scss';
 import { formatDate } from '../../utils/formatDate.js';
+import { memo } from 'react';
 
 const ChatBox = ({chat}) => {
     console.log(chat)
@@ -26,8 +27,14 @@ const ChatBox = ({chat}) => {
                     <div className="info">
                         <span className='name'>{user.username}</span>
                         <span className='mess'>
-                            {chat.lastMessage?.content?.slice(0, 30)}
-                            {chat.lastMessage?.content?.length > 30 && '...'}
+                            {
+                                chat.lastMessage?.messageType === 'image'? 'зображення'
+                                :
+                                <>
+                                    {chat.lastMessage?.content?.slice(0, 30)}
+                                    {chat.lastMessage?.content?.length > 30 && '...'}
+                                </>
+                            }
                         </span>
                     </div>
                 </div>
@@ -39,7 +46,7 @@ const ChatBox = ({chat}) => {
                         }
                     </span>
                     <div className="new">
-                        new
+                        нове
                     </div>
                     {/* <div className="empthy"></div> */}
                 </div>

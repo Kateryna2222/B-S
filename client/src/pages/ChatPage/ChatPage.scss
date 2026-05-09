@@ -54,7 +54,13 @@
         max-width: 500px;
         overflow-wrap: break-word;
         position: relative;
+    }
 
+    .imageMessage{
+        position: relative;
+    }
+
+    .text, .imageMessage{
         .time{
             font-size: 12px;
             position: absolute;
@@ -69,6 +75,7 @@
             right: 3px;
         }
     }
+
     .chatInput{
         background-color: $main_dark;
         width: 900px;

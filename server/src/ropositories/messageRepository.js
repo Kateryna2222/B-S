@@ -29,6 +29,36 @@ class MessageRepository {
         return await Message.findByPk(id);
     }
 
+    async makeRead({chatId, userId}){
+        return await Message.update(
+            { isRead: true },
+            {
+                where: {
+                    chatId,
+                    senderId: {
+                        [Op.ne]: userId
+                    },
+                    isRead: false
+                }
+            }
+        );
+    }
+
+    async makeReadForUsersInRoom({chatId, userIds}){
+        return await Message.update(
+            { isRead: true },
+            {
+                where: {
+                    chatId,
+                    senderId: {
+                        [Op.notIn]: userIds
+                    },
+                    isRead: false
+                }
+            }
+        );
+    }
+
     async save(message) {
         return await message.save();
     }

@@ -10,7 +10,7 @@
     cursor: pointer;
     li{
         color: $main_dark;
-        &.active{
+        &.active a{
             background-color: $main_dark;
             color: $main_light;
         }

@@ -17,6 +17,14 @@ const MessageBox = ({isMine, msg}) => {
                     <div className={isMine ? 'time right' : 'time left'}>
                         {msg.createdAt? formatDate(msg.createdAt) : null}
                     </div>
+                    <div className={isMine ? 'isRead isReadMy' : 'isRead isReadOther'}>
+                        {
+                            msg.isRead? 
+                            <span>&#10003;&#10003;</span>
+                            :                   
+                            <span>&#10003;</span>         
+                        }
+                    </div>
                 </div>
             )}
             {msg.content && (
@@ -24,6 +32,14 @@ const MessageBox = ({isMine, msg}) => {
                     {msg.content}
                     <div className={isMine ? 'time right' : 'time left'}>
                         {msg.createdAt? formatDate(msg.createdAt) : null}
+                    </div>
+                    <div className={isMine ? 'isRead isReadMy' : 'isRead isReadOther'}>
+                        {
+                            msg.isRead?
+                            <span>&#10003;&#10003;</span>
+                            :                   
+                            <span>&#10003;</span>         
+                        }
                     </div>
                 </div>
             )}

@@ -49,7 +49,8 @@ const chatSlice = createSlice({
         chats: [],
         activeChatId: null,
         messages: {},     
-        hasMore: {},       
+        hasMore: {},      
+        isNewMessages: false, 
         isLoading: false,
         isMessagesLoading: false,
     },
@@ -82,7 +83,20 @@ const chatSlice = createSlice({
             if (chat) {
                 chat.lastMessage = payload.lastMessage;
             }
-        }
+        },
+
+        markMessagesAsRead(state, { payload }) {
+            const { chatId, userId } = payload;
+
+            const messages = state.messages[chatId];
+            if (!messages) return;
+
+            messages.forEach(msg => {
+                if (msg.senderId !== userId) {
+                    msg.isRead = true;
+                }
+            });
+        },
         
     },
     extraReducers: (builder) => {
@@ -123,5 +137,5 @@ const chatSlice = createSlice({
     }
 })
 
-export const { setActiveChat, addMessage, updateChatLastMessage } = chatSlice.actions;
+export const { setActiveChat, addMessage, updateChatLastMessage, markMessagesAsRead } = chatSlice.actions;
 export default chatSlice.reducer;

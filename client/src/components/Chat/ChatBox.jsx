@@ -1,11 +1,12 @@
 import './ChatBox.scss';
 import { formatDate } from '../../utils/formatDate.js';
-import { memo } from 'react';
+import { useSelector } from 'react-redux';
 
 const ChatBox = ({chat}) => {
     console.log(chat)
 
-    const user = chat.otherUser;
+    const {user} = useSelector(state => state.user);
+    const user2 = chat.otherUser;
     
     return (
         <>
@@ -14,18 +15,18 @@ const ChatBox = ({chat}) => {
                     <div className="avatar">
                         <div className="img"
                             style={{
-                                backgroundImage: user.avatar
-                                    ? `url(http://localhost:3000/users/${user.avatar})`
+                                backgroundImage: user2.avatar
+                                    ? `url(http://localhost:3000/users/${user2.avatar})`
                                     : 'none'
                             }}
                         >
                             {
-                                user.avatar? '' : user.username[0]
+                                user2.avatar? '' : user2.username[0]
                             }
                         </div>
                     </div>
                     <div className="info">
-                        <span className='name'>{user.username}</span>
+                        <span className='name'>{user2.username}</span>
                         <span className='mess'>
                             {
                                 chat.lastMessage?.messageType === 'image'? 'зображення'
@@ -45,10 +46,11 @@ const ChatBox = ({chat}) => {
                             : ''
                         }
                     </span>
-                    <div className="new">
-                        нове
-                    </div>
-                    {/* <div className="empthy"></div> */}
+                    {
+                        chat.lastMessage.senderId === user.id || chat.lastMessage.isRead
+                            ? <div className="empty"></div>
+                            : <div className="new">нове</div>
+                    }
                 </div>
             </div>
         </>

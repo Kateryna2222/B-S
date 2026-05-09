@@ -59,6 +59,17 @@
     .imageMessage{
         position: relative;
     }
+    .isRead{
+        position: absolute;
+        bottom: 5px;
+        font-size: 15px;
+    }
+    .isReadMy{
+        left: 10px;
+    }
+    .isReadOther{
+        right: 10px;
+    }
 
     .text, .imageMessage{
         .time{

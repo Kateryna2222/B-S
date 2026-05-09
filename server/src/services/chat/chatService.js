@@ -30,6 +30,20 @@ class ChatService {
         return await messageRepository.findByChatId(chatId, cursor, limit);
     }
 
+    async readMessage({chatId, userId}){
+        const chat = await chatRepository.findById(chatId);
+        if (!chat) throw new ApiError(404, 'Чат не знайдено');
+
+        return await messageRepository.makeRead({chatId, userId})
+    }
+
+    async readMessageForUsers({chatId, userIds}){
+        const chat = await chatRepository.findById(chatId);
+        if (!chat) throw new ApiError(404, 'Чат не знайдено');
+
+        return await messageRepository.makeReadForUsersInRoom({chatId, userIds})
+    }
+
     async createMessage({ chatId, senderId, content, imageUrl }) {
         const chat = await chatRepository.findById(chatId);
         if (!chat) throw new ApiError(404, 'Чат не знайдено');

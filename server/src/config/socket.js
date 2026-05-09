@@ -30,8 +30,18 @@ function initSocket(server) {
     io.on("connection", (socket) => {
         console.log("User connected:", socket.id);
 
-        socket.on("join_chat", (chatId) => {
+        socket.on("join_chat", async(chatId) => {
             socket.join(chatId);
+
+            await chatService.readMessage({
+                chatId,
+                userId: socket.user.id
+            });
+
+            io.to(chatId).emit("messages_read", {
+                chatId,
+                userId: socket.user.id
+            });
         });
 
         socket.on("leave_chat", (chatId) => {
@@ -54,6 +64,22 @@ function initSocket(server) {
                 content: data.content,
                 imageUrl: fileName,
             });
+
+            //Check shoud be mess read
+            const room = io.sockets.adapter.rooms.get(data.chatId);
+            const socketsInRoom = room ? [...room] : [];
+
+            const usersInRoom = socketsInRoom
+                .map(socketId => io.sockets.sockets.get(socketId)?.user?.id)
+                .filter(id => id && id !== socket.user.id);
+
+            if (usersInRoom.length > 0) {
+                await chatService.readMessageForUsers({
+                    chatId: data.chatId,
+                    userIds: usersInRoom
+                });
+                message.isRead = true;
+            }
 
             io.to(data.chatId).emit("receive_message", message);
 

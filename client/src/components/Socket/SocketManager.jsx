@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import socket from '../../socket.js';
-import { addMessage, updateChatLastMessage } from '../../store/chat/chatSlice.js';
+import { addMessage, updateChatLastMessage, markMessagesAsRead } from '../../store/chat/chatSlice.js';
 
 export default function SocketManager() {
   const dispatch = useDispatch();
@@ -19,6 +19,10 @@ export default function SocketManager() {
 
     socket.on('chat_updated', (data) => {
       dispatch(updateChatLastMessage(data));
+    });
+
+    socket.on("messages_read", ({ chatId, userId }) => {
+      dispatch(markMessagesAsRead({ chatId, userId }));
     });
 
     return () => {

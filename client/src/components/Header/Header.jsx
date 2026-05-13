@@ -47,7 +47,7 @@ const Header = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to={'/notification '}>
+                            <Link to={'/notification'}>
                                 <img src={iconNotifications} alt="Сповіщення" />
                             </Link>
                         </li>

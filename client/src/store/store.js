@@ -5,6 +5,8 @@ import productSlice from "./product/productSlice.js";
 import categorySlice from "./category/categorySlice.js";
 import favouriteSlice from "./favourite/favouriteSlice.js";
 import chatSlice from "./chat/chatSlice.js";
+import adminSlice from "./admin/adminSlice.js";
+import notificationSlice from "./notification/notificationSlice.js";
 
 
 const rootReducer = combineReducers({
@@ -13,6 +15,8 @@ const rootReducer = combineReducers({
     category: categorySlice,
     favourite: favouriteSlice,
     chat: chatSlice,
+    admin: adminSlice,
+    notification: notificationSlice
 })
 
 export const store = configureStore({

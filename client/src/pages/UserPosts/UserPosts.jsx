@@ -48,7 +48,7 @@ const UserPosts = () => {
                     <li>
                         <button className={activeButton === 'pending' ? 'active' : ''} 
                                 onClick={()=>filter('pending')}>
-                            В очікуванні
+                            Замовлені
                         </button>
                     </li>
                     <li>

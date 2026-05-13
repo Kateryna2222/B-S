@@ -8,6 +8,7 @@ import productRouter from './productRouter.js';
 import favouriteRouter from './favouriteRouter.js';
 import ratingRouter from './ratingRouter.js';
 import chatRouter from './chatRouter.js';
+import notificationRouter from './notificationRouter.js';
 
 const router = Router();
 
@@ -19,5 +20,6 @@ router.use("/product", productRouter);
 router.use("/favourite", favouriteRouter);
 router.use("/rating", ratingRouter);
 router.use("/chat", chatRouter);
+router.use("/notification", notificationRouter);
 
 export default router;

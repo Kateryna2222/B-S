@@ -9,17 +9,17 @@ class MessageRepository {
     }
 
     async findByChatId(chatId, cursor = null, limit = 30) {
-        const where = { chatId };
+        // const where = { chatId };
 
-        if (cursor) {
-            where.createdAt = { [Op.lt]: cursor };
-        }
+        // if (cursor) {
+        //     where.createdAt = { [Op.lt]: cursor };
+        // }
 
         const messages = await Message.findAll({
-            where,
+            //where,
             include: [{ model: User, as: 'sender', attributes: ['id', 'username'] }],
             order: [['createdAt', 'DESC']],
-            limit
+            //limit
         });
 
         return messages.reverse();

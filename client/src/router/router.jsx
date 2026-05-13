@@ -6,6 +6,8 @@ import Home from "../pages/Home/Home.jsx";
 import NotFound from "../pages/NotFound/NotFound.jsx";
 import Loading from "../components/Loading/Loading.jsx";
 
+import AdminPage from "../pages/AdminPage/AdminPage.jsx";
+
 import Registration from "../pages/Auth/Registration.jsx";
 import UserPage from "../pages/User/UserPage.jsx";
 import Login from "../pages/Auth/Login.jsx";
@@ -21,6 +23,7 @@ import SellerPage from "../pages/SellerPage/SellerPage.jsx";
 import Favourite from "../pages/Favourite/Favourite.jsx";
 import ChatsPage from "../pages/ChatsPage/ChatsPage.jsx";
 import ChatPage from "../pages/ChatPage/ChatPage.jsx";
+import NotificationPage from "../pages/NotificationPage/NotificationPage.jsx";
 
 const ProtectedRoute = ({element}) => {
     const {isAuth, isLoading} = useSelector(state => state.user)
@@ -92,6 +95,14 @@ export const router = createBrowserRouter([
             {
                 path: "/chats/:id",
                 element: <ProtectedRoute element={<ChatPage/>}/>
+            },
+            {
+                path: "/admin",
+                element: <ProtectedRoute element={<AdminPage/>}/>
+            },
+            {
+                path: "/notification",
+                element: <ProtectedRoute element={<NotificationPage/>}/>
             },
         ]
 

@@ -91,6 +91,30 @@ const adminSlice = createSlice({
         builder.addCase(getUsers.rejected, (state) => {
             state.isLoading = false;
         })
+        //CHANGE ROLE
+        builder.addCase(changeUserRole.fulfilled, (state, {payload}) => {
+            state.users.forEach(user => {
+                if(user.id === payload.user.id){
+                    user.role = payload.user.role
+                }
+            })
+        })
+        //BLOCK
+        builder.addCase(blockUser.fulfilled, (state, {payload}) => {
+            state.users.forEach(user => {
+                if(user.id === payload.user.id){
+                    user.isActivated = payload.user.isActivated
+                }
+            })
+        })
+        //UNBLOCK
+        builder.addCase(unBlockUser.fulfilled, (state, {payload}) => {
+            state.users.forEach(user => {
+                if(user.id === payload.user.id){
+                    user.isActivated = payload.user.isActivated
+                }
+            })
+        })
     }
 })
 

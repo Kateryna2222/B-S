@@ -1,3 +1,4 @@
+import './AdminPage.scss';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -55,6 +56,13 @@ const AdminPage = () => {
         const query = buildQuery();
         dispatch(getUsers(query))
     }, [dispatch, pagination.page, params.search, params.role, params.sortDir, params.isActivated])
+
+
+    const handleClick = (field, value, btnName) => {
+        setParams(initialParams)
+        handleParams(field, value);
+        setActiveButton(btnName);
+    }
     
 
     return (
@@ -66,26 +74,31 @@ const AdminPage = () => {
             <ul className="filterBtns">
                 <li>
                     <button className={activeButton === '' ? 'active' : ''} 
-                            onClick={()=>setParams(initialParams)}>
+                            onClick={()=>{
+                                setParams(initialParams);
+                                setActiveButton('')
+                            }}>
                         Всі
                     </button>
                 </li>
                 <li>
-                    <button className={activeButton === 'USER' ? 'active' : ''} 
-                            onClick={()=>handleParams("role", 'USER')}>
+                    <button className={activeButton === 'onlyUsers' ? 'active' : ''} 
+                            onClick={()=>handleClick("role", 'USER', 'onlyUsers')}>
                         Корсичтувачі
                     </button>
                 </li>
                 <li>
-                    <button className={activeButton === 'ADMIN' ? 'active' : ''} 
-                            onClick={()=>handleParams("role", 'ADMIN')}>
+                    <button className={activeButton === 'onlyAdmins' ? 'active' : ''} 
+                            onClick={()=>{
+                                handleClick("role", 'ADMIN', 'onlyAdmins')
+                            }}>
                         Адміністратори
                     </button>
                 </li>
                 <li>
-                    <button className={activeButton === 'sold' ? 'active' : ''} 
-                            onClick={()=>handleParams("isActivated", false)}>
-                        Заблоковані
+                    <button className={activeButton === 'onlyBlocked' ? 'active' : ''} 
+                            onClick={()=>handleClick("isActivated", 'false', 'onlyBlocked')}>
+                        Заблоковані корсичтувачі
                     </button>
                 </li>
             </ul>

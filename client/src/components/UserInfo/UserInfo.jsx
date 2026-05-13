@@ -1,3 +1,4 @@
+import './UserInfo.scss';
 import { useDispatch } from "react-redux";
 import { blockUser, unBlockUser, changeUserRole } from "../../store/admin/adminSlice.js";
 
@@ -10,24 +11,22 @@ const UserInfo = ({user}) => {
     return (
         <li className="user">
             <div className="info">
-                <div className="id">
-                    ID:{user.id}
+                <div className="text">
+                    <div className="id">ID:</div>
+                    <div className="username">Користувач:</div>
+                    <div className="email">Пошта:</div>
+                    <div className="number">Номер телефону:</div>
+                    <div className="role">Роль:</div>
+                    <div className="status">Статус акаунту:</div>
                 </div>
-                <div className="username">
-                    Користувач: {user.username}
-                </div>
-                <div className="email">
-                    Пошта:{user.email}
-                </div>
-                <div className="role">
-                    Роль: {user.role === 'ADMIN'? 'адміністратор':'користувач'}
-                </div>
-                <div className="number">
-                    Номер телефону: {user.phoneNumber}
-                </div>
-                <div className="status">
-                    Статус акаунту: {user.isActivated? 'акивний': 'заблокований'}
-                </div>
+                <ul className="data">
+                    <li className="id">{user.id}</li>
+                    <li>{user.username}</li>
+                    <li>{user.email}</li>
+                    <li>{user.phoneNumber}</li>
+                    <li>{user.role === 'ADMIN'? 'адміністратор':'користувач'}</li>
+                    <li>{user.isActivated? 'акивний': 'заблокований'}</li>
+                </ul>
             </div>
             <div className="buttons">
                 <button onClick={()=>dispatch(changeUserRole({id: user.id, role: roleToChange}))}>

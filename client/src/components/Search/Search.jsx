@@ -15,7 +15,7 @@ const Search = ({ onSearch }) => {
                 <input
                     type="search"
                     name="q"
-                    placeholder="Що шукаєте?"
+                    placeholder="Пошук..."
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                 />

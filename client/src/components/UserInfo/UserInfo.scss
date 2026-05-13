@@ -1,0 +1,47 @@
+@use '../../style/vars' as *;
+
+.users{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    .user{
+        border: 1px solid $main_dark;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        color: $main_text;
+        border-radius: 6px;
+        padding: 20px 30px;
+
+        display: flex;
+        justify-content: space-between;
+
+        .info{
+            display: flex;
+            gap: 70px;
+            font-size: 16px;
+            .id{
+                font-size: 20px;
+                padding-bottom: 10px;
+                font-weight: 700;
+            }
+            .text, .data{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        .buttons{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            button{
+                background-color: $main_dark;
+                color: $main_light;
+                padding: 10px 15px;
+                font-size: 16px;
+                letter-spacing: 2px;
+                border-radius: 6px;
+            }
+        }
+    }
+}

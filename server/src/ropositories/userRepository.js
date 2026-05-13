@@ -30,8 +30,11 @@ class UserRepository{
         return await User.findOne({ where: { [field]: value } });
     }
 
-    async findAll() {
-        return await User.findAll();
+    async findAll(query) {
+        return await User.findAndCountAll({
+            ...query,
+            distinct: true
+        });
     }
 
     async create(data){

@@ -3,8 +3,8 @@ import adminService from "../services/adminService.js";
 class AdminController{
 
     async getAllUsers(req, res){
-        const users = await adminService.getAllUsers();
-        return res.status(200).json({users});
+        const users = await adminService.getAllUsers(req.query);
+        return res.status(200).json(users);
     }
 
     async blockUser(req, res){

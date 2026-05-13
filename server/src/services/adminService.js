@@ -1,12 +1,28 @@
 import ApiError from "../errors/ApiError.js";
 import userRepository from "../ropositories/userRepository.js";
 import UserGetDto from "../DTO/user/UserGetDto.js";
+import UserQueryDto from "../DTO/other/userQueryDto.js";
+import { handleUsersQuery } from "./function/handlaeUsersQuery.js";
+
+import { pagination } from "./function/pagination.js";
 
 class AdminService {
 
-    async getAllUsers() {
-        const users = await userRepository.findAll();
-        return users.map(user => new UserGetDto(user));
+    async getAllUsers(query) {
+
+        const qp = new UserQueryDto(query);
+        const params = handleUsersQuery(qp);
+
+        const result = await userRepository.findAll({...params});
+        console.log('RES' + result)
+        const users = result.rows.map(user => new UserGetDto(user));
+        
+        const pageData = pagination(qp, result);
+
+        return {
+            users,
+            ...pageData
+        }
     }
 
     async blockUser(userId) {

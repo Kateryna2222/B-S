@@ -79,7 +79,7 @@ const UserPosts = () => {
                         )
                     }
                 </ul>
-                <Pagination dispatch={dispatch}/>
+                <Pagination dispatch={dispatch} pagination={pagination} changePage={changePage}/>
             </div>
         </div>
     );

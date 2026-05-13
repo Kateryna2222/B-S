@@ -4,9 +4,10 @@ import axiosCustom from '../../utils/axios.js';
 
 export const getUsers = createAsyncThunk(
     'admin/getUsers',
-    async (_, thunkAPI) => {
+    async (payload, thunkAPI) => {
         try {
-            const {data} = await axiosCustom.get(`/admin/users`);
+            const params = payload? `?${payload}` : '';
+            const {data} = await axiosCustom.get(`/admin/users${params}`);
             return data
         } 
         catch (error) {
@@ -63,7 +64,16 @@ const adminSlice = createSlice({
     name: "admin",
     initialState: {
         users: [],
+        pagination: {
+            page: 1, 
+            totalPages: 1
+        },
         isLoading: false
+    },
+    reducers: {
+        changePage(state, {payload}){
+            state.pagination.page = payload;
+        }
     },
     extraReducers: (builder) => {
         //GET USERS
@@ -73,6 +83,10 @@ const adminSlice = createSlice({
         builder.addCase(getUsers.fulfilled, (state, {payload}) => {
             state.isLoading = false;
             state.users = payload.users;
+            state.pagination = {
+                page: payload.page,
+                totalPages: payload.totalPages
+            };
         })
         builder.addCase(getUsers.rejected, (state) => {
             state.isLoading = false;
@@ -80,4 +94,5 @@ const adminSlice = createSlice({
     }
 })
 
+export const { changePage } = adminSlice.actions;
 export default adminSlice.reducer

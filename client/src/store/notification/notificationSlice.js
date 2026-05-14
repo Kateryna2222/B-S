@@ -17,11 +17,24 @@ export const getNotifications = createAsyncThunk(
     }
 )
 
+export const createNotifications = createAsyncThunk(
+    'notification/createNotifications',
+    async (payload, thunkAPI) => {
+        try {
+            const {data} = await axiosCustom.post(`/notification`, payload);
+            return data
+        } 
+        catch (error) {
+            const message = error.response?.data?.message || error.message || 'Щось пішло не так';
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+)
+
 
 const notificationSlice = createSlice({
     name: "notification",
     initialState: {
-        seller: null,
         notifications: [],
         isLoading: false
     },

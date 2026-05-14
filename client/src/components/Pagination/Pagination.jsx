@@ -1,11 +1,9 @@
 import './Pagination.scss';
 
 import ReactPaginate from 'react-paginate';
-//import { changePage } from '../../store/product/productSlice.js';
 import { useSelector } from 'react-redux';
 
 const Pagination = ({dispatch, pagination, changePage}) => {
-  //const { pagination } = useSelector(state => state.product);
 
   return (
     <>

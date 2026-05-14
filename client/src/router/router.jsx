@@ -33,6 +33,20 @@ const ProtectedRoute = ({element}) => {
     return isAuth? element : <Navigate to='/auth/login' replace/>
 }
 
+const ProtectedAdminRoute = ({element}) => {
+    const {isAuth, isLoading, user} = useSelector(state => state.user)
+    if (isLoading) {
+        return <Loading/>
+    }
+    if(!isAuth){
+        return <Navigate to='/auth/login' replace/>
+    }
+    if(user?.role !== 'ADMIN'){
+        return <Navigate to='/' replace/>
+    }
+    return element 
+}
+
 
 export const router = createBrowserRouter([
     {
@@ -98,7 +112,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/admin",
-                element: <ProtectedRoute element={<AdminPage/>}/>
+                element: <ProtectedAdminRoute element={<AdminPage/>}/>
             },
             {
                 path: "/notification",

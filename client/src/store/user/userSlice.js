@@ -11,7 +11,7 @@ const userSlice = createSlice({
         isAuth: !!storage.getItem('accessToken'),
         user: null,
         accessToken: storage.getItem('accessToken') || null,
-        isLoading: false
+        isLoading: true
     },
     reducers: {},
     extraReducers: (builder) => {

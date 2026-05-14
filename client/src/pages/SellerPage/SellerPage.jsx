@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
-import { getSeller, getProducts } from "../../store/product/productSlice.js";
+import { getSeller, getProducts, changePage } from "../../store/product/productSlice.js";
 import { formatDate } from "../../utils/formatDate.js";
 import Rating from "../../components/Rating/Rating.jsx";
 import Post from '../../components/Post/Post.jsx';
@@ -109,7 +109,7 @@ const SellerPage = () => {
                                 })
                             }
                         </ul>
-                        <Pagination dispatch={dispatch}/>
+                        <Pagination dispatch={dispatch} pagination={pagination} changePage={changePage}/>
                     </>
                     :
                     <p className='noProducts'>Оголешень немає</p>

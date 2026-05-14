@@ -1,0 +1,76 @@
+@use '../../style/vars' as *;
+
+.createOrderPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 80px;
+    .orderForm{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        div{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        input{
+            border: 1px solid $main_dark;
+            width: 500px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 18px;
+        }
+        .deliveryMethod{
+            margin-top: 60px;
+            margin-bottom: 20px;
+            .hint{
+                text-align: center;
+                font-size: 22px;
+                margin-bottom: 20px;
+            }
+            .options{
+                display: flex;
+                flex-direction: column;
+                font-size: 20px;
+                input{
+                    width: 30px;
+                }
+            }
+            .novaPoshta{
+                background-image: url('../../assets/novaPoshta.png');
+                height: 80px;
+                width: 80px;
+            }
+            .ukrPoshta{
+                background-image: url('../../assets/ukrposhta.png');
+                height: 60px;
+                width: 60px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            .img{
+                background-color: inherit;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                background-size: 100%; 
+                overflow: hidden;
+            }
+            .option{
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+    .createOrderBtn{
+        margin-top: 60px;
+        background-color: $main_dark;
+        width: 200px;
+        color: $main_light;
+        padding: 10px 15px;
+        font-size: 20px;
+        border-radius: 3px;
+    }
+}

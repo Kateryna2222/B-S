@@ -14,7 +14,8 @@ const NotificationPage = () => {
     }, [])
 
     return (
-        <>
+        <div className="notifacationPage">
+            <h5 className="favouriteHeader">сповіщення</h5>
             {
                 isLoading?
                 <Loading/>
@@ -22,19 +23,19 @@ const NotificationPage = () => {
                 <>
                     {
                         notifications?
-                        <div className="notifacationPage">
+                        <ul className="notifacationList">
                             {
                                 notifications.map(i => {
                                     return <Notification key={i.id} item={i}/>
                                 })
                             }
-                        </div>
+                        </ul>
                         :
                         <div className="notNotifications">
                             У вас ще не має сповіщень
                         </div>
                     }
-                    <button onClick={()=>{
+                    {/* <button onClick={()=>{
                                 dispatch(
                                     createNotifications({
                                     title: 'Нове замовлення',
@@ -44,10 +45,10 @@ const NotificationPage = () => {
                                 )
                             }}>
                                 click
-                            </button>
+                            </button> */}
                 </>
             }
-        </>
+        </div>
     );
 };
 

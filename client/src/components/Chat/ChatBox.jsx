@@ -47,7 +47,7 @@ const ChatBox = ({chat}) => {
                         }
                     </span>
                     {
-                        chat.lastMessage?.senderId === user.id || chat.lastMessage.isRead
+                        chat.lastMessage?.senderId === user.id || chat.lastMessage?.isRead
                             ? <div className="empty"></div>
                             : <div className="new">нове</div>
                     }

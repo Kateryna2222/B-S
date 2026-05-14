@@ -25,6 +25,8 @@ import ChatsPage from "../pages/ChatsPage/ChatsPage.jsx";
 import ChatPage from "../pages/ChatPage/ChatPage.jsx";
 import NotificationPage from "../pages/NotificationPage/NotificationPage.jsx";
 
+import CreateOrderPage from "../pages/CreateOrderPage/CreateOrderPage.jsx";
+
 const ProtectedRoute = ({element}) => {
     const {isAuth, isLoading} = useSelector(state => state.user)
     if (isLoading) {
@@ -117,6 +119,10 @@ export const router = createBrowserRouter([
             {
                 path: "/notification",
                 element: <ProtectedRoute element={<NotificationPage/>}/>
+            },
+            {
+                path: "/order/:productId/create",
+                element: <ProtectedRoute element={<CreateOrderPage/>}/>
             },
         ]
 

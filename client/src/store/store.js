@@ -7,6 +7,7 @@ import favouriteSlice from "./favourite/favouriteSlice.js";
 import chatSlice from "./chat/chatSlice.js";
 import adminSlice from "./admin/adminSlice.js";
 import notificationSlice from "./notification/notificationSlice.js";
+import orderSlice from "./order/orderSlice.js";
 
 
 const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     favourite: favouriteSlice,
     chat: chatSlice,
     admin: adminSlice,
-    notification: notificationSlice
+    notification: notificationSlice,
+    order: orderSlice
 })
 
 export const store = configureStore({

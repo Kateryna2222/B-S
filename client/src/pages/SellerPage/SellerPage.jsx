@@ -64,7 +64,7 @@ const SellerPage = () => {
                                 {seller.username}
                             </span>
                             <div className="row">
-                                <Rating count={seller.averageRating} sellerId={seller.id} size={32} disabled={false}/>
+                                <Rating count={seller.averageRating} sellerId={seller?.id} size={32} disabled={false}/>
                                 <span className='ratingCount'>
                                     &#40;<strong>{seller.ratingsCount}</strong> оцінок&#41;
                                 </span>
@@ -73,15 +73,15 @@ const SellerPage = () => {
                         </div>
                     </div>
                     {
-                        user.id !== seller.id?
+                        user?.id !== seller?.id?
                         <div className="buttons">
-                            <Link to={`/chats/${seller.id}`}>
+                            <Link to={`/chats/${seller?.id}`}>
                                 <button className="message">
                                     написати продавцю
                                 </button>
                             </Link>
                             <button className="show" onClick={()=>setShowPhone(true)}>
-                                {showPhone? seller.phoneNumber : 'показати номер'}
+                                {showPhone? seller?.phoneNumber : 'показати номер'}
                             </button>
                         </div>
                         :

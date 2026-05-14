@@ -9,7 +9,6 @@ import { formatDate } from '../../utils/formatDate.js';
 import ImagesSlider from "../../components/ImagesSlider/ImagesSlider.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
 import Rating from '../../components/Rating/Rating.jsx';
-import { isPlainObject } from '@reduxjs/toolkit';
 
 const PostPage = () => {
 
@@ -97,7 +96,7 @@ const PostPage = () => {
                         </div>
                     </div>
                     {
-                        user.id !== currentProduct.user?.id?
+                        user?.id !== currentProduct.user?.id?
                         <div className="buttons">
                             <Link to={`/chats/${currentProduct.user?.id}`}>
                                 <button className="message">
@@ -111,6 +110,9 @@ const PostPage = () => {
                         :
                         null
                     }
+                    <div className="orderBtn">
+                        <Link to={`/order/${currentProduct.id}/create`}>оформити замовлення</Link>
+                    </div>
                 </div>
             }
         </>

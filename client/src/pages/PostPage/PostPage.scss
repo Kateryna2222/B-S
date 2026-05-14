@@ -54,7 +54,7 @@
     }
 
     .seller{
-        margin-bottom: 100px;
+        margin-bottom: 30px;
         margin-top: 60px;
         p{
             font-weight: 600;
@@ -116,6 +116,19 @@
             padding: 10px 15px;
             border-radius: 3px;
             letter-spacing: 2px;
+        }
+    }
+
+    .orderBtn{
+        margin-top: 40px;
+        a{
+            display: inline-block;
+            background-color: $main_dark;
+            color: $main_light;
+            padding: 10px 15px;
+            border-radius: 3px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
     }
 }

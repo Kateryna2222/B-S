@@ -29,7 +29,7 @@ class AdminService {
         const user = await userRepository.findOne("id", userId);
         if (!user) throw new ApiError(404, "User not found");
 
-        user.isActivated = false;
+        user.isBlocked = true;
         const updatedUser = await userRepository.save(user);
         return new UserGetDto(updatedUser);
     }
@@ -38,7 +38,7 @@ class AdminService {
         const user = await userRepository.findOne("id", userId);
         if (!user) throw new ApiError(404, "User not found");
 
-        user.isActivated = true;
+        user.isBlocked = false;
         const updatedUser = await userRepository.save(user);
         return new UserGetDto(updatedUser);
     }

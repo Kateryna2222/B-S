@@ -103,7 +103,7 @@ const adminSlice = createSlice({
         builder.addCase(blockUser.fulfilled, (state, {payload}) => {
             state.users.forEach(user => {
                 if(user.id === payload.user.id){
-                    user.isActivated = payload.user.isActivated
+                    user.isBlocked = payload.user.isBlocked
                 }
             })
         })
@@ -111,7 +111,7 @@ const adminSlice = createSlice({
         builder.addCase(unBlockUser.fulfilled, (state, {payload}) => {
             state.users.forEach(user => {
                 if(user.id === payload.user.id){
-                    user.isActivated = payload.user.isActivated
+                    user.isBlocked = payload.user.isBlocked
                 }
             })
         })

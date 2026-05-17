@@ -8,13 +8,13 @@ export default function(req, res, next){
 
     try { 
         const authHeader = req.headers.authorization;
-        if (!authHeader) throw new ApiError(401, "User not authorized");
+        if (!authHeader) throw new ApiError(401, "Користувач не авторизований");
 
         const accessToken = authHeader.split(' ')[1];
-        if (!accessToken) throw new ApiError(401, "User not authorized");
+        if (!accessToken) throw new ApiError(401, "Користувач не авторизований");
 
         const userData = tokenService.validateAccessToken(accessToken);
-        if (!userData) throw new ApiError(401, "User not authorized");
+        if (!userData) throw new ApiError(401, "Користувач не авторизований");
 
         req.user = userData;
         next();

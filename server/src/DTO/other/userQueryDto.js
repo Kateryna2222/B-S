@@ -5,7 +5,7 @@ class UserQueryDto{
         const validRoles = ['ADMIN', 'USER'];
 
         this.role = validRoles.includes(query.role) ? query.role : null;
-        this.isActivated = query.isActivated || null;
+        this.isBlocked = query.isBlocked || null;
 
         // search
         this.search = query.search || null;

@@ -4,11 +4,12 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { createOrder } from "../../store/order/orderSlice.js";
+import { createNotifications } from '../../store/notification/notificationSlice.js';
 
 
 const CreateOrderPage = () => {
 
-    const {productId} = useParams();
+    const {productId, sellerId} = useParams();
     const dispatch = useDispatch();
 
     const initialOrder = {
@@ -93,10 +94,15 @@ const CreateOrderPage = () => {
                     </div>
                 </div>
             </form>
-            <button className="createOrderBtn" onClick={()=>
+            <button className="createOrderBtn" onClick={async()=>
             {
-                console.log(order)
-                dispatch(createOrder(order))
+                //ERROR: WHAT IF ORDER ERROR
+                const createdOrder = await dispatch(createOrder(order)).unwrap();
+                dispatch(createNotifications({
+                    title: 'Нове замовлення',
+                    message: `Товар id:${productId} було замовлено.`,
+                    userId: sellerId
+                }))
             }}>
                 Підтвердити
             </button>

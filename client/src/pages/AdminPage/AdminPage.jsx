@@ -19,7 +19,7 @@ const AdminPage = () => {
         search: '',
         sortDir: 'desc',
         role: '',
-        isActivated: ''
+        isBlocked: ''
     }
     const [params, setParams] = useState(initialParams);
 
@@ -46,7 +46,7 @@ const AdminPage = () => {
         }
 
         if (params.isActivated !== '') {
-            query += `&isActivated=${params.isActivated}`;
+            query += `&isBlocked=${params.isBlocked}`;
         }
 
         return query;
@@ -55,7 +55,7 @@ const AdminPage = () => {
     useEffect(()=>{
         const query = buildQuery();
         dispatch(getUsers(query))
-    }, [dispatch, pagination.page, params.search, params.role, params.sortDir, params.isActivated])
+    }, [dispatch, pagination.page, params.search, params.role, params.sortDir, params.isBlocked])
 
 
     const handleClick = (field, value, btnName) => {
@@ -97,7 +97,7 @@ const AdminPage = () => {
                 </li>
                 <li>
                     <button className={activeButton === 'onlyBlocked' ? 'active' : ''} 
-                            onClick={()=>handleClick("isActivated", 'false', 'onlyBlocked')}>
+                            onClick={()=>handleClick("isBlocked", 'true', 'onlyBlocked')}>
                         Заблоковані корсичтувачі
                     </button>
                 </li>

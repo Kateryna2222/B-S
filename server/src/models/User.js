@@ -10,7 +10,8 @@ const User = sequelize.define('user', {
     role: {type: DataTypes.STRING, defaultValue: 'USER'},
     phoneNumber: {type: DataTypes.STRING, allowNull: false },
     isActivated: {type: DataTypes.BOOLEAN, defaultValue: false},
-    activationLink: {type: DataTypes.STRING}
+    activationLink: {type: DataTypes.STRING},
+    isBlocked: {type: DataTypes.BOOLEAN, defaultValue: false, allowNull: false}
 })
 
 export default User;

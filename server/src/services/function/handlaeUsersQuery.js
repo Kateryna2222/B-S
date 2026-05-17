@@ -4,7 +4,7 @@ export const handleUsersQuery = (qp) => {
     const where = {};
 
     // filter
-    if(qp.isActivated) where.isActivated = qp.isActivated;
+    if(qp.isBlocked) where.isBlocked = qp.isBlocked;
     if(qp.role) where.role = qp.role;
 
     // search

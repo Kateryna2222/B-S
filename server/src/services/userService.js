@@ -84,6 +84,12 @@ class UserService{
         return user;
     }
 
+    async findUser(id) {
+        const user = await userRepository.findOne('id', id);
+        if (!user) throw new ApiError(404, "User not found");
+        return user;
+    }
+
 }
 
 export default new UserService();

@@ -2,10 +2,10 @@ import ApiError from '../errors/ApiError.js';
 import tokenService from '../services/tokenService.js';
 import userService from '../services/userService.js';
 
-export default function(role){
+export default function(){
     return async function(req, res, next){
         if(req.method === 'OPTIONS'){
-            next()
+            return next()
         }
     
         try {
@@ -17,11 +17,9 @@ export default function(role){
 
             const userData = tokenService.validateAccessToken(accessToken);
             if (!userData) throw new ApiError(401, "Користувач не авторизований");
-
             const user = await userService.findUser(userData.id);
-            if(user.role !== role) throw new ApiError(403, "Немає доступу");
-            req.user = {...userData, role: user.role};
-        
+            if(user.isBlocked) throw new ApiError(403, "Користувача заблоковано");
+            req.user = {...userData, isBlocked: user.isBlocked};
             next();
         } 
         catch (error) {

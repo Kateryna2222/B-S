@@ -111,7 +111,7 @@ const PostPage = () => {
                         null
                     }
                     <div className="orderBtn">
-                        <Link to={`/order/${currentProduct.id}/create`}>оформити замовлення</Link>
+                        <Link to={`/seller/${currentProduct.user?.id}/order/${currentProduct.id}/create`}>оформити замовлення</Link>
                     </div>
                 </div>
             }

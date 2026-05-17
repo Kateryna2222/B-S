@@ -4,6 +4,7 @@ import { body } from "express-validator";
 import productController from "../controllers/productController.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 import validationMiddlleware from "../middlewares/validationMiddlleware.js";
+import checkIsBlockedMiddleware from "../middlewares/checkIsBlockedMiddleware.js";
 
 
 const router = Router();
@@ -15,7 +16,7 @@ router.post(
     body('title').isLength({ min: 2}),
     body('price').isNumeric(),
     body('categoryId').isInt(),
-    authMiddleware, 
+    checkIsBlockedMiddleware(), 
     validationMiddlleware,
     productController.createProduct,
 );
@@ -25,6 +26,7 @@ router.put(
     body('price').isNumeric(),
     body('categoryId').isInt(),
     authMiddleware, 
+    checkIsBlockedMiddleware(), 
     validationMiddlleware,
     productController.updateProduct
 );

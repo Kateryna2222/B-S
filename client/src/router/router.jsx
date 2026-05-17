@@ -121,7 +121,7 @@ export const router = createBrowserRouter([
                 element: <ProtectedRoute element={<NotificationPage/>}/>
             },
             {
-                path: "/order/:productId/create",
+                path: "/seller/:sellerId/order/:productId/create",
                 element: <ProtectedRoute element={<CreateOrderPage/>}/>
             },
         ]

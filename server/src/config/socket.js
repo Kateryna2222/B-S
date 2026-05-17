@@ -8,6 +8,10 @@ import { createFileSocket } from '../utils/createFile.js';
 import tokenService from '../services/tokenService.js';
 import chatService from '../services/chat/chatService.js';
 
+/************* */
+let ioInstance;
+export const getIO = () => ioInstance; 
+
 function initSocket(server) {
     const io = new Server(server, {
         cors: {
@@ -15,6 +19,8 @@ function initSocket(server) {
             credentials: true,
         },
     });
+
+    ioInstance = io;//******** */
 
     io.use((socket, next) => {
         const token = socket.handshake.auth.token;
@@ -29,6 +35,12 @@ function initSocket(server) {
 
     io.on("connection", (socket) => {
         console.log("User connected:", socket.id);
+
+        //----------------------------
+        socket.on("join_user_room", () => {
+            socket.join(`user_${socket.user.id}`);
+            console.log(`User ${socket.user.id} joined personal room`);
+        });
 
         socket.on("join_chat", async(chatId) => {
             socket.join(chatId);

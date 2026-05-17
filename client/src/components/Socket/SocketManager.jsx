@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import socket from '../../socket.js';
 import { addMessage, updateChatLastMessage, markMessagesAsRead } from '../../store/chat/chatSlice.js';
+import { addNotification } from '../../store/notification/notificationSlice.js';
 
 export default function SocketManager() {
   const dispatch = useDispatch();
@@ -12,6 +13,10 @@ export default function SocketManager() {
 
     socket.auth = { token: accessToken }; 
     socket.connect();
+
+    socket.on('connect', () => {
+        socket.emit('join_user_room');
+    });
 
     socket.on('receive_message', (message) => {
       dispatch(addMessage(message));
@@ -25,9 +30,15 @@ export default function SocketManager() {
       dispatch(markMessagesAsRead({ chatId, userId }));
     });
 
+    socket.on('new_notification', (notification) => {
+      dispatch(addNotification(notification));
+    });
+
     return () => {
       socket.off('receive_message');
       socket.off('chat_updated');
+      socket.off('messages_read');
+      socket.off('new_notification');
       socket.disconnect();
     };
   }, [isAuth, accessToken]);

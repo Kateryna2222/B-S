@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { createOrder } from "../../store/order/orderSlice.js";
-import { createNotifications } from '../../store/notification/notificationSlice.js';
 
 
 const CreateOrderPage = () => {
@@ -20,7 +19,8 @@ const CreateOrderPage = () => {
         city: '',
         deliveryBranch: '',
         deliveryMethod: 'nova_poshta',
-        productId: productId
+        productId,
+        sellerId
     }
 
     const [order, setOrder] = useState(initialOrder);
@@ -94,16 +94,7 @@ const CreateOrderPage = () => {
                     </div>
                 </div>
             </form>
-            <button className="createOrderBtn" onClick={async()=>
-            {
-                //ERROR: WHAT IF ORDER ERROR
-                const createdOrder = await dispatch(createOrder(order)).unwrap();
-                dispatch(createNotifications({
-                    title: 'Нове замовлення',
-                    message: `Товар id:${productId} було замовлено.`,
-                    userId: sellerId
-                }))
-            }}>
+            <button className="createOrderBtn" onClick={async()=>dispatch(createOrder(order))}>
                 Підтвердити
             </button>
         </div>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getNotifications, createNotifications } from "../../store/notification/notificationSlice.js";
+import { getNotifications } from "../../store/notification/notificationSlice.js";
 import Notification from "../../components/Notification/Notification.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
 
@@ -35,17 +35,6 @@ const NotificationPage = () => {
                             У вас ще не має сповіщень
                         </div>
                     }
-                    {/* <button onClick={()=>{
-                                dispatch(
-                                    createNotifications({
-                                    title: 'Нове замовлення',
-                                    message: 'Копистувач замовив',
-                                    userId: user?.id
-                                })
-                                )
-                            }}>
-                                click
-                            </button> */}
                 </>
             }
         </div>

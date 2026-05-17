@@ -1,7 +1,6 @@
 import './UserInfo.scss';
 import { useDispatch } from "react-redux";
 import { blockUser, unBlockUser, changeUserRole } from "../../store/admin/adminSlice.js";
-import { createNotifications } from '../../store/notification/notificationSlice.js';
 
 
 const UserInfo = ({user}) => {
@@ -30,37 +29,16 @@ const UserInfo = ({user}) => {
                 </ul>
             </div>
             <div className="buttons">
-                <button onClick={async()=>{
-                    const roleChange = dispatch(changeUserRole({id: user.id, role: roleToChange})).unwrap();
-                    dispatch(createNotifications({
-                        title: 'Зміна ролі', 
-                        message: `Ваш статус було змінено. Тепере Ви: ${roleToChange === 'ADMIN'? 'Адміністратор' : 'Користувач'}`,
-                        userId: user.id
-                    }))
-                }}>
+                <button onClick={()=>{dispatch(changeUserRole({id: user.id, role: roleToChange}))}}>
                     змінити роль
                 </button>
                 {
                     !user.isBlocked?
-                    <button onClick={async ()=>{
-                        const unBlock = await dispatch(blockUser(user.id)).unwrap();
-                        dispatch(createNotifications({
-                            title: 'Акаунт заблоковано', 
-                            message: 'Ваш акакнт було заблоковано. Тепер Ви не можете створювати оголошення.',
-                            userId: user.id
-                        }))
-                    }}>
+                    <button onClick={()=>{dispatch(blockUser(user.id))}}>
                         заблокувати
                     </button>
                     :
-                    <button onClick={async()=>{
-                        const block = await dispatch(unBlockUser(user.id)).unwrap();
-                        dispatch(createNotifications({
-                            title: 'Акаунт розблоковано', 
-                            message: 'Вітаємо. Ваш акакнт було розблоковано.',
-                            userId: user.id
-                        }))
-                    }}>
+                    <button onClick={()=>{dispatch(unBlockUser(user.id))}}>
                         розблуковати
                     </button>
                 }

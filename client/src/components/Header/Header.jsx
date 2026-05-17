@@ -13,7 +13,7 @@ import { clearFavouriteProducts } from '../../store/favourite/favouriteSlice.js'
 
 const Header = () => {
 
-    const {isAuth} = useSelector(state => state.user)
+    const {isAuth} = useSelector(state => state.user);
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
@@ -46,10 +46,11 @@ const Header = () => {
                                 <img src={iconChat} alt="Чат" />
                             </Link>
                         </li>
-                        <li>
+                        <li className='notificationIcon'>
                             <Link to={'/notification'}>
                                 <img src={iconNotifications} alt="Сповіщення" />
                             </Link>
+                            <div className={'count'}>+</div>
                         </li>
                     </ul>
                 </li>

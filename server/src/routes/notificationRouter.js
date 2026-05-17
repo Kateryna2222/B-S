@@ -7,6 +7,5 @@ const router = Router();
 router.use(authMiddleware);
 
 router.get('/', notificationController.getNotifications);
-router.post('/', notificationController.createNotification);
 
 export default router;

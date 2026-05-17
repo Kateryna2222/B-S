@@ -17,26 +17,17 @@ export const getNotifications = createAsyncThunk(
     }
 )
 
-export const createNotifications = createAsyncThunk(
-    'notification/createNotifications',
-    async (payload, thunkAPI) => {
-        try {
-            const {data} = await axiosCustom.post(`/notification`, payload);
-            return data
-        } 
-        catch (error) {
-            const message = error.response?.data?.message || error.message || 'Щось пішло не так';
-            return thunkAPI.rejectWithValue(message);
-        }
-    }
-)
-
 
 const notificationSlice = createSlice({
     name: "notification",
     initialState: {
         notifications: [],
         isLoading: false
+    },
+    reducers: {
+        addNotification(state, { payload }) {
+            state.notifications.unshift(payload); 
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getNotifications.pending, (state) => {
@@ -52,4 +43,5 @@ const notificationSlice = createSlice({
     }
 })
 
+export const { addNotification } = notificationSlice.actions;
 export default notificationSlice.reducer

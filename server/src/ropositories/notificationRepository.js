@@ -11,6 +11,13 @@ class NotificationRepository{
     async create(data) {
         return await Notification.create(data);
     }
+
+    async markAsRead(id) {
+        return await Notification.update(
+            { isRead: true },
+            { where: { userId: id } }
+        );
+    }
 }
 
 export default new NotificationRepository();

@@ -14,6 +14,7 @@ import { clearFavouriteProducts } from '../../store/favourite/favouriteSlice.js'
 const Header = () => {
 
     const {isAuth} = useSelector(state => state.user);
+    const {unReadCount} = useSelector(state => state.notification);
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
@@ -50,7 +51,12 @@ const Header = () => {
                             <Link to={'/notification'}>
                                 <img src={iconNotifications} alt="Сповіщення" />
                             </Link>
-                            <div className={'count'}>+</div>
+                            {
+                                unReadCount > 0?
+                                <div className={'count'}>{unReadCount}</div>
+                                :
+                                null
+                            }
                         </li>
                     </ul>
                 </li>

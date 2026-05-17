@@ -7,6 +7,7 @@ import SocketManager from "../../components/Socket/SocketManager.jsx";
 import Header from '../../components/Header/Header.jsx'
 import { checkAuth } from "../../store/user/authFunctions.js";
 import { getFavourites } from "../../store/favourite/favouriteSlice.js";
+import { getNotifications } from "../../store/notification/notificationSlice.js";
 
 const Layout = () => {
 
@@ -21,6 +22,7 @@ const Layout = () => {
     useEffect(()=>{
         if(isAuth){
             dispatch(getFavourites());
+            dispatch(getNotifications())
         }
     }, [dispatch, isAuth])
 

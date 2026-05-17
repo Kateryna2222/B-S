@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getNotifications } from "../../store/notification/notificationSlice.js";
 import Notification from "../../components/Notification/Notification.jsx";
 import Loading from "../../components/Loading/Loading.jsx";
+import { markAllAsRead } from "../../store/notification/notificationSlice.js";
 
 const NotificationPage = () => {
     const dispatch = useDispatch();
@@ -10,8 +11,10 @@ const NotificationPage = () => {
     const {user} = useSelector(state => state.user)
 
     useEffect(()=>{
-        dispatch(getNotifications())
-    }, [])
+        return () => {
+                dispatch(markAllAsRead());
+            }
+    }, [dispatch])
 
     return (
         <div className="notifacationPage">
@@ -22,7 +25,7 @@ const NotificationPage = () => {
                 :
                 <>
                     {
-                        notifications?
+                        notifications.length?
                         <ul className="notifacationList">
                             {
                                 notifications.map(i => {

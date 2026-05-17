@@ -5,8 +5,8 @@ module.exports = {
     await queryInterface.createTable('notifications', {
       id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
       title: { type: Sequelize.STRING, allowNull: false },
-      message : { type: Sequelize.TEXT },
-      data: {type: Sequelize.JSONB},
+      message: { type: Sequelize.TEXT },
+      isRead: {type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false},
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,

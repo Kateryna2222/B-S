@@ -15,6 +15,11 @@ class NotificationService{
         const notification = await notificationRepository.create(data);
         return notification
     }
+
+    async markAsRead(id){
+        const notification = await notificationRepository.markAsRead(id);
+        return notification
+    }
 }
 
 export default new NotificationService();

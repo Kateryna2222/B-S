@@ -3,11 +3,15 @@ import userRepository from "../../ropositories/userRepository.js";
 import ApiError from "../../errors/ApiError.js";
 
 class NotificationService{
-    async getNotifications(id){
+    async getNotifications(id, query){
         const user = await userRepository.findOne('id', id);
         if(!user) throw new ApiError(404, 'Користувача не знайдено');
 
-        const notifications = await notificationRepository.getAllByUserId(id);
+        const cursor = query.cursor || null;
+        const limit = Number(query.limit) || 10;
+        const onlyUnread = query.onlyUnread === 'true';
+
+        const notifications = await notificationRepository.getAllByUserId(id, cursor, limit, onlyUnread);
         return notifications
     }
 

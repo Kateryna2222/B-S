@@ -4,7 +4,7 @@ class NotificationController{
 
     async getNotifications(req, res){
         const { id } = req.user; 
-        const notifications = await notificationService.getNotifications(id);
+        const notifications = await notificationService.getNotifications(id, req.query);
         return res.status(200).json(notifications);
     }
 

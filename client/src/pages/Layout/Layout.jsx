@@ -22,7 +22,7 @@ const Layout = () => {
     useEffect(()=>{
         if(isAuth){
             dispatch(getFavourites());
-            dispatch(getNotifications())
+            dispatch(getNotifications({onlyUnread: true}))
         }
     }, [dispatch, isAuth])
 

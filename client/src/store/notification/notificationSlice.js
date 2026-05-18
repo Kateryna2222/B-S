@@ -5,9 +5,9 @@ import axiosCustom from '../../utils/axios.js';
 
 export const getNotifications = createAsyncThunk(
     'notification/getNotifications',
-    async (_, thunkAPI) => {
+    async ({limit = 10, onlyUnread = false}={}, thunkAPI) => {
         try {
-            const {data} = await axiosCustom.get(`/notification`);
+            const {data} = await axiosCustom.get(`/notification?limit=${limit}${onlyUnread? `&onlyUnread=${onlyUnread}`:''}`);
             return data
         } 
         catch (error) {
@@ -16,6 +16,18 @@ export const getNotifications = createAsyncThunk(
         }
     }
 )
+
+export const loadMoreNotifications = createAsyncThunk(
+    'notification/loadMoreNotifications',
+    async ({ cursor, limit = 10 }, thunkAPI) => {
+        try {
+            const { data } = await axiosCustom.get(`/notification?cursor=${cursor}&limit=${limit}`);
+            return data;
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.message);
+        }
+    }
+);
 
 export const markAllAsRead = createAsyncThunk(
     'notification/markAllAsRead',
@@ -37,6 +49,8 @@ const notificationSlice = createSlice({
     initialState: {
         notifications: [],
         unReadCount: 0,
+        nextCursor: null,
+        hasMore: true,
         isLoading: false
     },
     reducers: {
@@ -51,11 +65,19 @@ const notificationSlice = createSlice({
         })
         builder.addCase(getNotifications.fulfilled, (state, {payload}) => {
             state.isLoading = false;
-            state.notifications = payload;
+            state.notifications = payload.notifications;
+            state.nextCursor = payload.nextCursor;
+            state.hasMore = payload.hasMore;
             state.unReadCount = state.notifications.filter(n => !n.isRead).length;
         })
         builder.addCase(getNotifications.rejected, (state) => {
             state.isLoading = false;
+        })
+        // load more
+        builder.addCase(loadMoreNotifications.fulfilled, (state, {payload}) => {
+            state.nextCursor = payload.nextCursor;
+            state.hasMore = payload.hasMore;
+            state.notifications.push(...payload.notifications);
         })
         // markAllAsRead
         builder.addCase(markAllAsRead.fulfilled, (state) => {
